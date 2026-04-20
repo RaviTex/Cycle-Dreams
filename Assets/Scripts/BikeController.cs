@@ -3,56 +3,60 @@ using UnityEngine.InputSystem;
 
 public class BikeController : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset inputActions;
-    [SerializeField] private float groundCheckDistance = 0.25f;
+    public float acceleration = 20f;
+    public float turnSpeed = 50f;
+    public float gravity = 9.81f;
+    public float groundCheckDistance = 1f;
+    public float drag = 2f;
 
+    public InputActionReference moveAction;
     private Rigidbody rb;
+    private int groundLayer;
 
-    private bool isGrounded;
-
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        groundLayer = LayerMask.GetMask("Ground");
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
-        inputActions.Enable();
+        if (moveAction != null)
+            moveAction.action.Enable();
     }
 
-    private void Start()
+    void OnDisable()
     {
-        inputActions.FindAction("Move").performed += ctx => Move(ctx.ReadValue<Vector2>());
+        if (moveAction != null)
+            moveAction.action.Disable();
     }
 
-    private void Move(Vector2 direction)
+    void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(direction.x, rb.linearVelocity.y, direction.y) * 5f;
-    }
+        Vector2 input = moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
 
-    private void Update()
-    {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayer))
         {
-            isGrounded = true;
+            Vector3 vel = rb.linearVelocity;
+            if (vel.y < 0)
+            {
+                rb.linearVelocity = new Vector3(vel.x, 0f, vel.z);
+            }
+
+            transform.position = new Vector3(transform.position.x, hit.point.y + groundCheckDistance, transform.position.z);
         }
         else
         {
-            isGrounded = false;
+            rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
         }
-        if (!isGrounded)
-        {
-            print("Not grounded");
-            rb.AddForce(Vector3.down * 9.81f, ForceMode.Acceleration);
-        }
-        else
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        }
-    }
 
-    private void OnDisable()
-    {
-        inputActions.Disable();
+        rb.AddForce(transform.forward * acceleration * input.y, ForceMode.Acceleration);
+
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(-horizontalVelocity * drag, ForceMode.Acceleration);
+
+        float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
+        transform.Rotate(Vector3.up, turnSpeed * input.x * forwardSpeed * Time.fixedDeltaTime);
     }
 }
