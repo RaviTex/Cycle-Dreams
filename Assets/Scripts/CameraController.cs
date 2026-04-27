@@ -5,12 +5,12 @@ public class CameraController : MonoBehaviour
 {
     public Transform pivot;
     public float sensitivity = 0.1f;
-    public float distance = 5f;
-
     public InputActionReference lookAction;
+    public bool isVRMode = false;
 
     private float rotationX = 0f;
     private float rotationY = 0f;
+    private GameObject camera;
 
     void OnEnable()
     {
@@ -27,12 +27,20 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        camera = GetComponentInChildren<Camera>().gameObject;
     }
 
     void LateUpdate()
     {
         if (pivot == null) return;
 
+        transform.position = pivot.position;
+        transform.rotation = pivot.rotation;
+
+        if (isVRMode)
+        {
+            return;
+        }
         Vector2 lookInput = lookAction != null ? lookAction.action.ReadValue<Vector2>() : Vector2.zero;
 
         rotationX -= lookInput.y * sensitivity;
@@ -42,9 +50,6 @@ public class CameraController : MonoBehaviour
         rotationY = Mathf.Clamp(rotationY, -120f, 120f);
 
         Quaternion deviation = Quaternion.Euler(rotationX, rotationY, 0);
-        Quaternion finalRotation = pivot.rotation * deviation;
-
-        transform.position = pivot.position - (finalRotation * Vector3.forward * distance);
-        transform.LookAt(pivot);
+        camera.transform.localRotation = deviation;
     }
 }
