@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{5900D59A-314A-4302-91C5-224359DD5255}" SchemaVersion="123">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{5900D59A-314A-4302-91C5-224359DD5255}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{5900D59A-314A-4302-91C5-224359DD5255}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="BikeSpeed" ID="{A66302F9-3665-481B-8A2B-56863D4966FA}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>
