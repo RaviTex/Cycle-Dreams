@@ -1,0 +1,159 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3565403361",
+    "Type": "User",
+    "GUID": "{77E8E93B-166D-4376-ABDA-7A078710E157}",
+    "Color": "3",
+    "Language": "SFX",
+    "Hash": "{19CE3D68-ABFB-6928-9E16-B45066D26091}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype",
+    "ShortName": "Prototype",
+    "Path": "Prototype.bnk",
+    "Media": [
+     {
+      "Id": "13751084",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Photo_Good_Feedback.wav",
+      "CachePath": "1C/{1C5B3293-6750-9B20-A81B-68D31B626AAA}.wem"
+     },
+     {
+      "Id": "174534655",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Ambience.wav",
+      "CachePath": "E9/{E9D7DCCD-B7EE-8525-5107-F7E554CCFEBB}.wem"
+     },
+     {
+      "Id": "395744342",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_PickUp_Woosh.wav",
+      "CachePath": "17/{1739CC95-9F6D-304C-EB70-8D54140D47CA}.wem"
+     },
+     {
+      "Id": "425432104",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bike_Loop.wav",
+      "CachePath": "DC/{DC44C200-AC96-242E-9453-37475D68BE25}.wem"
+     },
+     {
+      "Id": "435127440",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Shutter.wav",
+      "CachePath": "46/{46E87B50-1F27-145C-E303-5D43B37E2673}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3174479978",
+      "Name": "Play_Ambiance",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_Ambiance",
+      "GUID": "{FFD0651A-E49B-4C40-ABB4-07337150BC7F}",
+      "Color": "3",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "174534655"
+       }
+      ]
+     },
+     {
+      "Id": "797552147",
+      "Name": "Play_BikeLoop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_BikeLoop",
+      "GUID": "{2C469190-CE4F-4BC7-8D27-91AC6D352C27}",
+      "Color": "3",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "425432104"
+       }
+      ]
+     },
+     {
+      "Id": "642588951",
+      "Name": "Play_CameraPickUp",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_CameraPickUp",
+      "GUID": "{17EA9976-ADB8-4A48-8F6D-9C2CADC92377}",
+      "Color": "3",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5679375",
+      "DurationMax": "0.5679375",
+      "MediaRefs": [
+       {
+        "Id": "395744342"
+       }
+      ]
+     },
+     {
+      "Id": "4863038",
+      "Name": "Play_CameraShutter",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_CameraShutter",
+      "GUID": "{41F96833-FD07-423D-99E0-511A0D63CFBB}",
+      "Color": "3",
+      "DurationType": "OneShot",
+      "DurationMin": "0.23570833",
+      "DurationMax": "0.23570833",
+      "MediaRefs": [
+       {
+        "Id": "435127440"
+       }
+      ]
+     },
+     {
+      "Id": "3594814145",
+      "Name": "Play_PictureTaken",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_PictureTaken",
+      "GUID": "{EB72ACB5-86B6-403C-B241-DA1C976E4195}",
+      "Color": "3",
+      "DurationType": "OneShot",
+      "DurationMin": "0.68575966",
+      "DurationMax": "0.68575966",
+      "MediaRefs": [
+       {
+        "Id": "13751084"
+       }
+      ]
+     },
+     {
+      "Id": "2839405212",
+      "Name": "Stop_Ambiance",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Stop_Ambiance",
+      "GUID": "{25E6C1EE-9CCD-4E6B-9BD4-332C5700FF1E}",
+      "Color": "3",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "4026860625",
+      "Name": "Stop_BikeLoop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Stop_BikeLoop",
+      "GUID": "{CD6A356E-07D6-47E1-B2FC-A9B563C7F48B}",
+      "Color": "3",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{4284D2CB-F410-EF46-C59A-980665FBCE18}"
+ }
+}

@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{386F9286-87FF-4A26-B1F8-12E8482BE907}" SchemaVersion="123">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{386F9286-87FF-4A26-B1F8-12E8482BE907}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{386F9286-87FF-4A26-B1F8-12E8482BE907}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Prototype" ID="{DC748ECB-141B-49BC-A8D0-962D632CD3D2}" ShortID="522837158">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="3"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="Play_Ambiance" ID="{FFD0651A-E49B-4C40-ABB4-07337150BC7F}">
+							<ChildrenList>
+								<Action Name="" ID="{A202418D-1838-447E-993D-0A4AA704E2B3}" ShortID="60349580">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ambience" ID="{CCAA888B-46E6-4E78-A949-3D35D76750D8}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_BikeLoop" ID="{2C469190-CE4F-4BC7-8D27-91AC6D352C27}">
+							<ChildrenList>
+								<Action Name="" ID="{9FD1BBBC-92A6-4AEB-AE7F-27CD5FD73BAC}" ShortID="1017738444">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Bike_Loop" ID="{6E84B17D-3438-4113-B9E1-BB089BF3693E}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_CameraPickUp" ID="{17EA9976-ADB8-4A48-8F6D-9C2CADC92377}">
+							<ChildrenList>
+								<Action Name="" ID="{D5B32FBF-BF83-4E96-AAE0-74CDA1D0ADD0}" ShortID="701905249">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Camera_PickUp_Woosh" ID="{00C30F9C-DB30-4DE0-A71F-76DC1CDD9224}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_CameraShutter" ID="{41F96833-FD07-423D-99E0-511A0D63CFBB}">
+							<ChildrenList>
+								<Action Name="" ID="{41E3AD1A-3E60-4C0D-A394-842BDBE64666}" ShortID="281169268">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Camera_Shutter" ID="{E2B9EFF9-F1A4-481D-86A4-B2D9EA399850}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_PictureTaken" ID="{EB72ACB5-86B6-403C-B241-DA1C976E4195}">
+							<ChildrenList>
+								<Action Name="" ID="{C6E33719-B88B-4FBE-8FBD-63B84CAF8C59}" ShortID="717426115">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Photo_Good_Feedback" ID="{3FFFD513-A8C6-4F74-B93B-E686CF27817A}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_Ambiance" ID="{25E6C1EE-9CCD-4E6B-9BD4-332C5700FF1E}">
+							<ChildrenList>
+								<Action Name="" ID="{0EA1BA80-E70F-43DC-B9F8-674D1FD4E1D3}" ShortID="940524678">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ambience" ID="{CCAA888B-46E6-4E78-A949-3D35D76750D8}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_BikeLoop" ID="{CD6A356E-07D6-47E1-B2FC-A9B563C7F48B}">
+							<ChildrenList>
+								<Action Name="" ID="{2E280AFC-2DD7-4EDE-A9A3-CD14D9465828}" ShortID="443652069">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Bike_Loop" ID="{6E84B17D-3438-4113-B9E1-BB089BF3693E}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
