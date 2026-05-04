@@ -1,6 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{589457B3-3A61-4725-BBCF-67190742440E}" SchemaVersion="123">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{589457B3-3A61-4725-BBCF-67190742440E}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{589457B3-3A61-4725-BBCF-67190742440E}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="Camera" ID="{F2FEA826-C30C-44A3-ADA8-E6B62EB66A5F}" ShortID="508893758">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="11"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Camera_PickUp_Woosh" ID="{00C30F9C-DB30-4DE0-A71F-76DC1CDD9224}" ShortID="87711397">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Camera_PickUp_Woosh" ID="{426A4F1C-3DE6-4B21-87EF-84BA7AF16296}">
+									<Language>SFX</Language>
+									<AudioFile>Camera_PickUp_Woosh.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="395744342"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Camera_PickUp_Woosh" ID="{426A4F1C-3DE6-4B21-87EF-84BA7AF16296}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Camera_Shutter" ID="{E2B9EFF9-F1A4-481D-86A4-B2D9EA399850}" ShortID="913201429">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Camera_Shutter" ID="{F3C897CF-7F1D-4C6E-A48A-07B61FEB82FD}">
+									<Language>SFX</Language>
+									<AudioFile>Camera_Shutter.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="435127440"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Camera_Shutter" ID="{F3C897CF-7F1D-4C6E-A48A-07B61FEB82FD}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Photo_Good_Feedback" ID="{3FFFD513-A8C6-4F74-B93B-E686CF27817A}" ShortID="561072528">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Photo_Good_Feedback" ID="{1B369381-0D7C-4958-AD12-B29BE89777B0}">
+									<Language>SFX</Language>
+									<AudioFile>Photo_Good_Feedback.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="13751084"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Photo_Good_Feedback" ID="{1B369381-0D7C-4958-AD12-B29BE89777B0}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</ActorMixer>
+				<ActorMixer Name="Bike" ID="{44B87602-0E43-4C14-93DF-60C3E5B6FF9A}" ShortID="325316656">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="1"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Bike_Loop" ID="{6E84B17D-3438-4113-B9E1-BB089BF3693E}" ShortID="638332114">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Bike_Loop" ID="{B23A7E9D-34D1-4A4A-9A17-41F907D95C1A}">
+									<Language>SFX</Language>
+									<AudioFile>Bike_Loop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="425432104"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{F867DFE7-CC3F-471F-82E4-CB7DCBF14640}" ShortID="506143873">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="BikeSpeed" ID="{A66302F9-3665-481B-8A2B-56863D4966FA}" WorkUnitID="{5900D59A-314A-4302-91C5-224359DD5255}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{2B1291D5-0162-4BF3-9EBD-853BB47C6746}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log2</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>100</XPos>
+																		<YPos>1.20215</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{59173992-DE3F-4460-B984-DD6F367F3946}" ShortID="160961057">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Pitch"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="BikeSpeed" ID="{A66302F9-3665-481B-8A2B-56863D4966FA}" WorkUnitID="{5900D59A-314A-4302-91C5-224359DD5255}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{9E8367A0-D99B-4585-80B6-F3E7D3B88935}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="65537"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-500</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log2</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>100</XPos>
+																		<YPos>500</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="Bike_Loop" ID="{B23A7E9D-34D1-4A4A-9A17-41F907D95C1A}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</ActorMixer>
+				<ActorMixer Name="Ambiance" ID="{0AE9CF8C-0E4E-4B41-8661-7C7269C9B2F3}" ShortID="88180657">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Ambience" ID="{CCAA888B-46E6-4E78-A949-3D35D76750D8}" ShortID="302720544">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Ambience" ID="{86D8E07B-78DF-4126-B3E2-9136ABE548BD}">
+									<Language>SFX</Language>
+									<AudioFile>Ambience.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="174534655"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Ambience" ID="{86D8E07B-78DF-4126-B3E2-9136ABE548BD}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

@@ -1,0 +1,16 @@
+Event	ID	Name			Wwise Object Path	Notes
+	4863038	Play_CameraShutter			\Default Work Unit\Prototype\Play_CameraShutter	
+	642588951	Play_CameraPickUp			\Default Work Unit\Prototype\Play_CameraPickUp	
+	797552147	Play_BikeLoop			\Default Work Unit\Prototype\Play_BikeLoop	
+	2839405212	Stop_Ambiance			\Default Work Unit\Prototype\Stop_Ambiance	
+	3174479978	Play_Ambiance			\Default Work Unit\Prototype\Play_Ambiance	
+	3594814145	Play_PictureTaken			\Default Work Unit\Prototype\Play_PictureTaken	
+	4026860625	Stop_BikeLoop			\Default Work Unit\Prototype\Stop_BikeLoop	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	13751084	Photo_Good_Feedback	C:\GameProjects\CycleDreams_Git\CycleDreams_Git_WwiseProject\.cache\1C\{1C5B3293-6750-9B20-A81B-68D31B626AAA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Camera\Photo_Good_Feedback		121064
+	174534655	Ambience	C:\GameProjects\CycleDreams_Git\CycleDreams_Git_WwiseProject\.cache\E9\{E9D7DCCD-B7EE-8525-5107-F7E554CCFEBB}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambiance\Ambience		19569024
+	395744342	Camera_PickUp_Woosh	C:\GameProjects\CycleDreams_Git\CycleDreams_Git_WwiseProject\.cache\17\{1739CC95-9F6D-304C-EB70-8D54140D47CA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Camera\Camera_PickUp_Woosh		109140
+	425432104	Bike_Loop	C:\GameProjects\CycleDreams_Git\CycleDreams_Git_WwiseProject\.cache\DC\{DC44C200-AC96-242E-9453-37475D68BE25}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bike\Bike_Loop		10129504
+	435127440	Camera_Shutter	C:\GameProjects\CycleDreams_Git\CycleDreams_Git_WwiseProject\.cache\46\{46E87B50-1F27-145C-E303-5D43B37E2673}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Camera\Camera_Shutter		45352
+
