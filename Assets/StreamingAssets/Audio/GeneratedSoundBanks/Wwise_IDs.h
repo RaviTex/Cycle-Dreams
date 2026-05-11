@@ -14,6 +14,7 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID PLAY_AMBIANCE = 3174479978U;
+        static const AkUniqueID PLAY_BEARSOUND = 3921706217U;
         static const AkUniqueID PLAY_BIKELOOP = 797552147U;
         static const AkUniqueID PLAY_CAMERAPICKUP = 642588951U;
         static const AkUniqueID PLAY_CAMERASHUTTER = 4863038U;
@@ -21,6 +22,11 @@ namespace AK
         static const AkUniqueID STOP_AMBIANCE = 2839405212U;
         static const AkUniqueID STOP_BIKELOOP = 4026860625U;
     } // namespace EVENTS
+
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID BIKESPEED = 2439429815U;
+    } // namespace GAME_PARAMETERS
 
     namespace BANKS
     {

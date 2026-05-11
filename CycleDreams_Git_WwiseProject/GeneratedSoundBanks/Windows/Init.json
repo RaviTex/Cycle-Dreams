@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{0AB50946-F590-BB42-F6A0-59B1518F37EA}",
+    "Hash": "{6AFB65D7-E5FF-70EB-884B-1B6C2D00DC83}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -63,9 +63,18 @@
       "GUID": "{D0C188F4-31A0-4B09-A139-283ECE8A081B}",
       "Color": "10"
      }
+    ],
+    "GameParameters": [
+     {
+      "Id": "2439429815",
+      "Name": "BikeSpeed",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\BikeSpeed",
+      "GUID": "{A66302F9-3665-481B-8A2B-56863D4966FA}",
+      "Color": "10"
+     }
     ]
    }
   ],
-  "FileHash": "{DA291AFB-C8FD-FE04-80B5-406033514146}"
+  "FileHash": "{A1384172-766A-C7EF-366A-F0B6834B1138}"
  }
 }

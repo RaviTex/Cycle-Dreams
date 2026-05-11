@@ -11,7 +11,7 @@
     "GUID": "{77E8E93B-166D-4376-ABDA-7A078710E157}",
     "Color": "3",
     "Language": "SFX",
-    "Hash": "{19CE3D68-ABFB-6928-9E16-B45066D26091}",
+    "Hash": "{8BD33704-B45F-1439-96E3-DAFE3D3AB353}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype",
     "ShortName": "Prototype",
     "Path": "Prototype.bnk",
@@ -25,12 +25,28 @@
       "CachePath": "1C/{1C5B3293-6750-9B20-A81B-68D31B626AAA}.wem"
      },
      {
+      "Id": "89364619",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 1.wav",
+      "CachePath": "4A/{4A85DDE4-01AE-6A0D-9EE8-AF6E5B68D5C6}.wem"
+     },
+     {
       "Id": "174534655",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Ambience.wav",
       "CachePath": "E9/{E9D7DCCD-B7EE-8525-5107-F7E554CCFEBB}.wem"
+     },
+     {
+      "Id": "339964001",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 2.wav",
+      "CachePath": "97/{974B35F6-BCDA-7976-6B82-D3AD7D414718}.wem"
      },
      {
       "Id": "395744342",
@@ -55,6 +71,14 @@
       "Location": "Memory",
       "ShortName": "Camera_Shutter.wav",
       "CachePath": "46/{46E87B50-1F27-145C-E303-5D43B37E2673}.wem"
+     },
+     {
+      "Id": "641992892",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669.wav",
+      "CachePath": "BB/{BB18FC83-593E-9742-DA4D-31FB8752AC49}.wem"
      }
     ],
     "Events": [
@@ -68,6 +92,27 @@
       "MediaRefs": [
        {
         "Id": "174534655"
+       }
+      ]
+     },
+     {
+      "Id": "3921706217",
+      "Name": "Play_BearSound",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_BearSound",
+      "GUID": "{4C69315F-42DD-42FF-B46D-F5770D877542}",
+      "Color": "3",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2986354",
+      "DurationMax": "1.9113646",
+      "MediaRefs": [
+       {
+        "Id": "89364619"
+       },
+       {
+        "Id": "339964001"
+       },
+       {
+        "Id": "641992892"
        }
       ]
      },
@@ -151,9 +196,18 @@
       "DurationMin": "0",
       "DurationMax": "0"
      }
+    ],
+    "GameParameters": [
+     {
+      "Id": "2439429815",
+      "Name": "BikeSpeed",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\BikeSpeed",
+      "GUID": "{A66302F9-3665-481B-8A2B-56863D4966FA}",
+      "Color": "10"
+     }
     ]
    }
   ],
-  "FileHash": "{4284D2CB-F410-EF46-C59A-980665FBCE18}"
+  "FileHash": "{00E49340-D9B3-B093-9A27-2319F0ED87AE}"
  }
 }
