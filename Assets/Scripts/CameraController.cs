@@ -7,22 +7,13 @@ public class CameraController : MonoBehaviour
     public float sensitivity = 0.1f;
     public InputActionReference lookAction;
     public bool isVRMode = false;
+    [SerializeField] private bool lerpPositionAndRotation = true;
+    [SerializeField] private float lerpSpeed = 5f;
 
     private float rotationX = 0f;
     private float rotationY = 0f;
     private GameObject camera;
 
-    void OnEnable()
-    {
-        if (lookAction != null)
-            lookAction.action.Enable();
-    }
-
-    void OnDisable()
-    {
-        if (lookAction != null)
-            lookAction.action.Disable();
-    }
 
     void Start()
     {
@@ -34,8 +25,16 @@ public class CameraController : MonoBehaviour
     {
         if (pivot == null) return;
 
-        transform.position = pivot.position;
-        transform.rotation = pivot.rotation;
+        if (lerpPositionAndRotation)
+        {
+            transform.position = Vector3.Lerp(transform.position, pivot.position, Time.deltaTime * lerpSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, pivot.rotation, Time.deltaTime * lerpSpeed);
+        }
+        else
+        {
+            transform.position = pivot.position;
+            transform.rotation = pivot.rotation;
+        }
 
         if (isVRMode)
         {
@@ -51,5 +50,16 @@ public class CameraController : MonoBehaviour
 
         Quaternion deviation = Quaternion.Euler(rotationX, rotationY, 0);
         camera.transform.localRotation = deviation;
+    }
+    void OnEnable()
+    {
+        if (lookAction != null)
+            lookAction.action.Enable();
+    }
+
+    void OnDisable()
+    {
+        if (lookAction != null)
+            lookAction.action.Disable();
     }
 }
