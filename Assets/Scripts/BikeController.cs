@@ -71,6 +71,7 @@ public class BikeController : MonoBehaviour
     private float currentForwardSpeed;
     private float currentThrottleInput;
     private float wigglePhase;
+    private bool hasPlayerInput;
 
     void Awake()
     {
@@ -84,7 +85,7 @@ public class BikeController : MonoBehaviour
     void Update()
     {
         UpdateSteeringInput();
-        if (enableVisuals)
+        if (enableVisuals && hasPlayerInput)
         {
             UpdateFrontSectionVisual();
             UpdateVisualLean();
@@ -95,21 +96,19 @@ public class BikeController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 input = ReadMoveInput();
-        currentForwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
+        Vector3 currentVelocity = rb.linearVelocity;
+        currentForwardSpeed = Vector3.Dot(currentVelocity, transform.forward);
 
         float smoothedThrottle = SmoothThrottleInput(input.y);
+        Quaternion currentRotation = rb.rotation;
 
-        HandleGrounding();
-        ApplyMotorAndBraking(input.y, smoothedThrottle);
-        ApplyHorizontalMotionCorrection(smoothedThrottle);
-        RotateBikeBody();
-        KeepBikeUpright();
-    }
+        HandleGrounding(ref currentVelocity, ref currentRotation);
+        ApplyMotorAndBraking(ref currentVelocity, input.y, smoothedThrottle);
+        ApplyHorizontalMotionCorrection(ref currentVelocity);
+        RotateBikeBody(ref currentRotation);
 
-    private void KeepBikeUpright()
-    {
-        Vector3 currentEuler = transform.eulerAngles;
-        transform.eulerAngles = new Vector3(currentEuler.x, currentEuler.y, 0f);
+        rb.linearVelocity = currentVelocity;
+        rb.MoveRotation(currentRotation);
     }
 
     private void InitializePhysics()
@@ -130,7 +129,14 @@ public class BikeController : MonoBehaviour
 
     private Vector2 ReadMoveInput()
     {
-        return moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
+        if (moveAction == null)
+        {
+            hasPlayerInput = false;
+            return Vector2.zero;
+        }
+        Vector2 input = moveAction.action.ReadValue<Vector2>();
+        hasPlayerInput = input != Vector2.zero;
+        return input;
     }
 
     private void UpdateSteeringInput()
@@ -147,34 +153,53 @@ public class BikeController : MonoBehaviour
         frontSection.transform.localRotation = frontSectionBaseRotation * Quaternion.Euler(0f, 0f, currentSteerInput * maxSteerAngle);
     }
 
-    private void HandleGrounding()
+    private void HandleGrounding(ref Vector3 velocity, ref Quaternion rotation)
     {
         if (frontWheelCenter == null || backWheelCenter == null)
             return;
 
-        rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+        bool frontGrounded = Physics.Raycast(frontWheelCenter.transform.position, Vector3.down, out RaycastHit frontHit, groundCheckDistance, groundLayer);
+        bool backGrounded = Physics.Raycast(backWheelCenter.transform.position, Vector3.down, out RaycastHit backHit, groundCheckDistance, groundLayer);
 
-        bool frontGrounded = ApplyWheelSuspension(frontWheelCenter.transform.position);
-        bool backGrounded = ApplyWheelSuspension(backWheelCenter.transform.position);
+        Vector3 averageNormal = Vector3.zero;
+        float averageError = 0f;
+        int groundedCount = 0;
 
-    }
-
-    private bool ApplyWheelSuspension(Vector3 wheelPosition)
-    {
-        if (Physics.Raycast(wheelPosition, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayer))
+        if (frontGrounded)
         {
-            float error = targetRideHeight - hit.distance;
-            float velocityAlongNormal = Vector3.Dot(rb.GetPointVelocity(wheelPosition), hit.normal);
-            float upwardForce = (error * suspensionSpringStrength) - (velocityAlongNormal * suspensionDamper);
-
-            // Push along the ground's normal instead of global up, this creates natural sliding down slopes
-            rb.AddForceAtPosition(hit.normal * upwardForce, wheelPosition, ForceMode.Acceleration);
-            return true;
+            averageNormal += frontHit.normal;
+            averageError += (targetRideHeight - frontHit.distance);
+            groundedCount++;
         }
-        return false;
+        if (backGrounded)
+        {
+            averageNormal += backHit.normal;
+            averageError += (targetRideHeight - backHit.distance);
+            groundedCount++;
+        }
+
+        if (groundedCount > 0)
+        {
+            averageNormal = (averageNormal / groundedCount).normalized;
+            averageError /= groundedCount;
+
+            float velocityAlongNormal = Vector3.Dot(velocity, averageNormal);
+            float upwardVelocityChange = (averageError * suspensionSpringStrength * Time.fixedDeltaTime) - (velocityAlongNormal * suspensionDamper * Time.fixedDeltaTime);
+
+            velocity += averageNormal * upwardVelocityChange;
+
+            Vector3 projectedForward = Vector3.ProjectOnPlane(transform.forward, averageNormal).normalized;
+            if (projectedForward.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(projectedForward, averageNormal);
+                rotation = Quaternion.Slerp(rotation, targetRot, 10f * Time.fixedDeltaTime);
+            }
+        }
+
+        velocity += Vector3.down * gravity * Time.fixedDeltaTime;
     }
 
-    private void ApplyMotorAndBraking(float rawInputY, float smoothedThrottle)
+    private void ApplyMotorAndBraking(ref Vector3 velocity, float rawInputY, float smoothedThrottle)
     {
         bool hasDirectionalInput = Mathf.Abs(rawInputY) > 0.01f;
         bool isMoving = Mathf.Abs(currentForwardSpeed) > reverseEngageSpeedThreshold;
@@ -185,10 +210,10 @@ public class BikeController : MonoBehaviour
         if (isBraking)
         {
             float brakeDirection = -Mathf.Sign(currentForwardSpeed);
-            rb.AddForce(transform.forward * brakingPower * Mathf.Abs(rawInputY) * brakeDirection, ForceMode.Acceleration);
+            velocity += transform.forward * brakingPower * Mathf.Abs(rawInputY) * brakeDirection * Time.fixedDeltaTime;
         }
 
-        rb.AddForce(transform.forward * engineAcceleration * smoothedThrottle, ForceMode.Acceleration);
+        velocity += transform.forward * engineAcceleration * smoothedThrottle * Time.fixedDeltaTime;
     }
 
     private float SmoothThrottleInput(float targetThrottle)
@@ -208,25 +233,24 @@ public class BikeController : MonoBehaviour
         return currentThrottleInput;
     }
 
-    private void ApplyHorizontalMotionCorrection(float throttleInput)
+    private void ApplyHorizontalMotionCorrection(ref Vector3 velocity)
     {
         Vector3 wheelForward = CalculateWheelForward();
         Vector3 wheelRight = Vector3.Cross(Vector3.up, wheelForward).normalized;
 
-        float forwardSpeed = Vector3.Dot(rb.linearVelocity, wheelForward);
-        float lateralSpeed = Vector3.Dot(rb.linearVelocity, wheelRight);
+        float forwardSpeed = Vector3.Dot(velocity, wheelForward);
+        float lateralSpeed = Vector3.Dot(velocity, wheelRight);
 
         // Standard aerodynamic drag (using velocity squared for realistic air resistance)
-        float aeroDragForce = forwardSpeed * Mathf.Abs(forwardSpeed) * drag * forwardDragMultiplier * 0.007f;
-        rb.AddForce(-wheelForward * aeroDragForce, ForceMode.Acceleration);
-
-        // Optional: reduce forward speed when drifting
-        // float driftDrag = Mathf.Abs(lateralSpeed) * driftingSpeedLoss;
-        // rb.AddForce(-wheelForward * Mathf.Sign(forwardSpeed) * driftDrag, ForceMode.Acceleration);
+        float aeroDragVelocity = forwardSpeed * Mathf.Abs(forwardSpeed) * drag * forwardDragMultiplier * 0.007f * Time.fixedDeltaTime;
+        velocity -= wheelForward * aeroDragVelocity;
 
         // Tire grip: cancel out only the lateral slide, leaving gravity to freely affect forward/backward rolling
-        Vector3 lateralCorrection = -wheelRight * lateralSpeed;
-        rb.AddForce(lateralCorrection * tireGripStrength, ForceMode.Acceleration);
+        float lateralCorrectionAmount = lateralSpeed * tireGripStrength * Time.fixedDeltaTime;
+        if (Mathf.Abs(lateralCorrectionAmount) > Mathf.Abs(lateralSpeed))
+            lateralCorrectionAmount = lateralSpeed; // Prevent overcorrection
+
+        velocity -= wheelRight * lateralCorrectionAmount;
     }
 
     private Vector3 CalculateWheelForward()
@@ -240,11 +264,10 @@ public class BikeController : MonoBehaviour
         return wheelForward;
     }
 
-    private void RotateBikeBody()
+    private void RotateBikeBody(ref Quaternion rotation)
     {
         float turnAmount = turnSpeed * currentSteerInput * currentForwardSpeed * Time.fixedDeltaTime;
-        Vector3 turnTorque = new Vector3(0, turnAmount / Time.fixedDeltaTime, 0);
-        rb.angularVelocity = new Vector3(rb.angularVelocity.x, turnTorque.y, rb.angularVelocity.z);
+        rotation *= Quaternion.Euler(0f, turnAmount, 0f);
     }
 
     private void RotateWheels()

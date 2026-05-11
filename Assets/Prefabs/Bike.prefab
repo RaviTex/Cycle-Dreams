@@ -176,7 +176,7 @@ MonoBehaviour:
   brakingPower: 8
   throttleResponseSpeed: 2
   reverseEngageSpeedThreshold: 0.1
-  turnSpeed: 1
+  turnSpeed: 30
   maxSteerAngle: 30
   steeringLerpSpeed: 8
   tireGripStrength: 12
@@ -185,7 +185,7 @@ MonoBehaviour:
   drag: 1
   forwardDragMultiplier: 1
   groundCheckDistance: 0.8
-  targetRideHeight: 0.36
+  targetRideHeight: 0.4
   suspensionSpringStrength: 200
   suspensionDamper: 20
   frontWheelCenter: {fileID: 7878132836805081396}
