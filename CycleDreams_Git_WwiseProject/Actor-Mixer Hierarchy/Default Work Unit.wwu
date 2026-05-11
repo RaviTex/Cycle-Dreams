@@ -243,6 +243,100 @@
 						</Sound>
 					</ChildrenList>
 				</ActorMixer>
+				<ActorMixer Name="Animals" ID="{DA59D402-A492-4129-9D3C-037D912B9572}" ShortID="43157295">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="Bear Noise" ID="{2B12BABA-E31B-4494-91D5-A1275BA93C21}" ShortID="972369518">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 1" ID="{8A33BAF1-CDB9-4536-BC76-1FAE06F86DAD}" ShortID="874902845">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 1" ID="{BF33680D-766E-42E8-9821-16817AA4ED0F}">
+											<Language>SFX</Language>
+											<AudioFile>Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="89364619"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 1" ID="{BF33680D-766E-42E8-9821-16817AA4ED0F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 2" ID="{5C7A933F-9470-4D07-9A62-3D13B195E586}" ShortID="303375818">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 2" ID="{9680FF95-41C4-4AC5-9B99-57B4175E4B25}">
+											<Language>SFX</Language>
+											<AudioFile>Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="339964001"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669 2" ID="{9680FF95-41C4-4AC5-9B99-57B4175E4B25}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669" ID="{BC42CF09-C61B-4AAD-B414-71144D43D28F}" ShortID="640692549">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{003830AC-16CC-47AC-8554-86F5AA506A69}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{613B6159-C72E-4AC9-A0CB-80822277C1E1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669" ID="{AC77265A-3BEC-4005-B9CA-6B22FAB56E23}">
+											<Language>SFX</Language>
+											<AudioFile>Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="641992892"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Creatures, Humanoid, Large Bearlike Roar, Designed 01 SND146669" ID="{AC77265A-3BEC-4005-B9CA-6B22FAB56E23}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

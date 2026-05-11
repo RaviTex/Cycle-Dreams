@@ -92,6 +92,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_BearSound" ID="{4C69315F-42DD-42FF-B46D-F5770D877542}">
+							<ChildrenList>
+								<Action Name="" ID="{AA76E2C9-FFBA-4D22-A440-5E4BED167BAE}" ShortID="673267552">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Bear Noise" ID="{2B12BABA-E31B-4494-91D5-A1275BA93C21}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
