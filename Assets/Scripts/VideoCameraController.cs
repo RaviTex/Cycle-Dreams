@@ -16,18 +16,18 @@ public class VideoCameraController : MonoBehaviour
     public GameObject isInCameraModeIndicator;
     public GameObject isRecordingIndicator;
     public GameObject photoGalleryPanel;
-    public Image PhotoDisplay;
-    [SerializeField] private TMP_Text photoCountText;
+    [SerializeField] private TMP_Text pageCountText;
     [SerializeField] private float maxZoomInFOV = 20f;
     [SerializeField] private float maxZoomOutFOV = 100f;
     public int resWidth = 1920;
     public int resHeight = 1080;
-    public List<Texture2D> shotImages = new List<Texture2D>();
+    public List<Sprite> shotImages = new List<Sprite>();
+    public List<Image> photoDisplays = new List<Image>();
 
     private Camera mainCamera;
     private RenderTexture renderTexture;
     private float normalFOV;
-    private int currentPhotoIndex = 0;
+    private int currentPhotoStartIndex = 0;
 
     void Start()
     {
@@ -47,6 +47,10 @@ public class VideoCameraController : MonoBehaviour
         {
             isInViewPhotoMode = !isInViewPhotoMode;
             photoGalleryPanel.SetActive(isInViewPhotoMode);
+            if (isInViewPhotoMode)
+            {
+                DisplayFotosFromIndex(currentPhotoStartIndex);
+            }
         }
 
         if (isInCameraMode)
@@ -68,26 +72,53 @@ public class VideoCameraController : MonoBehaviour
         }
         else if (isInViewPhotoMode)
         {
-            if (scrollWheelAction != null)
+            if (scrollWheelAction != null && scrollWheelAction.action.triggered)
             {
                 float scrollValue = scrollWheelAction.action.ReadValue<float>();
-                if (scrollValue > 0f)
+                if (scrollValue != 0f)
                 {
-                    currentPhotoIndex = (currentPhotoIndex + 1) % shotImages.Count;
-                    photoCountText.text = $"{currentPhotoIndex + 1} / {shotImages.Count}";
-                    PhotoDisplay.sprite = Sprite.Create(shotImages[currentPhotoIndex], new Rect(0, 0, shotImages[currentPhotoIndex].width, shotImages[currentPhotoIndex].height), new Vector2(0.5f, 0.5f));
-                }
-                else if (scrollValue < 0f)
-                {
-                    currentPhotoIndex = (currentPhotoIndex - 1 + shotImages.Count) % shotImages.Count;
-                    photoCountText.text = $"{currentPhotoIndex + 1} / {shotImages.Count}";
-                    PhotoDisplay.sprite = Sprite.Create(shotImages[currentPhotoIndex], new Rect(0, 0, shotImages[currentPhotoIndex].width, shotImages[currentPhotoIndex].height), new Vector2(0.5f, 0.5f));
+                    int maxStartIndex = Mathf.Max(0, ((shotImages.Count - 1) / photoDisplays.Count) * photoDisplays.Count);
+
+                    if (scrollValue < 0f)
+                    {
+                        currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex + photoDisplays.Count, 0, maxStartIndex);
+                    }
+                    else if (scrollValue > 0f)
+                    {
+                        currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex - photoDisplays.Count, 0, maxStartIndex);
+                    }
+
+                    DisplayFotosFromIndex(currentPhotoStartIndex);
                 }
             }
         }
         else
         {
             mainCamera.fieldOfView = normalFOV;
+        }
+    }
+
+    private void DisplayFotosFromIndex(int startIndex)
+    {
+        for (int i = 0; i < photoDisplays.Count; i++)
+        {
+            int photoIndex = startIndex + i;
+            if (photoIndex < shotImages.Count)
+            {
+                photoDisplays[i].sprite = shotImages[photoIndex];
+                photoDisplays[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                photoDisplays[i].gameObject.SetActive(false);
+            }
+        }
+
+        if (pageCountText != null)
+        {
+            int totalPages = Mathf.Max(1, Mathf.CeilToInt((float)shotImages.Count / photoDisplays.Count));
+            int currentPage = (startIndex / photoDisplays.Count) + 1;
+            pageCountText.text = $"{currentPage} / {totalPages}";
         }
     }
 
@@ -113,7 +144,7 @@ public class VideoCameraController : MonoBehaviour
             // byte[] bytes = screenShot.EncodeToPNG();
             // string filename = string.Format("{0}/Screenshots/screenshot_{1}.png", Application.persistentDataPath, System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
             // System.IO.File.WriteAllBytes(filename, bytes);
-            shotImages.Add(screenShot);
+            shotImages.Add(Sprite.Create(screenShot, new Rect(0, 0, screenShot.width, screenShot.height), new Vector2(0.5f, 0.5f)));
             // lastShotImage.sprite = Sprite.Create(screenShot, new Rect(0, 0, screenShot.width, screenShot.height), new Vector2(0.5f, 0.5f));
         }
     }

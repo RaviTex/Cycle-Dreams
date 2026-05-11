@@ -71,7 +71,6 @@ public class BikeController : MonoBehaviour
     private float currentForwardSpeed;
     private float currentThrottleInput;
     private float wigglePhase;
-    private bool hasPlayerInput;
 
     void Awake()
     {
@@ -85,7 +84,7 @@ public class BikeController : MonoBehaviour
     void Update()
     {
         UpdateSteeringInput();
-        if (enableVisuals && hasPlayerInput)
+        if (enableVisuals)
         {
             UpdateFrontSectionVisual();
             UpdateVisualLean();
@@ -129,14 +128,7 @@ public class BikeController : MonoBehaviour
 
     private Vector2 ReadMoveInput()
     {
-        if (moveAction == null)
-        {
-            hasPlayerInput = false;
-            return Vector2.zero;
-        }
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
-        hasPlayerInput = input != Vector2.zero;
-        return input;
+        return moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
     }
 
     private void UpdateSteeringInput()
@@ -242,7 +234,7 @@ public class BikeController : MonoBehaviour
         float lateralSpeed = Vector3.Dot(velocity, wheelRight);
 
         // Standard aerodynamic drag (using velocity squared for realistic air resistance)
-        float aeroDragVelocity = forwardSpeed * Mathf.Abs(forwardSpeed) * drag * forwardDragMultiplier * 0.007f * Time.fixedDeltaTime;
+        float aeroDragVelocity = forwardSpeed * Mathf.Abs(forwardSpeed) * drag * forwardDragMultiplier * 0.01f * Time.fixedDeltaTime;
         velocity -= wheelForward * aeroDragVelocity;
 
         // Tire grip: cancel out only the lateral slide, leaving gravity to freely affect forward/backward rolling
