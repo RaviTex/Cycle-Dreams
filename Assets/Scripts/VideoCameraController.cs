@@ -11,6 +11,8 @@ public class VideoCameraController : MonoBehaviour
     public InputActionReference viewPhotoModeToggleAction;
     public InputActionReference lefMouseClickAction;
     public InputActionReference scrollWheelAction;
+    public InputActionReference nextAction;
+    public InputActionReference previousAction;
     public bool isInCameraMode = false;
     public bool isInViewPhotoMode = false;
     public GameObject isInCameraModeIndicator;
@@ -77,7 +79,7 @@ public class VideoCameraController : MonoBehaviour
                 float scrollValue = scrollWheelAction.action.ReadValue<float>();
                 if (scrollValue != 0f)
                 {
-                    int maxStartIndex = Mathf.Max(0, ((shotImages.Count - 1) / photoDisplays.Count) * photoDisplays.Count);
+                    int maxStartIndex = Mathf.Max(0, shotImages.Count - 1 / photoDisplays.Count * photoDisplays.Count);
 
                     if (scrollValue < 0f)
                     {
@@ -90,6 +92,17 @@ public class VideoCameraController : MonoBehaviour
 
                     DisplayFotosFromIndex(currentPhotoStartIndex);
                 }
+            }
+            if (nextAction.action.triggered)
+            {
+                int maxStartIndex = Mathf.Max(0, shotImages.Count - 1 / photoDisplays.Count * photoDisplays.Count);
+                currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex + photoDisplays.Count, 0, maxStartIndex);
+                DisplayFotosFromIndex(currentPhotoStartIndex);
+            }
+            if (previousAction.action.triggered)
+            {
+                currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex - photoDisplays.Count, 0, shotImages.Count - 1);
+                DisplayFotosFromIndex(currentPhotoStartIndex);
             }
         }
         else

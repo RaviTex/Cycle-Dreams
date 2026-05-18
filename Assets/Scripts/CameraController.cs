@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     public Transform pivot;
-    public float sensitivity = 0.1f;
+    [SerializeField] private float sensitivity = 0.1f;
+    [SerializeField] private float gamepadSensitivity = 1f;
     public InputActionReference lookAction;
     public bool isVRMode = false;
     [SerializeField] private bool lerpPositionAndRotation = true;
@@ -13,6 +14,7 @@ public class CameraController : MonoBehaviour
     private float rotationX = 0f;
     private float rotationY = 0f;
     private GameObject camera;
+    private Vector2 lookInput;
 
 
     void Start()
@@ -40,10 +42,10 @@ public class CameraController : MonoBehaviour
         {
             return;
         }
-        Vector2 lookInput = lookAction != null ? lookAction.action.ReadValue<Vector2>() : Vector2.zero;
 
-        rotationX -= lookInput.y * sensitivity;
-        rotationY += lookInput.x * sensitivity;
+        rotationX -= lookInput.y;
+        rotationY += lookInput.x;
+        print(lookInput);
 
         rotationX = Mathf.Clamp(rotationX, -45f, 45f);
         rotationY = Mathf.Clamp(rotationY, -120f, 120f);
@@ -55,6 +57,19 @@ public class CameraController : MonoBehaviour
     {
         if (lookAction != null)
             lookAction.action.Enable();
+        lookAction.action.performed += ctx =>
+        {
+            lookInput = ctx.ReadValue<Vector2>();
+            if (ctx.control.device is Gamepad)
+            {
+                lookInput *= gamepadSensitivity;
+            }
+            if (ctx.control.device is not Gamepad)
+            {
+                lookInput *= sensitivity;
+            }
+        };
+        lookAction.action.canceled += ctx => lookInput = Vector2.zero;
     }
 
     void OnDisable()
