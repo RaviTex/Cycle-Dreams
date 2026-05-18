@@ -18,6 +18,8 @@ public class BikeSplineController : MonoBehaviour
     [SerializeField] private GameObject frontSection;
 
     private float speed;
+    public float CurrentSpeed => speed;
+    public bool freezeMovement = false;
     private float splineLenght;
     private float distanceCovered;
     private float t;
@@ -46,6 +48,8 @@ public class BikeSplineController : MonoBehaviour
 
     void Update()
     {
+        if (freezeMovement) return;
+
         if (isAcceleratingRight)
         {
             speed += acceleration * Time.deltaTime;
