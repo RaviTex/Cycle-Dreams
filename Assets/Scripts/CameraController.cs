@@ -45,7 +45,6 @@ public class CameraController : MonoBehaviour
 
         rotationX -= lookInput.y;
         rotationY += lookInput.x;
-        print(lookInput);
 
         rotationX = Mathf.Clamp(rotationX, -45f, 45f);
         rotationY = Mathf.Clamp(rotationY, -120f, 120f);

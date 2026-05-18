@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &168042514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2881520594437467356, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+  m_PrefabInstance: {fileID: 5193830336562647494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306333517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,72 +1214,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1634088193
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 74391700346014206, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_Name
-      value: Bike Spline
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 13.328
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 30.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8099006
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.5865673
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200291390079914394, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343420549681627936, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-      propertyPath: spline
-      value: 
-      objectReference: {fileID: 409165692}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
---- !u!4 &1634088194 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2881520594437467356, guid: 4e0a1096587b6c54bbe6b8956e889e61, type: 3}
-  m_PrefabInstance: {fileID: 1634088193}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1731028513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,6 +1553,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1129693620}
   m_SourcePrefab: {fileID: 100100000, guid: 6e025b79484786b448813b0099f9207b, type: 3}
+--- !u!114 &2019199015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+  m_PrefabInstance: {fileID: 5193830336562647494}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07ea6fe85b9f6e4b9dbbe19afbe573a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2107043721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,7 +1719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ce98fd3dcd6f34991b5bc72f93def0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 1634088194}
+  pivot: {fileID: 168042514}
   sensitivity: 0.1
   gamepadSensitivity: 1
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -1792,6 +1742,8 @@ MonoBehaviour:
   viewPhotoModeToggleAction: {fileID: -762902852776729225, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   lefMouseClickAction: {fileID: -6388571466007557339, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   scrollWheelAction: {fileID: -5226172062067718997, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  nextAction: {fileID: 7476244043514120974, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  previousAction: {fileID: 2411907206095950430, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   isInCameraMode: 0
   isInViewPhotoMode: 0
   isInCameraModeIndicator: {fileID: 1880595543}
@@ -1808,6 +1760,8 @@ MonoBehaviour:
   - {fileID: 5266458811797780116}
   - {fileID: 5266458811797780115}
   - {fileID: 5266458811797780114}
+  bikeController: {fileID: 2019199015}
+  bikeSplineController: {fileID: 0}
 --- !u!4 &543450651678136362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9040283346570539727, guid: f48720fe3d3aec94eb4d6d3e548e73fc, type: 3}
@@ -1832,7 +1786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74391700346014206, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1200291390079914394, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1874,17 +1828,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2887799627197391315, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      propertyPath: spline
+      value: 
+      objectReference: {fileID: 409165692}
     - target: {fileID: 5132305955467590483, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      propertyPath: spline
+      value: 
+      objectReference: {fileID: 409165692}
+    - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: turnSpeed
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      propertyPath: enableVisuals
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: steerStrength
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      propertyPath: useSplineMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: rollingResistance
@@ -2024,4 +1994,3 @@ SceneRoots:
   - {fileID: 1244219584}
   - {fileID: 1908276228}
   - {fileID: 409165693}
-  - {fileID: 1634088193}

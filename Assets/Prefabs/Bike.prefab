@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 8351940381318817826}
   - component: {fileID: 5463223659038967529}
   - component: {fileID: 5057720375829266366}
+  - component: {fileID: 2887799627197391315}
   m_Layer: 0
   m_Name: Bike
   m_TagString: Untagged
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07ea6fe85b9f6e4b9dbbe19afbe573a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSplineMode: 0
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   frontSection: {fileID: 8873404052146296575}
   frontWheel: {fileID: 7878132836805081396}
@@ -200,6 +202,7 @@ MonoBehaviour:
   wiggleFrequencySpeedBoost: 1
   wiggleMaxAngle: 1.5
   wiggleFullEffectSpeed: 5
+  freezeMovement: 0
 --- !u!54 &5057720375829266366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,6 +230,31 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2887799627197391315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74391700346014206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c173508181bd65e4fbfbb4f55dac8a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightAction: {fileID: -7896291703296941531, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  leftAction: {fileID: -7053123133719681545, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  spline: {fileID: 0}
+  acceleration: 2
+  drag: 1
+  accelerationTimer: 0.5
+  maxLeanAngle: 20
+  bikeModel: {fileID: 1035438221101633566}
+  frontWheel: {fileID: 7878132836805081396}
+  backWheel: {fileID: 2116551063536099421}
+  wheelSpinMultiplier: 15
+  frontSection: {fileID: 8873404052146296575}
+  freezeMovement: 0
 --- !u!1 &1019882545396482875
 GameObject:
   m_ObjectHideFlags: 0

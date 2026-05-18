@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class BikeController : MonoBehaviour
 {
+    [Header("Mode Configuration")]
+    public bool useSplineMode = false;
+
     [Header("Input Setup")]
     public InputActionReference moveAction;
 
@@ -82,6 +85,17 @@ public class BikeController : MonoBehaviour
 
     void Awake()
     {
+        BikeSplineController splineController = GetComponent<BikeSplineController>();
+        if (splineController != null)
+        {
+            splineController.enabled = useSplineMode;
+        }
+
+        if (useSplineMode)
+        {
+            this.enabled = false;
+        }
+
         InitializePhysics();
         CacheVisualBaseRotations();
     }
