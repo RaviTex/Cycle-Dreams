@@ -26,6 +26,9 @@ public class VideoCameraController : MonoBehaviour
     public List<Sprite> shotImages = new List<Sprite>();
     public List<Image> photoDisplays = new List<Image>();
 
+    [SerializeField] private BikeController bikeController;
+    [SerializeField] private BikeSplineController bikeSplineController;
+
     private Camera mainCamera;
     private RenderTexture renderTexture;
     private float normalFOV;
@@ -38,21 +41,44 @@ public class VideoCameraController : MonoBehaviour
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
     }
 
+    private bool IsBikeNearStandstill()
+    {
+        if (bikeController != null && bikeController.isActiveAndEnabled)
+        {
+            return Mathf.Abs(bikeController.CurrentForwardSpeed) < 0.5f;
+        }
+        if (bikeSplineController != null && bikeSplineController.isActiveAndEnabled)
+        {
+            return Mathf.Abs(bikeSplineController.CurrentSpeed) < 0.5f;
+        }
+        return true;
+    }
+
+    private void SetBikeFrozen(bool frozen)
+    {
+        if (bikeController != null) bikeController.freezeMovement = frozen;
+        if (bikeSplineController != null) bikeSplineController.freezeMovement = frozen;
+    }
+
     void Update()
     {
         if (cameraModeToggleAction.action.triggered && !isInViewPhotoMode)
         {
+            if (!isInCameraMode && !IsBikeNearStandstill()) return;
             isInCameraMode = !isInCameraMode;
             isInCameraModeIndicator.SetActive(isInCameraMode);
+            SetBikeFrozen(isInCameraMode);
         }
         if (viewPhotoModeToggleAction.action.triggered && !isInCameraMode && shotImages.Count > 0)
         {
+            if (!isInViewPhotoMode && !IsBikeNearStandstill()) return;
             isInViewPhotoMode = !isInViewPhotoMode;
             photoGalleryPanel.SetActive(isInViewPhotoMode);
             if (isInViewPhotoMode)
             {
                 DisplayFotosFromIndex(currentPhotoStartIndex);
             }
+            SetBikeFrozen(isInViewPhotoMode);
         }
 
         if (isInCameraMode)

@@ -75,8 +75,10 @@ public class BikeController : MonoBehaviour
     private float currentSteerInput;
     private float currentLeanAngle;
     private float currentForwardSpeed;
+    public float CurrentForwardSpeed => currentForwardSpeed;
     private float currentThrottleInput;
     private float wigglePhase;
+    public bool freezeMovement = false;
 
     void Awake()
     {
@@ -89,6 +91,8 @@ public class BikeController : MonoBehaviour
 
     void Update()
     {
+        if (freezeMovement) return;
+
         UpdateSteeringInput();
         if (enableVisuals)
         {
@@ -100,6 +104,12 @@ public class BikeController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (freezeMovement)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         Vector2 input = ReadMoveInput();
         Vector3 currentVelocity = rb.linearVelocity;
         currentForwardSpeed = Vector3.Dot(currentVelocity, transform.forward);
