@@ -17,6 +17,8 @@ public class BikeController : MonoBehaviour
     [Header("Motor & Braking")]
     [Tooltip("Maximum forward acceleration force.")]
     public float engineAcceleration = 5f;
+    [Tooltip("The absolute maximum speed (m/s) the engine can push the bike. Torque scales down efficiently as you reach this speed.")]
+    public float topSpeed = 25f;
     [Tooltip("Active braking force applied when pushing opposite to travel direction. Increase to stop faster.")]
     public float brakingPower = 8f;
     [Tooltip("How fast the gas input registers (higher = instant response). Smoothes out jerky input.")]
@@ -25,8 +27,12 @@ public class BikeController : MonoBehaviour
     public float reverseEngageSpeedThreshold = 1f;
 
     [Header("Steering & Handling")]
-    [Tooltip("How fast the bike turns physically.")]
-    public float turnSpeed = 30f;
+    [Tooltip("Maximum turn speed when driving slowly.")]
+    public float maxTurnSpeed = 40f;
+    [Tooltip("Minimum turn speed when driving at high speed.")]
+    public float minTurnSpeed = 10f;
+    [Tooltip("Speed at which turning reaches the minimum turn speed.")]
+    public float maxSpeedForTurn = 25f;
     [Tooltip("Maximum steering angle for the front wheel visual and steering calculation.")]
     public float maxSteerAngle = 30f;
     [Tooltip("How fast the front wheel turns to the target angle.")]
@@ -38,7 +44,7 @@ public class BikeController : MonoBehaviour
 
     [Header("Physics & Friction")]
     public float gravity = 9.81f;
-    [Tooltip("General air resistance taking away speed over time.")]
+    [Tooltip("General air resistance taking away speed exponentially as you go faster.")]
     public float drag = 1f;
     [Tooltip("Modifier for drag when moving purely forward (simulates aerodynamics).")]
     public float forwardDragMultiplier = .7f;
@@ -183,7 +189,7 @@ public class BikeController : MonoBehaviour
             Vector3 projectedForward = Vector3.ProjectOnPlane(transform.forward, averageNormal).normalized;
             if (projectedForward.sqrMagnitude > 0.001f)
             {
-                Quaternion targetRot = Quaternion.LookRotation(projectedForward, averageNormal);
+                Quaternion targetRot = Quaternion.LookRotation(projectedForward, Vector3.up);
                 rotation = Quaternion.Slerp(rotation, targetRot, 10f * Time.fixedDeltaTime);
             }
         }
@@ -204,8 +210,15 @@ public class BikeController : MonoBehaviour
             float brakeDirection = -Mathf.Sign(currentForwardSpeed);
             velocity += transform.forward * brakingPower * Mathf.Abs(rawInputY) * brakeDirection * Time.fixedDeltaTime;
         }
+        else
+        {
+            // Calculate how close we are to top speed. We fade engine power out as we reach top speed.
+            float speedRatio = Mathf.Clamp01(Mathf.Abs(currentForwardSpeed) / topSpeed);
+            // Gives full torque at 0 speed, and 0 torque at max speed.
+            float availableTorque = 1f - speedRatio;
 
-        velocity += transform.forward * engineAcceleration * smoothedThrottle * Time.fixedDeltaTime;
+            velocity += transform.forward * engineAcceleration * smoothedThrottle * availableTorque * Time.fixedDeltaTime;
+        }
     }
 
     private float SmoothThrottleInput(float targetThrottle)
@@ -235,7 +248,6 @@ public class BikeController : MonoBehaviour
 
         // Standard aerodynamic drag (using velocity squared for realistic air resistance)
         float aeroDragVelocity = forwardSpeed * Mathf.Abs(forwardSpeed) * drag * forwardDragMultiplier * 0.01f * Time.fixedDeltaTime;
-        velocity -= wheelForward * aeroDragVelocity;
 
         // Tire grip: cancel out only the lateral slide, leaving gravity to freely affect forward/backward rolling
         float lateralCorrectionAmount = lateralSpeed * tireGripStrength * Time.fixedDeltaTime;
@@ -258,7 +270,9 @@ public class BikeController : MonoBehaviour
 
     private void RotateBikeBody(ref Quaternion rotation)
     {
-        float turnAmount = turnSpeed * currentSteerInput * currentForwardSpeed * Time.fixedDeltaTime;
+        float speedRatio = Mathf.Clamp01(Mathf.Abs(currentForwardSpeed) / maxSpeedForTurn);
+        float currentTurnSpeed = Mathf.Lerp(maxTurnSpeed, minTurnSpeed, speedRatio);
+        float turnAmount = currentTurnSpeed * currentSteerInput * currentForwardSpeed * Time.fixedDeltaTime;
         rotation *= Quaternion.Euler(0f, turnAmount, 0f);
     }
 

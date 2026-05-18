@@ -121,6 +121,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SplineMoveRight",
+                    "type": "Button",
+                    "id": "4e5c703d-c15e-45c7-b3c4-683d5e01e940",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.5)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SplineMoveLeft",
+                    "type": "Button",
+                    "id": "2cc761d5-2302-49e6-a2eb-400f6d374419",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.5)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -616,6 +634,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "ViewPhotoMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d17200d2-890b-4fed-9c44-55b838b4eb87",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplineMoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d15dabdf-5782-4c6c-b5a6-c4f6100b6af9",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplineMoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d071f049-aaa3-4308-89bf-00f3997c7e58",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplineMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01dc3530-98d1-4945-95e7-09f0dff7c8a1",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplineMoveLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
