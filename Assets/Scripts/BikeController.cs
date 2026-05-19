@@ -6,6 +6,9 @@ public class BikeController : MonoBehaviour
     [Header("Mode Configuration")]
     public bool useSplineMode = false;
 
+    [Header("Other Controllers")]
+    [SerializeField] private CameraController cameraController;
+
     [Header("Input Setup")]
     public InputActionReference moveAction;
 
@@ -78,7 +81,8 @@ public class BikeController : MonoBehaviour
     private float currentSteerInput;
     private float currentLeanAngle;
     private float currentForwardSpeed;
-    public float CurrentForwardSpeed => currentForwardSpeed;
+    private float currentSpeed;
+    public float CurrentSpeed => currentSpeed;
     private float currentThrottleInput;
     private float wigglePhase;
     public bool freezeMovement = false;
@@ -118,6 +122,7 @@ public class BikeController : MonoBehaviour
 
     void FixedUpdate()
     {
+        cameraController.isDriving = currentSpeed > 0.25f;
         if (freezeMovement)
         {
             rb.linearVelocity = Vector3.zero;
@@ -126,6 +131,7 @@ public class BikeController : MonoBehaviour
 
         Vector2 input = ReadMoveInput();
         Vector3 currentVelocity = rb.linearVelocity;
+        currentSpeed = currentVelocity.magnitude;
         currentForwardSpeed = Vector3.Dot(currentVelocity, transform.forward);
 
         float smoothedThrottle = SmoothThrottleInput(input.y);

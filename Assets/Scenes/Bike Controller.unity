@@ -1123,7 +1123,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 330585545}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1146,7 +1146,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 306333518}
   - {fileID: 1880595544}
@@ -1726,6 +1726,10 @@ MonoBehaviour:
   isVRMode: 0
   lerpPositionAndRotation: 1
   lerpSpeed: 60
+  isDriving: 0
+  returnToCenterSpeed: 2
+  drivingRotationClampX: {x: -45, y: 45}
+  drivingRotationClampY: {x: -60, y: 60}
 --- !u!114 &2108777925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,17 +1849,17 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
-      propertyPath: enableVisuals
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: steerStrength
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: useSplineMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 2108777924}
     - target: {fileID: 5463223659038967529, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: rollingResistance
       value: 0
@@ -1989,8 +1993,8 @@ SceneRoots:
   - {fileID: 1731028517}
   - {fileID: 2107043725}
   - {fileID: 1541020603}
-  - {fileID: 1282919672}
   - {fileID: 1816115081}
   - {fileID: 1244219584}
   - {fileID: 1908276228}
   - {fileID: 409165693}
+  - {fileID: 1282919672}

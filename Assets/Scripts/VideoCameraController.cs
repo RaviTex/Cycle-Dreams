@@ -45,7 +45,7 @@ public class VideoCameraController : MonoBehaviour
     {
         if (bikeController != null && bikeController.isActiveAndEnabled)
         {
-            return Mathf.Abs(bikeController.CurrentForwardSpeed) < 0.5f;
+            return Mathf.Abs(bikeController.CurrentSpeed) < 0.5f;
         }
         if (bikeSplineController != null && bikeSplineController.isActiveAndEnabled)
         {

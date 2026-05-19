@@ -16,6 +16,7 @@ public class BikeSplineController : MonoBehaviour
     [SerializeField] private GameObject backWheel;
     [SerializeField] private float wheelSpinMultiplier = 1f;
     [SerializeField] private GameObject frontSection;
+    [SerializeField] private CameraController cameraController;
 
     private float speed;
     public float CurrentSpeed => speed;
@@ -48,6 +49,7 @@ public class BikeSplineController : MonoBehaviour
 
     void Update()
     {
+        cameraController.isDriving = speed > 0.25f;
         if (freezeMovement) return;
 
         if (isAcceleratingRight)
@@ -82,6 +84,7 @@ public class BikeSplineController : MonoBehaviour
         Vector3 localForward = transform.InverseTransformDirection(forwardTangent);
         float steerAngle = Mathf.Atan2(localForward.x, localForward.z) * Mathf.Rad2Deg;
         frontSection.transform.localRotation = initialSteerRotation * Quaternion.Euler(0, steerAngle, 0);
+
         // print(speed);
     }
 
