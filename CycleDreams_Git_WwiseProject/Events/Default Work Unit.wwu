@@ -103,6 +103,31 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_Wind" ID="{31DF390D-ED7C-4593-9F7A-7EB7439FA3DB}">
+							<ChildrenList>
+								<Action Name="" ID="{A30D6DFF-1864-41A1-A7EE-0017B2B2A663}" ShortID="644235635">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="White Noise_Wind" ID="{38B07A03-33E1-443B-889A-AAE974865825}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_Wind" ID="{059522D8-B269-4D04-94C4-C1E7E74E60BB}">
+							<ChildrenList>
+								<Action Name="" ID="{BB0EB414-A842-454C-A530-80E09B16A319}" ShortID="4760083">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="White Noise_Wind" ID="{38B07A03-33E1-443B-889A-AAE974865825}" WorkUnitID="{589457B3-3A61-4725-BBCF-67190742440E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
