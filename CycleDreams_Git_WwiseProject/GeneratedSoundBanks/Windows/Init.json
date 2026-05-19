@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{6AFB65D7-E5FF-70EB-884B-1B6C2D00DC83}",
+    "Hash": "{ED2A1ED6-590A-41D3-2AC6-E7169ED2357C}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -71,10 +71,17 @@
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\BikeSpeed",
       "GUID": "{A66302F9-3665-481B-8A2B-56863D4966FA}",
       "Color": "10"
+     },
+     {
+      "Id": "4217281002",
+      "Name": "WindPosition",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\WindPosition",
+      "GUID": "{1C3F1A35-380C-47CD-AA22-42FB021F734E}",
+      "Color": "10"
      }
     ]
    }
   ],
-  "FileHash": "{A1384172-766A-C7EF-366A-F0B6834B1138}"
+  "FileHash": "{810A85D1-3E1B-3F42-0155-3034FBF57435}"
  }
 }

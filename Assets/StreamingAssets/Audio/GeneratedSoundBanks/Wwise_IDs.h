@@ -19,13 +19,16 @@ namespace AK
         static const AkUniqueID PLAY_CAMERAPICKUP = 642588951U;
         static const AkUniqueID PLAY_CAMERASHUTTER = 4863038U;
         static const AkUniqueID PLAY_PICTURETAKEN = 3594814145U;
+        static const AkUniqueID PLAY_WIND = 1020223172U;
         static const AkUniqueID STOP_AMBIANCE = 2839405212U;
         static const AkUniqueID STOP_BIKELOOP = 4026860625U;
+        static const AkUniqueID STOP_WIND = 3173136834U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BIKESPEED = 2439429815U;
+        static const AkUniqueID WINDPOSITION = 4217281002U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS

@@ -11,7 +11,7 @@
     "GUID": "{77E8E93B-166D-4376-ABDA-7A078710E157}",
     "Color": "3",
     "Language": "SFX",
-    "Hash": "{8BD33704-B45F-1439-96E3-DAFE3D3AB353}",
+    "Hash": "{FEA68879-8DD5-1094-CE99-4569F9854259}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype",
     "ShortName": "Prototype",
     "Path": "Prototype.bnk",
@@ -39,6 +39,14 @@
       "Location": "Memory",
       "ShortName": "Ambience.wav",
       "CachePath": "E9/{E9D7DCCD-B7EE-8525-5107-F7E554CCFEBB}.wem"
+     },
+     {
+      "Id": "256120999",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "White Noise.wav",
+      "CachePath": "46/{464C42B8-5648-BF08-EF0F-606C045DBDC9}.wem"
      },
      {
       "Id": "339964001",
@@ -175,6 +183,19 @@
       ]
      },
      {
+      "Id": "1020223172",
+      "Name": "Play_Wind",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Play_Wind",
+      "GUID": "{31DF390D-ED7C-4593-9F7A-7EB7439FA3DB}",
+      "Color": "3",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "256120999"
+       }
+      ]
+     },
+     {
       "Id": "2839405212",
       "Name": "Stop_Ambiance",
       "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Stop_Ambiance",
@@ -195,6 +216,17 @@
       "DurationType": "OneShot",
       "DurationMin": "0",
       "DurationMax": "0"
+     },
+     {
+      "Id": "3173136834",
+      "Name": "Stop_Wind",
+      "ObjectPath": "\\Events\\Default Work Unit\\Prototype\\Stop_Wind",
+      "GUID": "{059522D8-B269-4D04-94C4-C1E7E74E60BB}",
+      "Color": "3",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      }
     ],
     "GameParameters": [
@@ -204,10 +236,17 @@
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\BikeSpeed",
       "GUID": "{A66302F9-3665-481B-8A2B-56863D4966FA}",
       "Color": "10"
+     },
+     {
+      "Id": "4217281002",
+      "Name": "WindPosition",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\WindPosition",
+      "GUID": "{1C3F1A35-380C-47CD-AA22-42FB021F734E}",
+      "Color": "10"
      }
     ]
    }
   ],
-  "FileHash": "{06CEF6D5-E6E6-1949-1D35-22AEE4CBD41C}"
+  "FileHash": "{EF3AB31C-3AEE-66E6-EBFB-2541BAB20A1C}"
  }
 }
