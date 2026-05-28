@@ -100,6 +100,8 @@ GameObject:
   - component: {fileID: 5463223659038967529}
   - component: {fileID: 5057720375829266366}
   - component: {fileID: 2887799627197391315}
+  - component: {fileID: 3945799635894165725}
+  - component: {fileID: 1945631537677127363}
   m_Layer: 0
   m_Name: Bike
   m_TagString: Untagged
@@ -167,13 +169,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSplineMode: 0
+  useArduinoInput: 0
+  cameraController: {fileID: 0}
+  visualController: {fileID: 3945799635894165725}
+  cameraDrivingSpeedThreshold: 0.25
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  frontSection: {fileID: 8873404052146296575}
-  frontWheel: {fileID: 7878132836805081396}
-  backWheel: {fileID: 2116551063536099421}
-  visualRoot: {fileID: 366283881454783140}
-  wheelSpinMultiplier: 15
-  enableVisuals: 1
   engineAcceleration: 1.5
   topSpeed: 25
   brakingPower: 8
@@ -195,14 +195,6 @@ MonoBehaviour:
   suspensionDamper: 20
   frontWheelCenter: {fileID: 7878132836805081396}
   backWheelCenter: {fileID: 2116551063536099421}
-  maxLeanAngle: 25
-  leanSmoothness: 8
-  leanFullEffectSpeed: 5
-  wiggleFrequency: 1.5
-  wiggleFrequencySpeedBoost: 1
-  wiggleMaxAngle: 1.5
-  wiggleFullEffectSpeed: 5
-  freezeMovement: 0
 --- !u!54 &5057720375829266366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,7 +246,50 @@ MonoBehaviour:
   backWheel: {fileID: 2116551063536099421}
   wheelSpinMultiplier: 15
   frontSection: {fileID: 8873404052146296575}
-  freezeMovement: 0
+  cameraController: {fileID: 0}
+  cameraDrivingSpeedThreshold: 0.25
+  dualButtonBrakeMultiplier: 5
+--- !u!114 &3945799635894165725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74391700346014206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e87258521c090f4f8f4fc2e1a4e08d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontSection: {fileID: 8873404052146296575}
+  frontWheel: {fileID: 7878132836805081396}
+  backWheel: {fileID: 2116551063536099421}
+  visualRoot: {fileID: 366283881454783140}
+  wheelSpinMultiplier: 15
+  maxSteerAngle: 25
+  maxLeanAngle: 25
+  leanSmoothness: 8
+  leanFullEffectSpeed: 5
+  wiggleFrequency: 1
+  wiggleFrequencySpeedBoost: 1
+  wiggleMaxAngle: 5
+  wiggleFullEffectSpeed: 5
+--- !u!114 &1945631537677127363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74391700346014206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1bf009a8a11224ea447a6e4d72aaba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deviceName: Teensy
+  wheelCircumference: 2.2
+  magnetsPerWheel: 4
+  speedSmoothing: 5
 --- !u!1 &1019882545396482875
 GameObject:
   m_ObjectHideFlags: 0

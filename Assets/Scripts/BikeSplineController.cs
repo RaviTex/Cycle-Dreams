@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 
-public class BikeSplineController : MonoBehaviour
+public class BikeSplineController : MonoBehaviour, IBikeController
 {
     public InputActionReference rightAction;
     public InputActionReference leftAction;
@@ -17,10 +17,12 @@ public class BikeSplineController : MonoBehaviour
     [SerializeField] private float wheelSpinMultiplier = 1f;
     [SerializeField] private GameObject frontSection;
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
+    [SerializeField] private float dualButtonBrakeMultiplier = 5f;
 
     private float speed;
     public float CurrentSpeed => speed;
-    public bool freezeMovement = false;
+    public bool freezeMovement { get; set; } = false;
     private float splineLenght;
     private float distanceCovered;
     private float t;
@@ -49,23 +51,35 @@ public class BikeSplineController : MonoBehaviour
 
     void Update()
     {
-        cameraController.isDriving = speed > 0.25f;
+        if (cameraController != null)
+        {
+            cameraController.isDriving = speed > cameraDrivingSpeedThreshold;
+        }
+
         if (freezeMovement) return;
 
-        if (isAcceleratingRight)
+        if (TeensyReader.Instance != null && TeensyReader.Instance.IsDeviceConnected)
         {
-            speed += acceleration * Time.deltaTime;
+            speed = TeensyReader.Instance.CurrentSpeed;
         }
-        if (isAcceleratingLeft)
+        else
         {
-            speed += acceleration * Time.deltaTime;
-        }
+            if (isAcceleratingRight)
+            {
+                speed += acceleration * Time.deltaTime;
+            }
+            if (isAcceleratingLeft)
+            {
+                speed += acceleration * Time.deltaTime;
+            }
 
-        if (isRightAccelHeld && isLeftAccelHeld)
-        {
-            speed -= drag * 5 * Time.deltaTime;
-        }
+            if (isRightAccelHeld && isLeftAccelHeld)
+            {
+                speed -= drag * dualButtonBrakeMultiplier * Time.deltaTime;
+            }
 
+            Drag();
+        }
 
         distanceCovered += speed * Time.deltaTime;
         t = distanceCovered / splineLenght;
@@ -74,7 +88,6 @@ public class BikeSplineController : MonoBehaviour
         forwardTangent = spline.Spline.EvaluateTangent(Mathf.Clamp01(nextT));
         transform.position = (Vector3)spline.Spline.EvaluatePosition(t) + spline.transform.position;
         transform.rotation = Quaternion.LookRotation(currentTangent);
-        Drag();
         lastAccelTimeLeft += Time.deltaTime;
         lastAccelTimeRight += Time.deltaTime;
         Rotation();
@@ -113,11 +126,13 @@ public class BikeSplineController : MonoBehaviour
         {
             isAcceleratingRight = true;
             isRightAccelHeld = true;
+            lastAccelTimeRight = 0f;
         }
         else if (!isRight && lastAccelTimeLeft >= accelerationTimer)
         {
             isAcceleratingLeft = true;
             isLeftAccelHeld = true;
+            lastAccelTimeLeft = 0f;
         }
     }
     private void StopAccelerating(bool isRight, bool isCancelled = false)
@@ -127,6 +142,7 @@ public class BikeSplineController : MonoBehaviour
             if (isCancelled)
             {
                 isRightAccelHeld = false;
+                lastAccelTimeRight = 0f;
             }
             isAcceleratingRight = false;
         }
@@ -135,6 +151,7 @@ public class BikeSplineController : MonoBehaviour
             if (isCancelled)
             {
                 isLeftAccelHeld = false;
+                lastAccelTimeLeft = 0f;
             }
             isAcceleratingLeft = false;
         }
@@ -156,32 +173,39 @@ public class BikeSplineController : MonoBehaviour
             frontWheel.transform.Rotate(Vector3.back, wheelSpin, Space.Self);
     }
 
+    private void OnRightStarted(InputAction.CallbackContext ctx) => Accelerate(true);
+    private void OnRightCanceled(InputAction.CallbackContext ctx) => StopAccelerating(true, true);
+    private void OnRightPerformed(InputAction.CallbackContext ctx) => StopAccelerating(true);
+    private void OnLeftStarted(InputAction.CallbackContext ctx) => Accelerate(false);
+    private void OnLeftCanceled(InputAction.CallbackContext ctx) => StopAccelerating(false, true);
+    private void OnLeftPerformed(InputAction.CallbackContext ctx) => StopAccelerating(false);
+
     void OnEnable()
     {
         if (rightAction != null && leftAction != null)
         {
             rightAction.action.Enable();
-            rightAction.action.started += ctx => Accelerate(true);
-            rightAction.action.canceled += ctx => StopAccelerating(true, true);
-            rightAction.action.performed += ctx => StopAccelerating(true);
+            rightAction.action.started += OnRightStarted;
+            rightAction.action.canceled += OnRightCanceled;
+            rightAction.action.performed += OnRightPerformed;
             leftAction.action.Enable();
-            leftAction.action.started += ctx => Accelerate(false);
-            leftAction.action.canceled += ctx => StopAccelerating(false, true);
-            leftAction.action.performed += ctx => StopAccelerating(false);
+            leftAction.action.started += OnLeftStarted;
+            leftAction.action.canceled += OnLeftCanceled;
+            leftAction.action.performed += OnLeftPerformed;
         }
     }
     void OnDisable()
     {
         if (leftAction != null && rightAction != null)
         {
-            rightAction.action.started -= ctx => Accelerate(true);
-            rightAction.action.canceled -= ctx => StopAccelerating(true, true);
-            rightAction.action.performed -= ctx => StopAccelerating(true);
-            leftAction.action.Disable();
-            leftAction.action.started -= ctx => Accelerate(false);
-            leftAction.action.canceled -= ctx => StopAccelerating(false, true);
-            leftAction.action.performed -= ctx => StopAccelerating(false);
+            rightAction.action.started -= OnRightStarted;
+            rightAction.action.canceled -= OnRightCanceled;
+            rightAction.action.performed -= OnRightPerformed;
             rightAction.action.Disable();
+            leftAction.action.started -= OnLeftStarted;
+            leftAction.action.canceled -= OnLeftCanceled;
+            leftAction.action.performed -= OnLeftPerformed;
+            leftAction.action.Disable();
         }
     }
 }

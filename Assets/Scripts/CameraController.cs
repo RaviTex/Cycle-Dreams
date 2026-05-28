@@ -16,19 +16,20 @@ public class CameraController : MonoBehaviour
     public bool isDriving = false;
     [SerializeField] private float returnToCenterSpeed = 2f;
     [SerializeField] private float snapToBoundsSpeed = 10f;
+    [SerializeField] private float snapCompletionThreshold = 0.1f;
     [SerializeField] private Vector2 drivingRotationClampX = new Vector2(-45f, 45f);
     [SerializeField] private Vector2 drivingRotationClampY = new Vector2(-60f, 60f);
 
     private float rotationX = 0f;
     private float rotationY = 0f;
-    private GameObject camera;
+    private GameObject _camera;
     private Vector2 lookInput;
 
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        camera = GetComponentInChildren<Camera>().gameObject;
+        _camera = GetComponentInChildren<Camera>().gameObject;
     }
 
     void LateUpdate()
@@ -58,7 +59,8 @@ public class CameraController : MonoBehaviour
                             rotationY < drivingRotationClampY.x || rotationY > drivingRotationClampY.y;
         }
 
-        if (!isDriving || !isOutOfBounds)
+        bool canApplyPlayerInput = !isDriving || !isOutOfBounds;
+        if (canApplyPlayerInput)
         {
             rotationX -= lookInput.y;
             rotationY += lookInput.x;
@@ -68,13 +70,14 @@ public class CameraController : MonoBehaviour
         {
             if (isOutOfBounds)
             {
-                float targetX = Mathf.Clamp(rotationX, drivingRotationClampX.x, drivingRotationClampX.y);
-                float targetY = Mathf.Clamp(rotationY, drivingRotationClampY.x, drivingRotationClampY.y);
+                float targetX = rotationX;
+                float targetY = rotationY;
+                ClampRotationToDrivingBounds(ref targetX, ref targetY);
 
                 rotationX = Mathf.Lerp(rotationX, targetX, Time.deltaTime * snapToBoundsSpeed);
                 rotationY = Mathf.Lerp(rotationY, targetY, Time.deltaTime * snapToBoundsSpeed);
 
-                if (Mathf.Abs(rotationX - targetX) < 0.1f && Mathf.Abs(rotationY - targetY) < 0.1f)
+                if (Mathf.Abs(rotationX - targetX) < snapCompletionThreshold && Mathf.Abs(rotationY - targetY) < snapCompletionThreshold)
                 {
                     rotationX = targetX;
                     rotationY = targetY;
@@ -82,8 +85,7 @@ public class CameraController : MonoBehaviour
             }
             else
             {
-                rotationX = Mathf.Clamp(rotationX, drivingRotationClampX.x, drivingRotationClampX.y);
-                rotationY = Mathf.Clamp(rotationY, drivingRotationClampY.x, drivingRotationClampY.y);
+                ClampRotationToDrivingBounds(ref rotationX, ref rotationY);
 
                 if (lookInput.sqrMagnitude < 0.001f && isCameraAssistEnabled)
                 {
@@ -98,30 +100,50 @@ public class CameraController : MonoBehaviour
         }
 
         Quaternion deviation = Quaternion.Euler(rotationX, rotationY, 0);
-        camera.transform.localRotation = deviation;
+        _camera.transform.localRotation = deviation;
     }
+
+    private void ClampRotationToDrivingBounds(ref float rotX, ref float rotY)
+    {
+        rotX = Mathf.Clamp(rotX, drivingRotationClampX.x, drivingRotationClampX.y);
+        rotY = Mathf.Clamp(rotY, drivingRotationClampY.x, drivingRotationClampY.y);
+    }
+
+    private void OnLookPerformed(InputAction.CallbackContext ctx)
+    {
+        lookInput = ctx.ReadValue<Vector2>();
+        if (ctx.control.device is Gamepad)
+        {
+            lookInput *= gamepadSensitivity;
+        }
+        else
+        {
+            lookInput *= sensitivity;
+        }
+    }
+
+    private void OnLookCanceled(InputAction.CallbackContext ctx)
+    {
+        lookInput = Vector2.zero;
+    }
+
     void OnEnable()
     {
         if (lookAction != null)
-            lookAction.action.Enable();
-        lookAction.action.performed += ctx =>
         {
-            lookInput = ctx.ReadValue<Vector2>();
-            if (ctx.control.device is Gamepad)
-            {
-                lookInput *= gamepadSensitivity;
-            }
-            if (ctx.control.device is not Gamepad)
-            {
-                lookInput *= sensitivity;
-            }
-        };
-        lookAction.action.canceled += ctx => lookInput = Vector2.zero;
+            lookAction.action.Enable();
+            lookAction.action.performed += OnLookPerformed;
+            lookAction.action.canceled += OnLookCanceled;
+        }
     }
 
     void OnDisable()
     {
         if (lookAction != null)
+        {
+            lookAction.action.performed -= OnLookPerformed;
+            lookAction.action.canceled -= OnLookCanceled;
             lookAction.action.Disable();
+        }
     }
 }

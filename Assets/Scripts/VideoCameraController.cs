@@ -29,6 +29,8 @@ public class VideoCameraController : MonoBehaviour
     [SerializeField] private BikeController bikeController;
     [SerializeField] private BikeSplineController bikeSplineController;
 
+    [SerializeField] private float cameraModeLaunchSpeedThreshold = 0.5f;
+
     private Camera mainCamera;
     private RenderTexture renderTexture;
     private float normalFOV;
@@ -41,23 +43,44 @@ public class VideoCameraController : MonoBehaviour
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
     }
 
-    private bool IsBikeNearStandstill()
+    private IBikeController GetActiveBikeController()
     {
         if (bikeController != null && bikeController.isActiveAndEnabled)
-        {
-            return Mathf.Abs(bikeController.CurrentSpeed) < 0.5f;
-        }
+            return bikeController;
         if (bikeSplineController != null && bikeSplineController.isActiveAndEnabled)
-        {
-            return Mathf.Abs(bikeSplineController.CurrentSpeed) < 0.5f;
-        }
-        return true;
+            return bikeSplineController;
+        return null;
+    }
+
+    private bool IsBikeNearStandstill()
+    {
+        var bike = GetActiveBikeController();
+        return bike == null || Mathf.Abs(bike.CurrentSpeed) < cameraModeLaunchSpeedThreshold;
     }
 
     private void SetBikeFrozen(bool frozen)
     {
-        if (bikeController != null) bikeController.freezeMovement = frozen;
-        if (bikeSplineController != null) bikeSplineController.freezeMovement = frozen;
+        var bike = GetActiveBikeController();
+        if (bike != null)
+            bike.freezeMovement = frozen;
+    }
+
+    private int GetMaxPhotoStartIndex()
+    {
+        int photosPerPage = photoDisplays.Count;
+        if (photosPerPage == 0) return 0;
+        int maxPages = Mathf.Max(1, Mathf.CeilToInt((float)shotImages.Count / photosPerPage));
+        return Mathf.Max(0, (maxPages - 1) * photosPerPage);
+    }
+
+    private void NavigatePhotos(int pageDirection)
+    {
+        currentPhotoStartIndex = Mathf.Clamp(
+            currentPhotoStartIndex + (pageDirection * photoDisplays.Count),
+            0,
+            GetMaxPhotoStartIndex()
+        );
+        DisplayFotosFromIndex(currentPhotoStartIndex);
     }
 
     void Update()
@@ -105,30 +128,16 @@ public class VideoCameraController : MonoBehaviour
                 float scrollValue = scrollWheelAction.action.ReadValue<float>();
                 if (scrollValue != 0f)
                 {
-                    int maxStartIndex = Mathf.Max(0, shotImages.Count - 1 / photoDisplays.Count * photoDisplays.Count);
-
-                    if (scrollValue < 0f)
-                    {
-                        currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex + photoDisplays.Count, 0, maxStartIndex);
-                    }
-                    else if (scrollValue > 0f)
-                    {
-                        currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex - photoDisplays.Count, 0, maxStartIndex);
-                    }
-
-                    DisplayFotosFromIndex(currentPhotoStartIndex);
+                    NavigatePhotos(scrollValue < 0f ? 1 : -1);
                 }
             }
             if (nextAction.action.triggered)
             {
-                int maxStartIndex = Mathf.Max(0, shotImages.Count - 1 / photoDisplays.Count * photoDisplays.Count);
-                currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex + photoDisplays.Count, 0, maxStartIndex);
-                DisplayFotosFromIndex(currentPhotoStartIndex);
+                NavigatePhotos(1);
             }
             if (previousAction.action.triggered)
             {
-                currentPhotoStartIndex = Mathf.Clamp(currentPhotoStartIndex - photoDisplays.Count, 0, shotImages.Count - 1);
-                DisplayFotosFromIndex(currentPhotoStartIndex);
+                NavigatePhotos(-1);
             }
         }
         else
@@ -212,5 +221,21 @@ public class VideoCameraController : MonoBehaviour
             lefMouseClickAction.action.Disable();
         if (scrollWheelAction != null)
             scrollWheelAction.action.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var sprite in shotImages)
+        {
+            if (sprite != null)
+            {
+                if (sprite.texture != null)
+                {
+                    Destroy(sprite.texture);
+                }
+                Destroy(sprite);
+            }
+        }
+        shotImages.Clear();
     }
 }

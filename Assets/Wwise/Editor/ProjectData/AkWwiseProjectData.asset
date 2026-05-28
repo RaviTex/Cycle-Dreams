@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 743c8f02d0b0d04ebb5a802079179f9a
     GuidInternal: 
-    m_lastTime: -8584231140396558988
+    m_lastTime: -8584243138771952193
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 59613b612ec7c94aa0cb80822277c1e1
     GuidInternal: 
-    m_lastTime: -8584231140403907073
+    m_lastTime: -8584237042435031300
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -117,7 +117,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: a02b89a436bf5744865951368c288b91
     GuidInternal: 
-    m_lastTime: -8584231140396600286
+    m_lastTime: -8584237042428067704
     List:
     - name: Prototype
       guid: 3be9e8776d167643abda7a078710e157
@@ -145,7 +145,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 86926f38ff87264ab1f812e8482be907
     GuidInternal: 
-    m_lastTime: -8584231004806979561
+    m_lastTime: -8584224080951297913
     List:
     - name: Play_Ambiance
       guid: 1a65d0ff9be4404cabb407337150bc7f
@@ -267,6 +267,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Play_Wind
+      guid: 0d39df317ced93459f7a7eb7439fa3db
+      id: 1020223172
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 86926f38ff87264ab1f812e8482be907
+      - ElementName: Prototype
+        ObjectType: 4
+        guid: cb8e74dc1b14bc49a8d0962d632cd3d2
+      - ElementName: Play_Wind
+        ObjectType: 3
+        guid: 0d39df317ced93459f7a7eb7439fa3db
+      Path: Events\Default Work Unit\Prototype\Play_Wind
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Prototype
       guid: cb8e74dc1b14bc49a8d0962d632cd3d2
       id: 3565403361
@@ -324,6 +344,26 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Stop_Wind
+      guid: d822950569b2044d94c4c1e7e74e60bb
+      id: 3173136834
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 86926f38ff87264ab1f812e8482be907
+      - ElementName: Prototype
+        ObjectType: 4
+        guid: cb8e74dc1b14bc49a8d0962d632cd3d2
+      - ElementName: Stop_Wind
+        ObjectType: 3
+        guid: d822950569b2044d94c4c1e7e74e60bb
+      Path: Events\Default Work Unit\Prototype\Stop_Wind
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -336,7 +376,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 9ad500594a31024391c5224359dd5255
     GuidInternal: 
-    m_lastTime: -8584231140409150906
+    m_lastTime: -8584224080951287933
     List:
     - name: BikeSpeed
       guid: f90263a665361b488a2b56863d4966fa
@@ -352,6 +392,20 @@ MonoBehaviour:
         ObjectType: 13
         guid: f90263a665361b488a2b56863d4966fa
       Path: Game Parameters\Default Work Unit\BikeSpeed
+    - name: WindPosition
+      guid: 351a3f1c0c38cd47aa2242fb021f734e
+      id: 4217281002
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 9ad500594a31024391c5224359dd5255
+      - ElementName: WindPosition
+        ObjectType: 13
+        guid: 351a3f1c0c38cd47aa2242fb021f734e
+      Path: Game Parameters\Default Work Unit\WindPosition
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -364,7 +418,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: 875de698405b7f42b030f351e0bf5154
     GuidInternal: 
-    m_lastTime: -8584231140396580282
+    m_lastTime: -8584243138771992541
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -378,7 +432,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 5ba04fd65a36ad4c8470060dd22b2a55
     GuidInternal: 
-    m_lastTime: -8584231140396570244
+    m_lastTime: -8584243138771987479
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -392,7 +446,7 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 59de08ba5428a94f8d878e47e7488cdf
     GuidInternal: 
-    m_lastTime: -8584231140396570244
+    m_lastTime: -8584243138771972396
     List: []
   ExpandedFileSystemItemIds: 
   ExpandedWaapiItemIds: 

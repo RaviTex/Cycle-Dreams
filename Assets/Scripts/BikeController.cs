@@ -1,24 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BikeController : MonoBehaviour
+public class BikeController : MonoBehaviour, IBikeController
 {
     [Header("Mode Configuration")]
     public bool useSplineMode = false;
+    public bool useArduinoInput = false;
 
     [Header("Other Controllers")]
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private BikeVisualController visualController;
+    [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
 
     [Header("Input Setup")]
     public InputActionReference moveAction;
-
-    [Header("Bike Parts & Visuals")]
-    [SerializeField] private GameObject frontSection;
-    [SerializeField] private GameObject frontWheel;
-    [SerializeField] private GameObject backWheel;
-    [SerializeField] private Transform visualRoot;
-    [SerializeField] private float wheelSpinMultiplier = 20f;
-    [SerializeField] private bool enableVisuals = true;
 
     [Header("Motor & Braking")]
     [Tooltip("Maximum forward acceleration force.")]
@@ -63,29 +58,16 @@ public class BikeController : MonoBehaviour
     [SerializeField] private GameObject frontWheelCenter;
     [SerializeField] private GameObject backWheelCenter;
 
-    [Header("Visual Effects: Lean")]
-    [SerializeField] private float maxLeanAngle = 25f;
-    [SerializeField] private float leanSmoothness = 8f;
-    [SerializeField] private float leanFullEffectSpeed = 15f;
-
-    [Header("Visual Effects: Wiggle")]
-    [SerializeField] private float wiggleFrequency = 2f;
-    [SerializeField] private float wiggleFrequencySpeedBoost = 1f;
-    [SerializeField] private float wiggleMaxAngle = 1.5f;
-    [SerializeField] private float wiggleFullEffectSpeed = 15f;
+    [Header("Arduino Input")]
 
     private Rigidbody rb;
     private int groundLayer;
-    private Quaternion frontSectionBaseRotation;
-    private Quaternion visualRootBaseRotation;
     private float currentSteerInput;
-    private float currentLeanAngle;
     private float currentForwardSpeed;
     private float currentSpeed;
     public float CurrentSpeed => currentSpeed;
     private float currentThrottleInput;
-    private float wigglePhase;
-    public bool freezeMovement = false;
+    public bool freezeMovement { get; set; } = false;
 
     void Awake()
     {
@@ -101,7 +83,8 @@ public class BikeController : MonoBehaviour
         }
 
         InitializePhysics();
-        CacheVisualBaseRotations();
+        if (visualController == null)
+            visualController = GetComponent<BikeVisualController>();
     }
 
     void OnEnable() { if (moveAction != null) moveAction.action.Enable(); }
@@ -109,20 +92,21 @@ public class BikeController : MonoBehaviour
 
     void Update()
     {
+
+
         if (freezeMovement) return;
 
         UpdateSteeringInput();
-        if (enableVisuals)
+        if (visualController != null)
         {
-            UpdateFrontSectionVisual();
-            UpdateVisualLean();
-            RotateWheels();
+            visualController.UpdateVisuals(currentForwardSpeed, currentSteerInput);
         }
     }
 
     void FixedUpdate()
     {
-        cameraController.isDriving = currentSpeed > 0.25f;
+        UpdateCameraState();
+
         if (freezeMovement)
         {
             rb.linearVelocity = Vector3.zero;
@@ -146,6 +130,14 @@ public class BikeController : MonoBehaviour
         rb.MoveRotation(currentRotation);
     }
 
+    private void UpdateCameraState()
+    {
+        if (cameraController != null)
+        {
+            cameraController.isDriving = currentSpeed > cameraDrivingSpeedThreshold;
+        }
+    }
+
     private void InitializePhysics()
     {
         rb = GetComponent<Rigidbody>();
@@ -153,32 +145,23 @@ public class BikeController : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
     }
 
-    private void CacheVisualBaseRotations()
-    {
-        if (frontSection != null)
-            frontSectionBaseRotation = frontSection.transform.localRotation;
-
-        if (visualRoot != null)
-            visualRootBaseRotation = visualRoot.localRotation;
-    }
-
     private Vector2 ReadMoveInput()
     {
-        return moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
+        if (moveAction == null) return Vector2.zero;
+        Vector2 input = moveAction.action.ReadValue<Vector2>();
+
+        if (TeensyReader.Instance != null && TeensyReader.Instance.IsDeviceConnected)
+        {
+            input.y = 0f; // Block gamepad throttle/brake
+        }
+
+        return input;
     }
 
     private void UpdateSteeringInput()
     {
         float steerInput = ReadMoveInput().x;
         currentSteerInput = Mathf.Lerp(currentSteerInput, steerInput, steeringLerpSpeed * Time.deltaTime);
-    }
-
-    private void UpdateFrontSectionVisual()
-    {
-        if (frontSection == null)
-            return;
-
-        frontSection.transform.localRotation = frontSectionBaseRotation * Quaternion.Euler(0f, 0f, currentSteerInput * maxSteerAngle);
     }
 
     private void HandleGrounding(ref Vector3 velocity, ref Quaternion rotation)
@@ -229,6 +212,19 @@ public class BikeController : MonoBehaviour
 
     private void ApplyMotorAndBraking(ref Vector3 velocity, float rawInputY, float smoothedThrottle)
     {
+        if (TeensyReader.Instance != null && TeensyReader.Instance.IsDeviceConnected)
+        {
+            float targetForwardSpeed = TeensyReader.Instance.CurrentSpeed;
+            float currentThrottle = targetForwardSpeed - currentForwardSpeed;
+
+            // Only apply forward force when pedaling faster than we are moving
+            if (currentThrottle > 0)
+            {
+                velocity += transform.forward * engineAcceleration * currentThrottle * Time.fixedDeltaTime;
+            }
+            return;
+        }
+
         bool hasDirectionalInput = Mathf.Abs(rawInputY) > 0.01f;
         bool isMoving = Mathf.Abs(currentForwardSpeed) > reverseEngageSpeedThreshold;
         bool isOppositeDirection = hasDirectionalInput && Mathf.Sign(rawInputY) != Mathf.Sign(currentForwardSpeed);
@@ -304,36 +300,5 @@ public class BikeController : MonoBehaviour
         float currentTurnSpeed = Mathf.Lerp(maxTurnSpeed, minTurnSpeed, speedRatio);
         float turnAmount = currentTurnSpeed * currentSteerInput * currentForwardSpeed * Time.fixedDeltaTime;
         rotation *= Quaternion.Euler(0f, turnAmount, 0f);
-    }
-
-    private void RotateWheels()
-    {
-        float wheelSpin = currentForwardSpeed * Mathf.PI * 2 * wheelSpinMultiplier * Time.deltaTime;
-
-        if (backWheel != null)
-            backWheel.transform.Rotate(Vector3.back, wheelSpin, Space.Self);
-        if (frontWheel != null)
-            frontWheel.transform.Rotate(Vector3.back, wheelSpin, Space.Self);
-    }
-
-    private void UpdateVisualLean()
-    {
-        if (visualRoot == null)
-            return;
-
-        float speedMagnitude = Mathf.Abs(currentForwardSpeed);
-        float leanSpeedFactor = Mathf.Clamp01(speedMagnitude / Mathf.Max(0.01f, leanFullEffectSpeed));
-        float targetLean = currentSteerInput * maxLeanAngle * leanSpeedFactor;
-        currentLeanAngle = Mathf.Lerp(currentLeanAngle, targetLean, leanSmoothness * Time.deltaTime);
-
-        float wiggleSpeedFactor = Mathf.Clamp01(speedMagnitude / Mathf.Max(0.01f, wiggleFullEffectSpeed));
-        float wiggleFrequencyAtSpeed = wiggleFrequency * (wiggleFrequencySpeedBoost * wiggleSpeedFactor);
-        wigglePhase += wiggleFrequencyAtSpeed * Mathf.PI * 2f * Time.deltaTime;
-        if (wigglePhase > Mathf.PI * 2f)
-            wigglePhase -= Mathf.PI * 2f;
-        float wiggleAngle = Mathf.Sin(wigglePhase) * wiggleMaxAngle * wiggleSpeedFactor;
-
-        float totalLean = currentLeanAngle + wiggleAngle;
-        visualRoot.localRotation = visualRootBaseRotation * Quaternion.Euler(-totalLean, 0f, 0f);
     }
 }
