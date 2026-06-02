@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class TeensyReader : MonoBehaviour
 {
+    public InputActionReference slider;
     [Header("Device Settings")]
     public string deviceName = "Teensy";
 
@@ -80,8 +81,9 @@ public class TeensyReader : MonoBehaviour
             return;
         }
 
-        Vector2 stick = teensyJoystick.stick.ReadValue();
-        bool isPassing = stick.x < 0;
+        float sliderLeft = slider.action.ReadValue<float>();
+        bool isPassing = sliderLeft < 0;
+        print(isPassing);
 
         timeSinceLastPass += Time.deltaTime;
 

@@ -5,7 +5,6 @@ public class BikeController : MonoBehaviour, IBikeController
 {
     [Header("Mode Configuration")]
     public bool useSplineMode = false;
-    public bool useArduinoInput = false;
 
     [Header("Other Controllers")]
     [SerializeField] private CameraController cameraController;
@@ -215,13 +214,21 @@ public class BikeController : MonoBehaviour, IBikeController
         if (TeensyReader.Instance != null && TeensyReader.Instance.IsDeviceConnected)
         {
             float targetForwardSpeed = TeensyReader.Instance.CurrentSpeed;
-            float currentThrottle = targetForwardSpeed - currentForwardSpeed;
 
-            // Only apply forward force when pedaling faster than we are moving
-            if (currentThrottle > 0)
+            // Raycast forward to check if a wall is in front of us
+            bool isWallAhead = Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out RaycastHit forwardHit, 1.5f, groundLayer);
+            
+            // If there's a steep surface in front (normal.y < 0.5 means a slope steeper than 60 degrees) or 
+            // the bike itself is angled too sharply upwards, kill the forced speed to prevent wall climbing.
+            if ((isWallAhead && forwardHit.normal.y < 0.5f) || Vector3.Angle(Vector3.up, transform.forward) < 45f)
             {
-                velocity += transform.forward * engineAcceleration * currentThrottle * Time.fixedDeltaTime;
+                targetForwardSpeed = 0f;
             }
+
+            // Exactly enforce the target speed on the forward axis to bypass gravity/drag deceleration
+            velocity -= transform.forward * currentForwardSpeed;
+            velocity += transform.forward * targetForwardSpeed;
+            
             return;
         }
 

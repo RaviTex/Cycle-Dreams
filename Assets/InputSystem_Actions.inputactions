@@ -139,6 +139,15 @@
                     "processors": "",
                     "interactions": "Hold(duration=0.5)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HallSensorValue",
+                    "type": "PassThrough",
+                    "id": "2f260b5e-774f-47c2-a135-349f3b3bd0b8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -259,17 +268,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3ea4d645-4504-4529-b061-ab81934c3752",
-                    "path": "<Joystick>/stick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -678,6 +676,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SplineMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46caa808-da75-4631-a4e6-32b7d0bfb8d9",
+                    "path": "<HID::Teensyduino Teensy Flight Sim Controls>/slider",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HallSensorValue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

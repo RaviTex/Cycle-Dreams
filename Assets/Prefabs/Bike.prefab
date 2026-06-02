@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1bf009a8a11224ea447a6e4d72aaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: -429438811110981671, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   deviceName: Teensy
   wheelCircumference: 2.2
   magnetsPerWheel: 4
