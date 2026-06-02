@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSplineMode: 0
-  useArduinoInput: 0
   cameraController: {fileID: 0}
   visualController: {fileID: 3945799635894165725}
   cameraDrivingSpeedThreshold: 0.25
@@ -290,7 +289,7 @@ MonoBehaviour:
   deviceName: Teensy
   wheelCircumference: 2.2
   magnetsPerWheel: 4
-  speedSmoothing: 5
+  speedSmoothing: 1
 --- !u!1 &1019882545396482875
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2881520594437467356}
+  - component: {fileID: 4357003166186529718}
   m_Layer: 0
   m_Name: Camera Pivot
   m_TagString: Untagged
@@ -529,6 +529,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1200291390079914394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4357003166186529718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851829211082504844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ff35065fbb16d4495442625181212c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3663136056266968104
 GameObject:
   m_ObjectHideFlags: 0

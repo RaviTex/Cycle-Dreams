@@ -66,10 +66,39 @@ public class BikeController : MonoBehaviour, IBikeController
     private float currentSpeed;
     public float CurrentSpeed => currentSpeed;
     private float currentThrottleInput;
-    public bool freezeMovement { get; set; } = false;
+    private bool freezeMovementState = false;
+    private bool wasKinematicBeforeFreeze = false;
+    public bool freezeMovement
+    {
+        get => freezeMovementState;
+        set
+        {
+            if (freezeMovementState == value) return;
+            freezeMovementState = value;
+
+            if (rb == null) return;
+
+            if (freezeMovementState)
+            {
+                wasKinematicBeforeFreeze = rb.isKinematic;
+                rb.isKinematic = true;
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            else
+            {
+                rb.isKinematic = wasKinematicBeforeFreeze;
+            }
+        }
+    }
 
     void Awake()
     {
+        if (cameraController == null)
+        {
+            cameraController = FindFirstObjectByType<CameraController>();
+        }
+
         BikeSplineController splineController = GetComponent<BikeSplineController>();
         if (splineController != null)
         {
@@ -109,6 +138,7 @@ public class BikeController : MonoBehaviour, IBikeController
         if (freezeMovement)
         {
             rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             return;
         }
 
@@ -217,7 +247,7 @@ public class BikeController : MonoBehaviour, IBikeController
 
             // Raycast forward to check if a wall is in front of us
             bool isWallAhead = Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out RaycastHit forwardHit, 1.5f, groundLayer);
-            
+
             // If there's a steep surface in front (normal.y < 0.5 means a slope steeper than 60 degrees) or 
             // the bike itself is angled too sharply upwards, kill the forced speed to prevent wall climbing.
             if ((isWallAhead && forwardHit.normal.y < 0.5f) || Vector3.Angle(Vector3.up, transform.forward) < 45f)
@@ -228,7 +258,7 @@ public class BikeController : MonoBehaviour, IBikeController
             // Exactly enforce the target speed on the forward axis to bypass gravity/drag deceleration
             velocity -= transform.forward * currentForwardSpeed;
             velocity += transform.forward * targetForwardSpeed;
-            
+
             return;
         }
 

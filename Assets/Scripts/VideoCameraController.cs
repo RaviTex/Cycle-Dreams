@@ -36,6 +36,19 @@ public class VideoCameraController : MonoBehaviour
     private float normalFOV;
     private int currentPhotoStartIndex = 0;
 
+    void Awake()
+    {
+        if (bikeController == null)
+        {
+            bikeController = Object.FindFirstObjectByType<BikeController>();
+        }
+
+        if (bikeSplineController == null)
+        {
+            bikeSplineController = Object.FindFirstObjectByType<BikeSplineController>();
+        }
+    }
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -55,7 +68,9 @@ public class VideoCameraController : MonoBehaviour
     private bool IsBikeNearStandstill()
     {
         var bike = GetActiveBikeController();
-        return bike == null || Mathf.Abs(bike.CurrentSpeed) < cameraModeLaunchSpeedThreshold;
+        if (bike == null) return false;
+
+        return Mathf.Abs(bike.CurrentSpeed) < cameraModeLaunchSpeedThreshold;
     }
 
     private void SetBikeFrozen(bool frozen)

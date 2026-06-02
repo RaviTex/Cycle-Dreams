@@ -22,7 +22,25 @@ public class BikeSplineController : MonoBehaviour, IBikeController
 
     private float speed;
     public float CurrentSpeed => speed;
-    public bool freezeMovement { get; set; } = false;
+    private bool freezeMovementState = false;
+    public bool freezeMovement
+    {
+        get => freezeMovementState;
+        set
+        {
+            if (freezeMovementState == value) return;
+            freezeMovementState = value;
+
+            if (freezeMovementState)
+            {
+                speed = 0f;
+                isAcceleratingRight = false;
+                isAcceleratingLeft = false;
+                isRightAccelHeld = false;
+                isLeftAccelHeld = false;
+            }
+        }
+    }
     private float splineLenght;
     private float distanceCovered;
     private float t;
@@ -39,6 +57,14 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     private Vector3 currentTangent;
     private Vector3 forwardTangent;
     private Quaternion initialSteerRotation;
+
+    void Awake()
+    {
+        if (cameraController == null)
+        {
+            cameraController = FindFirstObjectByType<CameraController>();
+        }
+    }
 
     void Start()
     {

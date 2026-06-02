@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     public Transform pivot;
+    [SerializeField] private BikeController bikeController;
+    [SerializeField] private BikeSplineController bikeSplineController;
     [SerializeField] private float sensitivity = 0.1f;
     [SerializeField] private float gamepadSensitivity = 1f;
     public InputActionReference lookAction;
@@ -25,6 +27,27 @@ public class CameraController : MonoBehaviour
     private GameObject _camera;
     private Vector2 lookInput;
 
+    void Awake()
+    {
+        if (pivot == null)
+        {
+            CameraPivot pivotMarker = FindFirstObjectByType<CameraPivot>();
+            if (pivotMarker != null)
+            {
+                pivot = pivotMarker.transform;
+            }
+        }
+
+        if (bikeController == null)
+        {
+            bikeController = FindFirstObjectByType<BikeController>();
+        }
+
+        if (bikeSplineController == null)
+        {
+            bikeSplineController = FindFirstObjectByType<BikeSplineController>();
+        }
+    }
 
     void Start()
     {
