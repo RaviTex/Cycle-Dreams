@@ -16,9 +16,10 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     [SerializeField] private GameObject backWheel;
     [SerializeField] private float wheelSpinMultiplier = 1f;
     [SerializeField] private GameObject frontSection;
-    [SerializeField] private CameraController cameraController;
     [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
     [SerializeField] private float dualButtonBrakeMultiplier = 5f;
+
+    private CameraController cameraController;
 
     private float speed;
     public float CurrentSpeed => speed;
@@ -58,16 +59,11 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     private Vector3 forwardTangent;
     private Quaternion initialSteerRotation;
 
-    void Awake()
-    {
-        if (cameraController == null)
-        {
-            cameraController = FindFirstObjectByType<CameraController>();
-        }
-    }
 
     void Start()
     {
+        cameraController = GameManager.Instance.cameraController;
+
         splineLenght = spline.Spline.GetLength();
         initalBikeModelRotation = bikeModel.transform.localRotation;
         currentBikeModelRotation = initalBikeModelRotation;

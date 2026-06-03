@@ -26,32 +26,22 @@ public class VideoCameraController : MonoBehaviour
     public List<Sprite> shotImages = new List<Sprite>();
     public List<Image> photoDisplays = new List<Image>();
 
-    [SerializeField] private BikeController bikeController;
-    [SerializeField] private BikeSplineController bikeSplineController;
-
     [SerializeField] private float cameraModeLaunchSpeedThreshold = 0.5f;
+
+    private BikeController bikeController;
+    private BikeSplineController bikeSplineController;
 
     private Camera mainCamera;
     private RenderTexture renderTexture;
     private float normalFOV;
     private int currentPhotoStartIndex = 0;
 
-    void Awake()
-    {
-        if (bikeController == null)
-        {
-            bikeController = Object.FindFirstObjectByType<BikeController>();
-        }
-
-        if (bikeSplineController == null)
-        {
-            bikeSplineController = Object.FindFirstObjectByType<BikeSplineController>();
-        }
-    }
-
     void Start()
     {
-        mainCamera = Camera.main;
+        bikeController = GameManager.Instance.bikeController;
+        bikeSplineController = GameManager.Instance.bikeSplineController;
+
+        mainCamera = GameManager.Instance.mainCamera;
         normalFOV = mainCamera.fieldOfView;
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
     }

@@ -2,17 +2,13 @@ using UnityEngine;
 
 public class CanvasScaler : MonoBehaviour
 {
-    [Header("References")]
-    public Camera targetCamera;
-
-    [Header("FOV Settings")]
-    [Tooltip("The FOV at which the canvas scale should be unchanged.")]
-    public bool isInVRMode = false;
-    public float VRScaleMultiplier = 1f;
-    public float referenceFOVVR = 98.04f;
-    public float referenceFOV = 60f;
-
+    private Camera targetCamera;
+    private float referenceFOV = 60f;
+    private float VRScaleMultiplier = 1f;
+    private float referenceFOVVR = 98.04f;
+    private bool isInVRMode = false;
     private Vector3 initialScale;
+
 
     private void Start()
     {
@@ -21,6 +17,9 @@ public class CanvasScaler : MonoBehaviour
 
         initialScale = transform.localScale;
         isInVRMode = GameManager.Instance.isInVRMode;
+        referenceFOV = GameManager.Instance.referenceFOV;
+        VRScaleMultiplier = GameManager.Instance.VRScaleMultiplier;
+        referenceFOVVR = GameManager.Instance.referenceFOVVR;
     }
 
     private void LateUpdate()

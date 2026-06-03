@@ -3,13 +3,9 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform pivot;
-    [SerializeField] private BikeController bikeController;
-    [SerializeField] private BikeSplineController bikeSplineController;
     [SerializeField] private float sensitivity = 0.1f;
     [SerializeField] private float gamepadSensitivity = 1f;
     public InputActionReference lookAction;
-    public bool isVRMode = false;
     [SerializeField] private bool lerpPositionAndRotation = true;
     [SerializeField] private float lerpSpeed = 5f;
     [SerializeField] private bool isCameraAssistEnabled = true;
@@ -22,38 +18,19 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 drivingRotationClampX = new Vector2(-45f, 45f);
     [SerializeField] private Vector2 drivingRotationClampY = new Vector2(-60f, 60f);
 
+    private bool isVRMode = false;
+    private Transform pivot;
     private float rotationX = 0f;
     private float rotationY = 0f;
     private GameObject _camera;
     private Vector2 lookInput;
 
-    void Awake()
-    {
-        if (pivot == null)
-        {
-            CameraPivot pivotMarker = FindFirstObjectByType<CameraPivot>();
-            if (pivotMarker != null)
-            {
-                pivot = pivotMarker.transform;
-            }
-        }
-
-        if (bikeController == null)
-        {
-            bikeController = FindFirstObjectByType<BikeController>();
-        }
-
-        if (bikeSplineController == null)
-        {
-            bikeSplineController = FindFirstObjectByType<BikeSplineController>();
-        }
-    }
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        _camera = GetComponentInChildren<Camera>().gameObject;
 
+        pivot = GameManager.Instance.cameraPivot.transform;
+        _camera = GameManager.Instance.mainCamera.gameObject;
         isVRMode = GameManager.Instance.isInVRMode;
     }
 

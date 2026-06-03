@@ -678,6 +678,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInVRMode: 0
+  isSplineMode: 1
+  bikeController: {fileID: 0}
+  bikeSplineController: {fileID: 0}
+  cameraPivot: {fileID: 0}
+  cameraController: {fileID: 0}
+  bikeVisualController: {fileID: 0}
+  mainCamera: {fileID: 0}
+  photoCamera: {fileID: 0}
+  referenceFOV: 60
+  VRScaleMultiplier: 0.5
+  referenceFOVVR: 98.04
 --- !u!4 &1131577578
 Transform:
   m_ObjectHideFlags: 0

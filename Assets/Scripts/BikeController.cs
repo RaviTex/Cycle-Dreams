@@ -3,14 +3,6 @@ using UnityEngine.InputSystem;
 
 public class BikeController : MonoBehaviour, IBikeController
 {
-    [Header("Mode Configuration")]
-    public bool useSplineMode = false;
-
-    [Header("Other Controllers")]
-    [SerializeField] private CameraController cameraController;
-    [SerializeField] private BikeVisualController visualController;
-    [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
-
     [Header("Input Setup")]
     public InputActionReference moveAction;
 
@@ -25,6 +17,8 @@ public class BikeController : MonoBehaviour, IBikeController
     public float throttleResponseSpeed = 2f;
     [Tooltip("The bike must be slower than this speed (m/s) before it will switch from forward to reverse (or vice-versa).")]
     public float reverseEngageSpeedThreshold = 1f;
+    [Tooltip("Maximum speed for transitioning into photo or photo view mode.")]
+    [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
 
     [Header("Steering & Handling")]
     [Tooltip("Maximum turn speed when driving slowly.")]
@@ -57,8 +51,8 @@ public class BikeController : MonoBehaviour, IBikeController
     [SerializeField] private GameObject frontWheelCenter;
     [SerializeField] private GameObject backWheelCenter;
 
-    [Header("Arduino Input")]
-
+    private CameraController cameraController;
+    private BikeVisualController visualController;
     private Rigidbody rb;
     private int groundLayer;
     private float currentSteerInput;
@@ -94,34 +88,20 @@ public class BikeController : MonoBehaviour, IBikeController
 
     void Awake()
     {
-        if (cameraController == null)
-        {
-            cameraController = FindFirstObjectByType<CameraController>();
-        }
-
-        BikeSplineController splineController = GetComponent<BikeSplineController>();
-        if (splineController != null)
-        {
-            splineController.enabled = useSplineMode;
-        }
-
-        if (useSplineMode)
-        {
-            this.enabled = false;
-        }
-
         InitializePhysics();
-        if (visualController == null)
-            visualController = GetComponent<BikeVisualController>();
     }
 
     void OnEnable() { if (moveAction != null) moveAction.action.Enable(); }
     void OnDisable() { if (moveAction != null) moveAction.action.Disable(); }
 
+    private void Start()
+    {
+        visualController = GameManager.Instance.bikeVisualController;
+        cameraController = GameManager.Instance.cameraController;
+    }
+
     void Update()
     {
-
-
         if (freezeMovement) return;
 
         UpdateSteeringInput();
