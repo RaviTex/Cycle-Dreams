@@ -648,6 +648,51 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9127120572191758296, guid: 6e025b79484786b448813b0099f9207b, type: 3}
+--- !u!1 &1131577576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131577578}
+  - component: {fileID: 1131577577}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1131577577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131577576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846e38311491af64389a12231c1c4df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInVRMode: 0
+--- !u!4 &1131577578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131577576}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1244219580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Rig
       objectReference: {fileID: 0}
+    - target: {fileID: 3823066920788895122, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
+      propertyPath: isInVRMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5626543293910303813, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -1356,6 +1405,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6545352849734241188, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6715789879135061625, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
+      propertyPath: isVRMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1376,3 +1433,4 @@ SceneRoots:
   - {fileID: 1908276228}
   - {fileID: 5193830336562647494}
   - {fileID: 409165693}
+  - {fileID: 1131577578}

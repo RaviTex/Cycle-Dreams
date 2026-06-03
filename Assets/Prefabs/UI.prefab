@@ -117,6 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 0}
+  isInVRMode: 0
+  referenceFOVVR: 98.04016
   referenceFOV: 60
 --- !u!1 &5091835502791507307
 GameObject:

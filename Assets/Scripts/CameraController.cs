@@ -53,6 +53,8 @@ public class CameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _camera = GetComponentInChildren<Camera>().gameObject;
+
+        isVRMode = GameManager.Instance.isInVRMode;
     }
 
     void LateUpdate()
