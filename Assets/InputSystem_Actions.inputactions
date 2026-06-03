@@ -594,7 +594,7 @@
                 {
                     "name": "negative",
                     "id": "243440ec-4672-494b-a994-f92d4b18ae03",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -605,7 +605,7 @@
                 {
                     "name": "positive",
                     "id": "0ff3f4bb-93cb-44f6-840c-5dcb24440aca",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

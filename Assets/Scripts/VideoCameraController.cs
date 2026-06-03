@@ -124,13 +124,14 @@ public class VideoCameraController : MonoBehaviour
             if (scrollWheelAction != null)
             {
                 float scrollValue = scrollWheelAction.action.ReadValue<float>();
+                var control = scrollWheelAction.action.activeControl;
                 if (scrollValue > 0f)
                 {
-                    mainCamera.fieldOfView = Mathf.Max(maxZoomInFOV, mainCamera.fieldOfView - 5f);
+                    mainCamera.fieldOfView = Mathf.Max(maxZoomInFOV, mainCamera.fieldOfView - (control.device is Mouse ? 5f : 60f * Time.deltaTime));
                 }
                 else if (scrollValue < 0f)
                 {
-                    mainCamera.fieldOfView = Mathf.Min(maxZoomOutFOV, mainCamera.fieldOfView + 5f);
+                    mainCamera.fieldOfView = Mathf.Min(maxZoomOutFOV, mainCamera.fieldOfView + (control.device is Mouse ? 5f : 60f * Time.deltaTime));
                 }
             }
 
