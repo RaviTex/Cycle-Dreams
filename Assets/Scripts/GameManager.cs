@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.XR.Management;
 
@@ -20,6 +21,13 @@ public class GameManager : MonoBehaviour
     public float referenceFOV = 60f;
     public float VRScaleMultiplier = 0.5f;
     public float referenceFOVVR = 98.04f;
+    [Header("Bike Controller Settings")]
+    public bool isModeSwitchPossible => GetActiveBikeController()?.CurrentSpeed < modeSwitchSpeedThreshold;
+    public float modeSwitchSpeedThreshold = 0.5f;
+
+
+    public event Action OnMovementFreeze;
+
 
     private void Awake()
     {
@@ -61,5 +69,24 @@ public class GameManager : MonoBehaviour
 
         bikeSplineController.enabled = isSplineMode;
         bikeController.enabled = !isSplineMode;
+    }
+
+    public void FreezeBikeMovement()
+    {
+        var bike = GetActiveBikeController();
+        if (bike != null)
+        {
+            bike.freezeMovement = true;
+            OnMovementFreeze?.Invoke();
+        }
+    }
+
+    private IBikeController GetActiveBikeController()
+    {
+        if (bikeController != null && bikeController.isActiveAndEnabled)
+            return bikeController;
+        if (bikeSplineController != null && bikeSplineController.isActiveAndEnabled)
+            return bikeSplineController;
+        return null;
     }
 }

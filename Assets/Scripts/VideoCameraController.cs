@@ -26,11 +26,9 @@ public class VideoCameraController : MonoBehaviour
     public List<Sprite> shotImages = new List<Sprite>();
     public List<Image> photoDisplays = new List<Image>();
 
-    [SerializeField] private float cameraModeLaunchSpeedThreshold = 0.5f;
-
+    private bool isModeSwitchPossible => GameManager.Instance.isModeSwitchPossible;
     private BikeController bikeController;
     private BikeSplineController bikeSplineController;
-
     private Camera mainCamera;
     private RenderTexture renderTexture;
     private float normalFOV;
@@ -53,14 +51,6 @@ public class VideoCameraController : MonoBehaviour
         if (bikeSplineController != null && bikeSplineController.isActiveAndEnabled)
             return bikeSplineController;
         return null;
-    }
-
-    private bool IsBikeNearStandstill()
-    {
-        var bike = GetActiveBikeController();
-        if (bike == null) return false;
-
-        return Mathf.Abs(bike.CurrentSpeed) < cameraModeLaunchSpeedThreshold;
     }
 
     private void SetBikeFrozen(bool frozen)
@@ -92,14 +82,14 @@ public class VideoCameraController : MonoBehaviour
     {
         if (cameraModeToggleAction.action.triggered && !isInViewPhotoMode)
         {
-            if (!isInCameraMode && !IsBikeNearStandstill()) return;
+            if (!isInCameraMode && !isModeSwitchPossible) return;
             isInCameraMode = !isInCameraMode;
             isInCameraModeIndicator.SetActive(isInCameraMode);
             SetBikeFrozen(isInCameraMode);
         }
         if (viewPhotoModeToggleAction.action.triggered && !isInCameraMode && shotImages.Count > 0)
         {
-            if (!isInViewPhotoMode && !IsBikeNearStandstill()) return;
+            if (!isInViewPhotoMode && !isModeSwitchPossible) return;
             isInViewPhotoMode = !isInViewPhotoMode;
             photoGalleryPanel.SetActive(isInViewPhotoMode);
             if (isInViewPhotoMode)

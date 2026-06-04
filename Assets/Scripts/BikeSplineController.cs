@@ -16,11 +16,10 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     [SerializeField] private GameObject backWheel;
     [SerializeField] private float wheelSpinMultiplier = 1f;
     [SerializeField] private GameObject frontSection;
-    [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
     [SerializeField] private float dualButtonBrakeMultiplier = 5f;
 
     private CameraController cameraController;
-
+    private float modeSwitchSpeedThreshold;
     private float speed;
     public float CurrentSpeed => speed;
     private bool freezeMovementState = false;
@@ -63,6 +62,7 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     void Start()
     {
         cameraController = GameManager.Instance.cameraController;
+        modeSwitchSpeedThreshold = GameManager.Instance.modeSwitchSpeedThreshold;
 
         splineLenght = spline.Spline.GetLength();
         initalBikeModelRotation = bikeModel.transform.localRotation;
@@ -73,11 +73,6 @@ public class BikeSplineController : MonoBehaviour, IBikeController
 
     void Update()
     {
-        if (cameraController != null)
-        {
-            cameraController.isDriving = speed > cameraDrivingSpeedThreshold;
-        }
-
         if (freezeMovement) return;
 
         if (TeensyReader.Instance != null && TeensyReader.Instance.IsDeviceConnected)

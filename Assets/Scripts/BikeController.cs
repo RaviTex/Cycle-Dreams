@@ -17,8 +17,6 @@ public class BikeController : MonoBehaviour, IBikeController
     public float throttleResponseSpeed = 2f;
     [Tooltip("The bike must be slower than this speed (m/s) before it will switch from forward to reverse (or vice-versa).")]
     public float reverseEngageSpeedThreshold = 1f;
-    [Tooltip("Maximum speed for transitioning into photo or photo view mode.")]
-    [SerializeField] private float cameraDrivingSpeedThreshold = 0.25f;
 
     [Header("Steering & Handling")]
     [Tooltip("Maximum turn speed when driving slowly.")]
@@ -51,7 +49,6 @@ public class BikeController : MonoBehaviour, IBikeController
     [SerializeField] private GameObject frontWheelCenter;
     [SerializeField] private GameObject backWheelCenter;
 
-    private CameraController cameraController;
     private BikeVisualController visualController;
     private Rigidbody rb;
     private int groundLayer;
@@ -97,7 +94,6 @@ public class BikeController : MonoBehaviour, IBikeController
     private void Start()
     {
         visualController = GameManager.Instance.bikeVisualController;
-        cameraController = GameManager.Instance.cameraController;
     }
 
     void Update()
@@ -113,8 +109,6 @@ public class BikeController : MonoBehaviour, IBikeController
 
     void FixedUpdate()
     {
-        UpdateCameraState();
-
         if (freezeMovement)
         {
             rb.linearVelocity = Vector3.zero;
@@ -137,14 +131,6 @@ public class BikeController : MonoBehaviour, IBikeController
 
         rb.linearVelocity = currentVelocity;
         rb.MoveRotation(currentRotation);
-    }
-
-    private void UpdateCameraState()
-    {
-        if (cameraController != null)
-        {
-            cameraController.isDriving = currentSpeed > cameraDrivingSpeedThreshold;
-        }
     }
 
     private void InitializePhysics()

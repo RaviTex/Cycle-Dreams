@@ -11,7 +11,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] private bool isCameraAssistEnabled = true;
 
     [Header("State Settings")]
-    public bool isDriving = false;
     [SerializeField] private float returnToCenterSpeed = 2f;
     [SerializeField] private float snapToBoundsSpeed = 10f;
     [SerializeField] private float snapCompletionThreshold = 0.1f;
@@ -19,6 +18,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 drivingRotationClampY = new Vector2(-60f, 60f);
 
     private bool isVRMode = false;
+    private bool isModeSwitchPossible => GameManager.Instance.isModeSwitchPossible;
     private Transform pivot;
     private float rotationX = 0f;
     private float rotationY = 0f;
@@ -55,20 +55,20 @@ public class CameraController : MonoBehaviour
         }
 
         bool isOutOfBounds = false;
-        if (isDriving)
+        if (!isModeSwitchPossible)
         {
             isOutOfBounds = rotationX < drivingRotationClampX.x || rotationX > drivingRotationClampX.y ||
                             rotationY < drivingRotationClampY.x || rotationY > drivingRotationClampY.y;
         }
 
-        bool canApplyPlayerInput = !isDriving || !isOutOfBounds;
+        bool canApplyPlayerInput = !isModeSwitchPossible || !isOutOfBounds;
         if (canApplyPlayerInput)
         {
             rotationX -= lookInput.y;
             rotationY += lookInput.x;
         }
 
-        if (isDriving)
+        if (!isModeSwitchPossible)
         {
             if (isOutOfBounds)
             {
