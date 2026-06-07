@@ -1,5 +1,5 @@
 {
-    "originalSdkFolder": "C:\\Program Files (x86)\\Audiokinetic\\Wwise2024.1.7.8863\\SDK",
+    "originalSdkFolder": "C:\\Program Files\\Wwise2024.1.7.8863\\SDK",
     "currentVersion": {
         "nickname": "",
         "build": 3596,
@@ -15,10 +15,6 @@
         {
             "id": "Packages",
             "valueId": "Extensions"
-        },
-        {
-            "id": "DeploymentPlatforms",
-            "valueId": "Android"
         },
         {
             "id": "DeploymentPlatforms",

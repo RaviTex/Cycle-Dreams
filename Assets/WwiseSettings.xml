@@ -11,8 +11,8 @@
     <ShowMissingRigidBodyWarning>true</ShowMissingRigidBodyWarning>
     <ShowSpatialAudioWarningMsg>true</ShowSpatialAudioWarningMsg>
     <WwiseInstallationPathMac></WwiseInstallationPathMac>
-    <WwiseInstallationPathWindows>C:\Program Files (x86)\Audiokinetic\Wwise2024.1.7.8863</WwiseInstallationPathWindows>
-    <WwiseProjectPath>../CycleDreams_Git_WwiseProject/CycleDreams_Git_WwiseProject.wproj</WwiseProjectPath>
+    <WwiseInstallationPathWindows>C:\Program Files\Wwise2024.1.7.8863</WwiseInstallationPathWindows>
+    <WwiseProjectPath>../../Cycle-Dreams/CycleDreams_Git_WwiseProject/CycleDreams_Git_WwiseProject.wproj</WwiseProjectPath>
     <UseWaapi>true</UseWaapi>
     <WaapiPort>8080</WaapiPort>
     <WaapiIP>127.0.0.1</WaapiIP>
