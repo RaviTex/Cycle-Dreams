@@ -519,7 +519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2809577913182375080
 RectTransform:
   m_ObjectHideFlags: 0
@@ -569,8 +569,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<voffset=1em>
 
-    <sprite name=a> <sprite name=s> <sprite name=d>  <sprie
-    name=jl> Move
+    <sprite name=a>/<sprite name=lt>  Wait for bike to
+    start tilting back up
+
+    Then <sprite name=d>/<sprite name=rt>. Wait for bike
+    to start tilting back up and repeat.
+
+    <sprite name=lt> & <sprite name=rt>
+    Brake
 
     <sprite name=mouse> <sprite name=jr>  Camera</voffset>'
   m_isRightToLeft: 0
@@ -599,8 +605,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
