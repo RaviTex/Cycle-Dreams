@@ -72,9 +72,9 @@ public class BikeController : MonoBehaviour, IBikeController
             if (freezeMovementState)
             {
                 wasKinematicBeforeFreeze = rb.isKinematic;
-                rb.isKinematic = true;
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
             }
             else
             {

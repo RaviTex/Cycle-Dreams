@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Management;
 
 public class GameManager : MonoBehaviour
@@ -73,7 +74,18 @@ public class GameManager : MonoBehaviour
 
     public void PrototypeComplete()
     {
-        print("Prototype Complete! Implement level completion logic here.");
+        print("Prototype Complete!");
+        UIManager.Instance.PrototypeComplete();
+        FreezeBikeMovement();
+    }
+    public void GameOver()
+    {
+        UIManager.Instance.ShowGameOver();
+        FreezeBikeMovement();
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void FreezeBikeMovement()
