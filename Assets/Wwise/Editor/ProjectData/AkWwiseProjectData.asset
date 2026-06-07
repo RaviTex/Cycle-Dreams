@@ -165,8 +165,8 @@ MonoBehaviour:
         guid: 1a65d0ff9be4404cabb407337150bc7f
       Path: Events\Default Work Unit\Prototype\Play_Ambiance
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Play_BearSound
       guid: 5f31694cdd42ff42b46df5770d877542
       id: 3921706217
@@ -185,8 +185,8 @@ MonoBehaviour:
         guid: 5f31694cdd42ff42b46df5770d877542
       Path: Events\Default Work Unit\Prototype\Play_BearSound
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.9113646
+      minDuration: 1.2986354
     - name: Play_BikeLoop
       guid: 9091462c4fcec74b8d2791ac6d352c27
       id: 797552147
@@ -205,8 +205,8 @@ MonoBehaviour:
         guid: 9091462c4fcec74b8d2791ac6d352c27
       Path: Events\Default Work Unit\Prototype\Play_BikeLoop
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Play_CameraPickUp
       guid: 7699ea17b8ad484a8f6d9c2cadc92377
       id: 642588951
@@ -225,8 +225,8 @@ MonoBehaviour:
         guid: 7699ea17b8ad484a8f6d9c2cadc92377
       Path: Events\Default Work Unit\Prototype\Play_CameraPickUp
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.5679375
+      minDuration: 0.5679375
     - name: Play_CameraShutter
       guid: 3368f94107fd3d4299e0511a0d63cfbb
       id: 4863038
@@ -245,8 +245,8 @@ MonoBehaviour:
         guid: 3368f94107fd3d4299e0511a0d63cfbb
       Path: Events\Default Work Unit\Prototype\Play_CameraShutter
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.23570833
+      minDuration: 0.23570833
     - name: Play_PictureTaken
       guid: b5ac72ebb6863c40b241da1c976e4195
       id: 3594814145
@@ -265,8 +265,8 @@ MonoBehaviour:
         guid: b5ac72ebb6863c40b241da1c976e4195
       Path: Events\Default Work Unit\Prototype\Play_PictureTaken
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.68575966
+      minDuration: 0.68575966
     - name: Play_Wind
       guid: 0d39df317ced93459f7a7eb7439fa3db
       id: 1020223172
@@ -285,8 +285,8 @@ MonoBehaviour:
         guid: 0d39df317ced93459f7a7eb7439fa3db
       Path: Events\Default Work Unit\Prototype\Play_Wind
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Prototype
       guid: cb8e74dc1b14bc49a8d0962d632cd3d2
       id: 3565403361
@@ -322,8 +322,8 @@ MonoBehaviour:
         guid: eec1e625cd9c6b4e9bd4332c5700ff1e
       Path: Events\Default Work Unit\Prototype\Stop_Ambiance
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_BikeLoop
       guid: 6e356acdd607e147b2fca9b563c7f48b
       id: 4026860625
@@ -342,8 +342,8 @@ MonoBehaviour:
         guid: 6e356acdd607e147b2fca9b563c7f48b
       Path: Events\Default Work Unit\Prototype\Stop_BikeLoop
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_Wind
       guid: d822950569b2044d94c4c1e7e74e60bb
       id: 3173136834
@@ -362,8 +362,8 @@ MonoBehaviour:
         guid: d822950569b2044d94c4c1e7e74e60bb
       Path: Events\Default Work Unit\Prototype\Stop_Wind
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:

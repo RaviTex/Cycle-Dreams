@@ -168,10 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07ea6fe85b9f6e4b9dbbe19afbe573a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSplineMode: 0
-  cameraController: {fileID: 0}
-  visualController: {fileID: 3945799635894165725}
-  cameraDrivingSpeedThreshold: 0.25
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   engineAcceleration: 1.5
   topSpeed: 25
@@ -181,7 +177,7 @@ MonoBehaviour:
   maxTurnSpeed: 40
   minTurnSpeed: 10
   maxSpeedForTurn: 5
-  maxSteerAngle: 30
+  maxSteerAngle: 20
   steeringLerpSpeed: 8
   tireGripStrength: 12
   driftingSpeedLoss: 0.1
@@ -235,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightAction: {fileID: -7896291703296941531, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   leftAction: {fileID: -7053123133719681545, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  turnAroundAction: {fileID: -5273930963971449646, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   spline: {fileID: 0}
   acceleration: 2
   drag: 1
@@ -245,8 +242,6 @@ MonoBehaviour:
   backWheel: {fileID: 2116551063536099421}
   wheelSpinMultiplier: 15
   frontSection: {fileID: 8873404052146296575}
-  cameraController: {fileID: 0}
-  cameraDrivingSpeedThreshold: 0.25
   dualButtonBrakeMultiplier: 5
 --- !u!114 &3945799635894165725
 MonoBehaviour:

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
@@ -6,6 +8,7 @@ public class BikeSplineController : MonoBehaviour, IBikeController
 {
     public InputActionReference rightAction;
     public InputActionReference leftAction;
+    public InputActionReference turnAroundAction;
     [SerializeField] private SplineContainer spline;
     [SerializeField] private float acceleration = 1f;
     [SerializeField] private float drag = 1f;
@@ -18,8 +21,6 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     [SerializeField] private GameObject frontSection;
     [SerializeField] private float dualButtonBrakeMultiplier = 5f;
 
-    private CameraController cameraController;
-    private float modeSwitchSpeedThreshold;
     private float speed;
     public float CurrentSpeed => speed;
     private bool freezeMovementState = false;
@@ -43,6 +44,7 @@ public class BikeSplineController : MonoBehaviour, IBikeController
     }
     private float splineLenght;
     private float distanceCovered;
+    private float direction = 1f;
     private float t;
     private float lastAccelTimeLeft;
     private float lastAccelTimeRight;
@@ -61,9 +63,6 @@ public class BikeSplineController : MonoBehaviour, IBikeController
 
     void Start()
     {
-        cameraController = GameManager.Instance.cameraController;
-        modeSwitchSpeedThreshold = GameManager.Instance.modeSwitchSpeedThreshold;
-
         splineLenght = spline.Spline.GetLength();
         initalBikeModelRotation = bikeModel.transform.localRotation;
         currentBikeModelRotation = initalBikeModelRotation;
@@ -98,20 +97,20 @@ public class BikeSplineController : MonoBehaviour, IBikeController
             Drag();
         }
 
-        distanceCovered += speed * Time.deltaTime;
+        distanceCovered += speed * direction * Time.deltaTime;
         t = distanceCovered / splineLenght;
         currentTangent = spline.Spline.EvaluateTangent(t);
         float nextT = (distanceCovered + 1) / splineLenght;
         forwardTangent = spline.Spline.EvaluateTangent(Mathf.Clamp01(nextT));
         transform.position = (Vector3)spline.Spline.EvaluatePosition(t) + spline.transform.position;
-        transform.rotation = Quaternion.LookRotation(currentTangent);
+        transform.rotation = Quaternion.LookRotation(currentTangent * direction);
         lastAccelTimeLeft += Time.deltaTime;
         lastAccelTimeRight += Time.deltaTime;
         Rotation();
         RotateWheels();
         Debug.DrawLine(transform.position, transform.position + currentTangent, Color.red);
         Debug.DrawLine(transform.position, transform.position + forwardTangent, Color.blue);
-        Vector3 localForward = transform.InverseTransformDirection(forwardTangent);
+        Vector3 localForward = transform.InverseTransformDirection(forwardTangent * direction);
         float steerAngle = Mathf.Atan2(localForward.x, localForward.z) * Mathf.Rad2Deg;
         frontSection.transform.localRotation = initialSteerRotation * Quaternion.Euler(0, steerAngle, 0);
 
@@ -190,6 +189,26 @@ public class BikeSplineController : MonoBehaviour, IBikeController
             frontWheel.transform.Rotate(Vector3.back, wheelSpin, Space.Self);
     }
 
+    private void TurnAround(InputAction.CallbackContext ctx)
+    {
+        direction *= -1f;
+        speed = speed * 0.2f;
+        StartCoroutine(TurnAroundCoroutine());
+    }
+
+    private IEnumerator TurnAroundCoroutine()
+    {
+        float targetAngle = 180f;
+        float currentAngle = 0f;
+        while (currentAngle < targetAngle)
+        {
+            float step = Time.deltaTime * 180f;
+            transform.localRotation = Quaternion.Euler(0, step, 0) * transform.localRotation;
+            currentAngle += step;
+            yield return null;
+        }
+    }
+
     private void OnRightStarted(InputAction.CallbackContext ctx) => Accelerate(true);
     private void OnRightCanceled(InputAction.CallbackContext ctx) => StopAccelerating(true, true);
     private void OnRightPerformed(InputAction.CallbackContext ctx) => StopAccelerating(true);
@@ -209,6 +228,8 @@ public class BikeSplineController : MonoBehaviour, IBikeController
             leftAction.action.started += OnLeftStarted;
             leftAction.action.canceled += OnLeftCanceled;
             leftAction.action.performed += OnLeftPerformed;
+            turnAroundAction.action.Enable();
+            turnAroundAction.action.performed += TurnAround;
         }
     }
     void OnDisable()
@@ -223,6 +244,8 @@ public class BikeSplineController : MonoBehaviour, IBikeController
             leftAction.action.canceled -= OnLeftCanceled;
             leftAction.action.performed -= OnLeftPerformed;
             leftAction.action.Disable();
+            turnAroundAction.action.performed -= TurnAround;
+            turnAroundAction.action.Disable();
         }
     }
 }

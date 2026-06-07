@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour
         bikeController.enabled = !isSplineMode;
     }
 
+    public void PrototypeComplete()
+    {
+        print("Prototype Complete! Implement level completion logic here.");
+    }
+
     public void FreezeBikeMovement()
     {
         var bike = GetActiveBikeController();

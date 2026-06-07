@@ -148,6 +148,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TurnBikeAround",
+                    "type": "Button",
+                    "id": "7f56904c-ca76-4311-ae7e-7bbb16ced939",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -687,6 +696,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "HallSensorValue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02dce4fb-bef7-4b3e-8748-a73b23a294e5",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnBikeAround",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb7b284b-fab3-4e94-aa6a-6c811f91073b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnBikeAround",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
