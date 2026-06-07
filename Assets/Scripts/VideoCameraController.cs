@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Linq;
+using AK.Wwise;
 
 public class VideoCameraController : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class VideoCameraController : MonoBehaviour
     public GameObject isInCameraModeIndicator;
     public GameObject isRecordingIndicator;
     public GameObject photoGalleryPanel;
+    [SerializeField] private GameObject hasFotographedAnimalsIndicator;
     [SerializeField] private TMP_Text pageCountText;
     [SerializeField] private float maxZoomInFOV = 20f;
     [SerializeField] private float maxZoomOutFOV = 100f;
@@ -25,6 +28,9 @@ public class VideoCameraController : MonoBehaviour
     public int resHeight = 1080;
     public List<Sprite> shotImages = new List<Sprite>();
     public List<Image> photoDisplays = new List<Image>();
+
+    [SerializeField] private AK.Wwise.Event playCameraShutterSound;
+    [SerializeField] private AK.Wwise.Event playCameraPickUpSound;
 
     private bool isModeSwitchPossible => GameManager.Instance.isModeSwitchPossible;
     private BikeController bikeController;
@@ -86,12 +92,17 @@ public class VideoCameraController : MonoBehaviour
             isInCameraMode = !isInCameraMode;
             isInCameraModeIndicator.SetActive(isInCameraMode);
             SetBikeFrozen(isInCameraMode);
+            if (isInCameraMode)
+            {
+                playCameraPickUpSound.Post(gameObject);
+            }
         }
         if (viewPhotoModeToggleAction.action.triggered && !isInCameraMode && shotImages.Count > 0)
         {
             if (!isInViewPhotoMode && !isModeSwitchPossible) return;
             isInViewPhotoMode = !isInViewPhotoMode;
             photoGalleryPanel.SetActive(isInViewPhotoMode);
+            hasFotographedAnimalsIndicator.SetActive(isInViewPhotoMode);
             if (isInViewPhotoMode)
             {
                 DisplayFotosFromIndex(currentPhotoStartIndex);
@@ -173,6 +184,26 @@ public class VideoCameraController : MonoBehaviour
         {
             StartCoroutine(FlashRecordingIndicator());
 
+            if (!GameManager.Instance.HasFotographedRabbit || !GameManager.Instance.HasFotographedBear)
+            {
+                foreach (var animal in GameManager.Instance.prototypeAnimals)
+                {
+                    if (IsVisibleToCamera(animal))
+                    {
+                        if (animal.CompareTag("Rabbit"))
+                        {
+                            GameManager.Instance.HasFotographedRabbit = true;
+                        }
+                        else if (animal.CompareTag("Bear"))
+                        {
+                            GameManager.Instance.HasFotographedBear = true;
+                        }
+                    }
+                }
+            }
+
+            playCameraShutterSound.Post(gameObject);
+
             mainCamera.targetTexture = renderTexture;
 
             Texture2D screenShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
@@ -191,6 +222,12 @@ public class VideoCameraController : MonoBehaviour
             shotImages.Add(Sprite.Create(screenShot, new Rect(0, 0, screenShot.width, screenShot.height), new Vector2(0.5f, 0.5f)));
             // lastShotImage.sprite = Sprite.Create(screenShot, new Rect(0, 0, screenShot.width, screenShot.height), new Vector2(0.5f, 0.5f));
         }
+    }
+
+    private bool IsVisibleToCamera(GameObject go)
+    {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
+        return planes.All(plane => plane.GetDistanceToPoint(go.transform.position) >= 0);
     }
 
     private IEnumerator FlashRecordingIndicator()

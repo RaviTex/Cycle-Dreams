@@ -11,7 +11,7 @@
     "GUID": "{77E8E93B-166D-4376-ABDA-7A078710E157}",
     "Color": "3",
     "Language": "SFX",
-    "Hash": "{FEA68879-8DD5-1094-CE99-4569F9854259}",
+    "Hash": "{3B128799-DD08-D90D-73B4-78F21F184397}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Prototype",
     "ShortName": "Prototype",
     "Path": "Prototype.bnk",
@@ -247,6 +247,6 @@
     ]
    }
   ],
-  "FileHash": "{EF3AB31C-3AEE-66E6-EBFB-2541BAB20A1C}"
+  "FileHash": "{42FEBCA1-9340-63C1-AF68-816C96CBF092}"
  }
 }

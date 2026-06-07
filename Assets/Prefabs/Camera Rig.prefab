@@ -47,17 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ce98fd3dcd6f34991b5bc72f93def0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 0}
-  bikeController: {fileID: 0}
-  bikeSplineController: {fileID: 0}
   sensitivity: 0.1
   gamepadSensitivity: 1
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  isVRMode: 0
   lerpPositionAndRotation: 1
   lerpSpeed: 60
   isCameraAssistEnabled: 1
-  isDriving: 0
   returnToCenterSpeed: 2
   snapToBoundsSpeed: 10
   snapCompletionThreshold: 0.1
@@ -86,6 +81,7 @@ MonoBehaviour:
   isInCameraModeIndicator: {fileID: 5726751220092193700}
   isRecordingIndicator: {fileID: 6857126396315256689}
   photoGalleryPanel: {fileID: 9000802907990573087}
+  hasFotographedAnimalsIndicator: {fileID: 6122501576703270725}
   pageCountText: {fileID: 475277774611029638}
   maxZoomInFOV: 20
   maxZoomOutFOV: 100
@@ -97,9 +93,14 @@ MonoBehaviour:
   - {fileID: 6664188252274990426}
   - {fileID: 7287441460453099638}
   - {fileID: 9006981610894882614}
-  bikeController: {fileID: 0}
-  bikeSplineController: {fileID: 0}
-  cameraModeLaunchSpeedThreshold: 0.5
+  playCameraShutterSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6ed373a8f03df084b95b2fd5198d56d0, type: 2}
+  playCameraPickUpSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1b650a294c3acd54e93efe7aa86b5865, type: 2}
 --- !u!1 &3937595112815758535
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +562,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5091835502791507307, guid: 6a65b5888fe720c4d9ca7cd57b0e2ad2, type: 3}
   m_PrefabInstance: {fileID: 707158109826414287}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6122501576703270725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6712380168152263050, guid: 6a65b5888fe720c4d9ca7cd57b0e2ad2, type: 3}
+  m_PrefabInstance: {fileID: 707158109826414287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6591503414386267906 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5956553543509467597, guid: 6a65b5888fe720c4d9ca7cd57b0e2ad2, type: 3}
@@ -585,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177877201393837119, guid: f48720fe3d3aec94eb4d6d3e548e73fc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9040283346570539727, guid: f48720fe3d3aec94eb4d6d3e548e73fc, type: 3}
       propertyPath: m_LocalPosition.x

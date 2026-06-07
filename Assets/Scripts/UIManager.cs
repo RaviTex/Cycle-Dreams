@@ -5,12 +5,14 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private GameObject prototypeCompleteUI;
-    [SerializeField] private GameObject explainInputsUI;
+    [SerializeField] private GameObject explainNormalInputsUI;
+    [SerializeField] private GameObject explainSplineInputsUI;
     [SerializeField] private GameObject explainPhotoModeUI;
     [SerializeField] private GameObject explainViewModeUI;
     [SerializeField] private GameObject explainOffRoadUI;
     [SerializeField] private GameObject explainGameUI;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject reminderUI;
 
     private void Awake()
     {
@@ -30,11 +32,19 @@ public class UIManager : MonoBehaviour
 
     public void ShowExplainInputs()
     {
-        explainInputsUI.SetActive(true);
+        explainNormalInputsUI.SetActive(true);
     }
     public void HideExplainInputs()
     {
-        explainInputsUI.SetActive(false);
+        explainNormalInputsUI.SetActive(false);
+    }
+    public void ShowExplainSplineInputs()
+    {
+        explainSplineInputsUI.SetActive(true);
+    }
+    public void HideExplainSplineInputs()
+    {
+        explainSplineInputsUI.SetActive(false);
     }
     public void ShowExplainPhotoMode()
     {
@@ -71,5 +81,13 @@ public class UIManager : MonoBehaviour
     public void HideExplainGame()
     {
         explainGameUI.SetActive(false);
+    }
+    public void ShowReminder()
+    {
+        reminderUI.SetActive(true);
+    }
+    public void HideReminder()
+    {
+        reminderUI.SetActive(false);
     }
 }

@@ -6,11 +6,17 @@ public class Endpoint : MonoBehaviour
     {
         if (other.CompareTag("Endpoint"))
         {
-            GameManager.Instance.PrototypeComplete();
+            if (GameManager.Instance.HasFotographedRabbit && GameManager.Instance.HasFotographedBear)
+                GameManager.Instance.PrototypeComplete();
+            else
+                UIManager.Instance.ShowReminder();
         }
         else if (other.CompareTag("Explain Inputs"))
         {
-            UIManager.Instance.ShowExplainInputs();
+            if (!GameManager.Instance.isSplineMode)
+                UIManager.Instance.ShowExplainInputs();
+            else
+                UIManager.Instance.ShowExplainSplineInputs();
         }
         else if (other.CompareTag("Explain Photo Mode"))
         {
@@ -37,7 +43,10 @@ public class Endpoint : MonoBehaviour
     {
         if (other.CompareTag("Explain Inputs"))
         {
-            UIManager.Instance.HideExplainInputs();
+            if (!GameManager.Instance.isSplineMode)
+                UIManager.Instance.HideExplainInputs();
+            else
+                UIManager.Instance.HideExplainSplineInputs();
         }
         else if (other.CompareTag("Explain Photo Mode"))
         {
@@ -54,6 +63,10 @@ public class Endpoint : MonoBehaviour
         else if (other.CompareTag("Explain Game"))
         {
             UIManager.Instance.HideExplainGame();
+        }
+        else if (other.CompareTag("Endpoint"))
+        {
+            UIManager.Instance.HideReminder();
         }
     }
 }

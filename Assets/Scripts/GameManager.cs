@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Management;
@@ -25,8 +26,50 @@ public class GameManager : MonoBehaviour
     [Header("Bike Controller Settings")]
     public bool isModeSwitchPossible => GetActiveBikeController()?.CurrentSpeed < modeSwitchSpeedThreshold;
     public float modeSwitchSpeedThreshold = 0.5f;
-
-
+    [Header("Prototype Animals")]
+    public List<GameObject> prototypeAnimals;
+    private bool hasFotographedRabbit;
+    public bool HasFotographedRabbit
+    {
+        get => hasFotographedRabbit;
+        set
+        {
+            hasFotographedRabbit = value;
+            if (value)
+            {
+                rabbitCheckmark.SetActive(true);
+                rabbitXmark.SetActive(false);
+            }
+            else
+            {
+                rabbitCheckmark.SetActive(false);
+                rabbitXmark.SetActive(true);
+            }
+        }
+    }
+    private bool hasFotographedBear;
+    public bool HasFotographedBear
+    {
+        get => hasFotographedBear;
+        set
+        {
+            hasFotographedBear = value;
+            if (value)
+            {
+                bearCheckmark.SetActive(true);
+                bearXmark.SetActive(false);
+            }
+            else
+            {
+                bearCheckmark.SetActive(false);
+                bearXmark.SetActive(true);
+            }
+        }
+    }
+    [SerializeField] private GameObject rabbitCheckmark;
+    [SerializeField] private GameObject bearCheckmark;
+    [SerializeField] private GameObject rabbitXmark;
+    [SerializeField] private GameObject bearXmark;
     public event Action OnMovementFreeze;
 
 
@@ -98,7 +141,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IBikeController GetActiveBikeController()
+    public IBikeController GetActiveBikeController()
     {
         if (bikeController != null && bikeController.isActiveAndEnabled)
             return bikeController;
