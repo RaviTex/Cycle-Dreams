@@ -12,6 +12,8 @@ TagManager:
   - Explain Off Road
   - Explain Game
   - Game Over
+  - Rabbit
+  - Bear
   layers:
   - Default
   - TransparentFX

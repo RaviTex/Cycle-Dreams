@@ -15,3 +15,4 @@ MonoBehaviour:
   objectName: Prototype
   id: 3565403361
   guid: 77E8E93B-166D-4376-ABDA-7A078710E157
+  bank: {fileID: 11400000, guid: 85802b18edf122144a9ee8a826cbaa9b, type: 2}

@@ -3337,6 +3337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1541020603}
   - component: {fileID: 1541020602}
+  - component: {fileID: 1541020604}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -3384,6 +3385,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541020604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541020601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1 &1562552859 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8400967599043881996, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
@@ -3687,7 +3701,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prototypeCompleteUI: {fileID: 1928556319}
-  explainInputsUI: {fileID: 8309202487735458410}
+  explainNormalInputsUI: {fileID: 0}
+  explainSplineInputsUI: {fileID: 0}
   explainPhotoModeUI: {fileID: 8309202487735458409}
   explainViewModeUI: {fileID: 8309202487735458408}
   explainOffRoadUI: {fileID: 8309202487735458407}
@@ -4266,11 +4281,6 @@ GameObject:
 --- !u!1 &8309202487735458409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4710317970716713005, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
-  m_PrefabInstance: {fileID: 8309202487735458405}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8309202487735458410 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3966551233203678832, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
   m_PrefabInstance: {fileID: 8309202487735458405}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

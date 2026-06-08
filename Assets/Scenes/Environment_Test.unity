@@ -637,11 +637,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!4 &670605227 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2881520594437467356, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
-  m_PrefabInstance: {fileID: 5193830336562647494}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1541020603}
   - component: {fileID: 1541020602}
+  - component: {fileID: 1541020604}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -976,6 +972,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541020604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541020601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed39f2b237e573f4f85990bb5d1440ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitBank: {fileID: 0}
 --- !u!1 &1731028513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,12 +1494,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ce98fd3dcd6f34991b5bc72f93def0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {fileID: 670605227}
   sensitivity: 0.1
+  gamepadSensitivity: 1
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  isVRMode: 0
   lerpPositionAndRotation: 1
   lerpSpeed: 60
+  isCameraAssistEnabled: 1
+  returnToCenterSpeed: 2
+  snapToBoundsSpeed: 10
+  snapCompletionThreshold: 0.1
+  drivingRotationClampX: {x: -45, y: 45}
+  drivingRotationClampY: {x: -60, y: 60}
 --- !u!114 &2108777925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,11 +1521,14 @@ MonoBehaviour:
   viewPhotoModeToggleAction: {fileID: -762902852776729225, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   lefMouseClickAction: {fileID: -6388571466007557339, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   scrollWheelAction: {fileID: -5226172062067718997, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  nextAction: {fileID: 0}
+  previousAction: {fileID: 0}
   isInCameraMode: 0
   isInViewPhotoMode: 0
   isInCameraModeIndicator: {fileID: 1880595543}
   isRecordingIndicator: {fileID: 306333517}
   photoGalleryPanel: {fileID: 919132147955696272}
+  hasFotographedAnimalsIndicator: {fileID: 0}
   pageCountText: {fileID: 5266458811797780118}
   maxZoomInFOV: 20
   maxZoomOutFOV: 100
@@ -1523,6 +1540,14 @@ MonoBehaviour:
   - {fileID: 5266458811797780116}
   - {fileID: 5266458811797780115}
   - {fileID: 5266458811797780114}
+  playCameraShutterSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  playCameraPickUpSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!4 &543450651678136362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9040283346570539727, guid: f48720fe3d3aec94eb4d6d3e548e73fc, type: 3}
