@@ -188,17 +188,18 @@ public class VideoCameraController : MonoBehaviour
             {
                 foreach (var animal in GameManager.Instance.prototypeAnimals)
                 {
-                    if (IsVisibleToCamera(animal))
-                    {
-                        if (animal.CompareTag("Rabbit"))
+                    if (Vector3.Distance(mainCamera.transform.position, animal.transform.position) < 50f)
+                        if (IsVisibleToCamera(animal))
                         {
-                            GameManager.Instance.HasFotographedRabbit = true;
+                            if (animal.CompareTag("Rabbit"))
+                            {
+                                GameManager.Instance.HasFotographedRabbit = true;
+                            }
+                            else if (animal.CompareTag("Bear"))
+                            {
+                                GameManager.Instance.HasFotographedBear = true;
+                            }
                         }
-                        else if (animal.CompareTag("Bear"))
-                        {
-                            GameManager.Instance.HasFotographedBear = true;
-                        }
-                    }
                 }
             }
 

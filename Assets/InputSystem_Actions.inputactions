@@ -36,7 +36,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
@@ -63,7 +63,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -72,7 +72,7 @@
                     "name": "Next",
                     "type": "Button",
                     "id": "b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -272,11 +272,11 @@
                 },
                 {
                     "name": "",
-                    "id": "1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8",
-                    "path": "<XRController>/{Primary2DAxis}",
+                    "id": "48e3edeb-7099-4343-b37a-29057e71d72f",
+                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "XR",
+                    "groups": ";XR",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -404,6 +404,17 @@
                 },
                 {
                     "name": "",
+                    "id": "bfe97e5d-c9a7-4284-9a86-d144fed5ea70",
+                    "path": "<XRController>{RightHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f2e9ba44-c423-42a7-ad56-f20975884794",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -492,6 +503,17 @@
                 },
                 {
                     "name": "",
+                    "id": "08acb15e-9358-4ae7-86e7-1573b4b08559",
+                    "path": "<XRController>{LeftHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Previous",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1c04ea5f-b012-41d1-a6f7-02e963b52893",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -558,6 +580,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8fda166a-65e0-46df-96a7-07c22027c35a",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "VideoCameraMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8448b59e-ab5e-492d-a044-f1ce174748bd",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -574,6 +607,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "ShotPhoto",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5d0a5e6-594b-4bb4-8e1c-d4e659903b72",
+                    "path": "<XRController>/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
                     "action": "ShotPhoto",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -623,6 +667,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "1D Axis",
+                    "id": "4fb7f319-7f41-42f6-8fbf-03f489f8be12",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VideoCameraZoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "292c2554-8635-4418-8714-da40209f148b",
+                    "path": "<XRController>{LeftHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "VideoCameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3a67cd68-7dd5-432e-9936-c032b4804647",
+                    "path": "<XRController>{RightHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "VideoCameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "699faf3b-ae00-46a5-a3cf-27622c7196cf",
                     "path": "<Keyboard>/v",
@@ -640,6 +717,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "ViewPhotoMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f93311c-b2f1-49b0-ad94-298c2343f015",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
                     "action": "ViewPhotoMode",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -668,6 +756,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0a0e4eec-6410-4b7b-a13e-47c0e2a6d0c5",
+                    "path": "<XRController>/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "SplineMoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d071f049-aaa3-4308-89bf-00f3997c7e58",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -684,6 +783,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "SplineMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "836bc653-01a7-4263-9b93-a1b586fcf88a",
+                    "path": "<XRController>/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
                     "action": "SplineMoveLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -717,6 +827,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "TurnBikeAround",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18d82b90-b3e2-4c77-83b6-c309689d3249",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
                     "action": "TurnBikeAround",
                     "isComposite": false,
                     "isPartOfComposite": false

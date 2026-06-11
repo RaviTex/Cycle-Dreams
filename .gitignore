@@ -69,3 +69,5 @@ data/
 
 *.pidb.lock
 *.pdb.leta
+
+.utmp/

@@ -8,30 +8,35 @@
 						<Property Name="Channels" Type="int32">
 							<ValueList>
 								<Value Platform="Mac">4</Value>
+								<Value Platform="Android">4</Value>
 								<Value Platform="Windows">4</Value>
 							</ValueList>
 						</Property>
 						<Property Name="LRMix" Type="Real64">
 							<ValueList>
 								<Value Platform="Mac">0</Value>
+								<Value Platform="Android">0</Value>
 								<Value Platform="Windows">0</Value>
 							</ValueList>
 						</Property>
 						<Property Name="MaxSampleRate" Type="int32">
 							<ValueList>
 								<Value Platform="Mac">48000</Value>
+								<Value Platform="Android">48000</Value>
 								<Value Platform="Windows">48000</Value>
 							</ValueList>
 						</Property>
 						<Property Name="MinSampleRate" Type="int32">
 							<ValueList>
 								<Value Platform="Mac">0</Value>
+								<Value Platform="Android">0</Value>
 								<Value Platform="Windows">0</Value>
 							</ValueList>
 						</Property>
 						<Property Name="SampleRate" Type="int32">
 							<ValueList>
 								<Value Platform="Mac">0</Value>
+								<Value Platform="Android">0</Value>
 								<Value Platform="Windows">0</Value>
 							</ValueList>
 						</Property>
@@ -39,6 +44,9 @@
 					<ConversionPluginInfoList>
 						<ConversionPluginInfo Platform="Mac">
 							<ConversionPlugin Name="" ID="{77B24508-7C34-482F-9420-93A2EB30A2D2}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+						</ConversionPluginInfo>
+						<ConversionPluginInfo Platform="Android">
+							<ConversionPlugin Name="" ID="{719EA77D-76B5-4F6E-9AB0-AEC012FC48FB}" PluginName="PCM" CompanyID="0" PluginID="1"/>
 						</ConversionPluginInfo>
 						<ConversionPluginInfo Platform="Windows">
 							<ConversionPlugin Name="" ID="{F5450FC9-E607-4912-9AF8-3E0230D52175}" PluginName="PCM" CompanyID="0" PluginID="1"/>

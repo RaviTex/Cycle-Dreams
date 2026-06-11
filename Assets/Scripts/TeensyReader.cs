@@ -82,48 +82,17 @@ public class TeensyReader : MonoBehaviour
         }
 
         float sliderLeft = slider.action.ReadValue<float>();
-        bool isPassing = sliderLeft < 0;
-        print(isPassing);
 
-        timeSinceLastPass += Time.deltaTime;
+        float throttle = (sliderLeft + 1f) * 0.5f;
+        float bikeSpeedMS = throttle * 15f;
 
-        // Detect transition into pass state
-        if (isPassing && !lastPassState)
-        {
-            float distancePerPass = wheelCircumference / magnetsPerWheel;
 
-            // Prevent division by zero and overly high speeds from double-reads
-            if (timeSinceLastPass > 0.05f)
-            {
-                lastCalculatedSpeed = distancePerPass / timeSinceLastPass;
-            }
-            timeSinceLastPass = 0f;
-        }
-
-        lastPassState = isPassing;
-
-        // Decay logic: The speed cannot physically be faster than the time it's currently taking for the next pass
-        float distance = wheelCircumference / magnetsPerWheel;
-        // If timeSinceLastPass is 0 (exactly on the frame of a pass), maxPossibleSpeed should just allow the last calculated speed
-        float maxPossibleSpeed = timeSinceLastPass > 0.001f ? distance / timeSinceLastPass : lastCalculatedSpeed;
-
-        // Hard stop threshold to prevent infinite asymptote. 
-        if (maxPossibleSpeed < 0.2f)
-        {
-            maxPossibleSpeed = 0f;
-            lastCalculatedSpeed = 0f;
-        }
-
-        float targetSpeed = Mathf.Min(lastCalculatedSpeed, maxPossibleSpeed);
-
-        CurrentSpeed = Mathf.Lerp(CurrentSpeed, targetSpeed, speedSmoothing * Time.deltaTime);
-
-        // Snap directly to 0 if we're extremely close, to prevent endless Lerping
-        if (CurrentSpeed < 0.05f)
-        {
-            CurrentSpeed = 0f;
-        }
-        print($"Current Speed: {CurrentSpeed:F2} m/s");
+        CurrentSpeed = Mathf.Lerp(CurrentSpeed, bikeSpeedMS, speedSmoothing * Time.deltaTime);
+        Debug.Log(
+            $"Slider={sliderLeft:F3}, " +
+            $"Throttle={throttle:F3}, " +
+            $"Speed={bikeSpeedMS:F3}"
+        );
     }
 }
 

@@ -1,0 +1,38 @@
+{
+ "PlatformInfo": {
+  "Platform": {
+   "Name": "Android",
+   "BasePlatform": "Android",
+   "Generator": "2024.1.7.8863"
+  },
+  "RootPaths": {
+   "ProjectRoot": "../..",
+   "SourceFilesRoot": "../../.cache",
+   "SoundBanksRoot": ".",
+   "ExternalSourcesInputFile": "",
+   "ExternalSourcesOutputRoot": "../../../Assets/GeneratedSoundBanks/Android"
+  },
+  "DefaultAlign": "16",
+  "Settings": {
+   "AutoSoundBankDefinition": "false",
+   "CopyLooseStreamedMediaFiles": "true",
+   "SubFoldersForGeneratedFiles": "false",
+   "RemoveUnusedGeneratedFiles": "true",
+   "SourceControlGeneratedFiles": "false",
+   "GenerateHeaderFile": "true",
+   "GenerateContentTxtFile": "true",
+   "GenerateMetadataXML": "false",
+   "GenerateMetadataJSON": "true",
+   "GenerateAllBanksMetadata": "false",
+   "GeneratePerBankMetadata": "true",
+   "UseSoundBankNames": "true",
+   "AllowExceedingMaxSize": "false",
+   "MaxAttenuationInfo": "true",
+   "EstimatedDurationInfo": "true",
+   "PrintObjectGuid": "true",
+   "PrintObjectPath": "true",
+   "PrintObjectColor": "true"
+  },
+  "FileHash": "{B50AF4B4-6397-6EAA-C574-E25A4F5E7814}"
+ }
+}

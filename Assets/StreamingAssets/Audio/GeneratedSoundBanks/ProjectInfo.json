@@ -8,6 +8,13 @@
   "CacheRoot": "../../../../CycleDreams_Git_WwiseProject/.cache",
   "Platforms": [
    {
+    "Name": "Android",
+    "GUID": "{5D4FE8C3-A602-42BA-9405-4A662D04720B}",
+    "BasePlatform": "Android",
+    "BasePlatformGUID": "{A2D401DE-B8B6-4FEB-8142-137C34D507CA}",
+    "Path": "../../../../CycleDreams_Git_WwiseProject/GeneratedSoundBanks/Android"
+   },
+   {
     "Name": "Mac",
     "GUID": "{A9E204E9-410C-418C-A2FA-79DF6A499502}",
     "BasePlatform": "Mac",
@@ -31,6 +38,6 @@
     "UseAsStandIn": "true"
    }
   ],
-  "FileHash": "{EBDE14F5-3DE3-408E-C14D-669BE0EA35A1}"
+  "FileHash": "{18F372C9-3E55-CA28-395D-70BBFE66595D}"
  }
 }
