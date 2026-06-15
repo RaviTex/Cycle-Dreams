@@ -4,75 +4,79 @@ public class Endpoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance == null || GameManager.Instance.IsRestarting) return;
-        if (UIManager.Instance == null) return;
+        var gm = GameManager.Instance;
+        if (gm == null || gm.IsRestarting) return;
+        var ui = UIManager.Instance;
+        if (ui == null) return;
 
         if (other.CompareTag("Endpoint"))
         {
-            if (GameManager.Instance.HasFotographedRabbit && GameManager.Instance.HasFotographedBear)
-                GameManager.Instance.PrototypeComplete();
+            if (gm.HasFotographedRabbit && gm.HasFotographedBear)
+                gm.PrototypeComplete();
             else
-                UIManager.Instance.ShowReminder();
+                ui.ShowReminder();
         }
         else if (other.CompareTag("Explain Inputs"))
         {
-            if (!GameManager.Instance.isSplineMode)
-                UIManager.Instance.ShowExplainInputs();
+            if (!gm.isSplineMode)
+                ui.ShowExplainInputs();
             else
-                UIManager.Instance.ShowExplainSplineInputs();
+                ui.ShowExplainSplineInputs();
         }
         else if (other.CompareTag("Explain Photo Mode"))
         {
-            UIManager.Instance.ShowExplainPhotoMode();
+            ui.ShowExplainPhotoMode();
         }
         else if (other.CompareTag("Explain View Mode"))
         {
-            UIManager.Instance.ShowExplainViewMode();
+            ui.ShowExplainViewMode();
         }
         else if (other.CompareTag("Explain Off Road"))
         {
-            UIManager.Instance.ShowExplainOffRoad();
+            ui.ShowExplainOffRoad();
         }
         else if (other.CompareTag("Explain Game"))
         {
-            UIManager.Instance.ShowExplainGame();
+            ui.ShowExplainGame();
         }
         else if (other.CompareTag("Game Over"))
         {
-            GameManager.Instance.GameOver();
+            gm.GameOver();
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (GameManager.Instance == null || GameManager.Instance.IsRestarting) return;
-        if (UIManager.Instance == null) return;
+        var gm = GameManager.Instance;
+        if (gm == null || gm.IsRestarting) return;
+        var ui = UIManager.Instance;
+        if (ui == null) return;
 
         if (other.CompareTag("Explain Inputs"))
         {
-            if (!GameManager.Instance.isSplineMode)
-                UIManager.Instance.HideExplainInputs();
+            if (!gm.isSplineMode)
+                ui.HideExplainInputs();
             else
-                UIManager.Instance.HideExplainSplineInputs();
+                ui.HideExplainSplineInputs();
         }
         else if (other.CompareTag("Explain Photo Mode"))
         {
-            UIManager.Instance.HideExplainPhotoMode();
+            ui.HideExplainPhotoMode();
         }
         else if (other.CompareTag("Explain View Mode"))
         {
-            UIManager.Instance.HideExplainViewMode();
+            ui.HideExplainViewMode();
         }
         else if (other.CompareTag("Explain Off Road"))
         {
-            UIManager.Instance.HideExplainOffRoad();
+            ui.HideExplainOffRoad();
         }
         else if (other.CompareTag("Explain Game"))
         {
-            UIManager.Instance.HideExplainGame();
+            ui.HideExplainGame();
         }
         else if (other.CompareTag("Endpoint"))
         {
-            UIManager.Instance.HideReminder();
+            ui.HideReminder();
         }
     }
 }

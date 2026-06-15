@@ -33,20 +33,13 @@ public class VideoCameraController : MonoBehaviour
     [SerializeField] private AK.Wwise.Event playCameraShutterSound;
     [SerializeField] private AK.Wwise.Event playCameraPickUpSound;
 
-    private bool isModeSwitchPossible
-    {
-        get
-        {
-            var gm = GameManager.Instance;
-            return gm != null && gm.isModeSwitchPossible;
-        }
-    }
     private BikeController bikeController;
     private BikeSplineController bikeSplineController;
     private Camera mainCamera;
     private RenderTexture renderTexture;
     private float normalFOV;
     private int currentPhotoStartIndex = 0;
+    private bool wasInFOVModifyingMode;
 
     void Start()
     {
@@ -99,11 +92,13 @@ public class VideoCameraController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance == null || GameManager.Instance.IsRestarting) return;
+        var gm = GameManager.Instance;
+        if (gm == null || gm.IsRestarting) return;
+        bool modeSwitchPossible = gm.isModeSwitchPossible;
 
         if (cameraModeToggleAction.action.triggered && !isInViewPhotoMode)
         {
-            if (!isInCameraMode && !isModeSwitchPossible) return;
+            if (!isInCameraMode && !modeSwitchPossible) return;
             isInCameraMode = !isInCameraMode;
             isInCameraModeIndicator.SetActive(isInCameraMode);
             SetBikeFrozen(isInCameraMode);
@@ -114,7 +109,7 @@ public class VideoCameraController : MonoBehaviour
         }
         if (viewPhotoModeToggleAction.action.triggered && !isInCameraMode && shotImages.Count > 0)
         {
-            if (!isInViewPhotoMode && !isModeSwitchPossible) return;
+            if (!isInViewPhotoMode && !modeSwitchPossible) return;
             isInViewPhotoMode = !isInViewPhotoMode;
             photoGalleryPanel.SetActive(isInViewPhotoMode);
             hasFotographedAnimalsIndicator.SetActive(isInViewPhotoMode);
@@ -164,8 +159,13 @@ public class VideoCameraController : MonoBehaviour
         }
         else
         {
-            mainCamera.fieldOfView = normalFOV;
+            if (wasInFOVModifyingMode)
+            {
+                mainCamera.fieldOfView = normalFOV;
+            }
         }
+
+        wasInFOVModifyingMode = isInCameraMode || isInViewPhotoMode;
     }
 
     private void DisplayFotosFromIndex(int startIndex)
@@ -202,9 +202,9 @@ public class VideoCameraController : MonoBehaviour
             if (!GameManager.Instance.HasFotographedRabbit || !GameManager.Instance.HasFotographedBear)
             {
                 var gm = GameManager.Instance;
-                if (gm != null && gm.prototypeAnimals != null)
+                if (gm != null)
                 {
-                    foreach (var animal in gm.prototypeAnimals)
+                    foreach (var animal in gm.GetPrototypeAnimals())
                     {
                         if (animal == null) continue;
                         if (Vector3.Distance(mainCamera.transform.position, animal.transform.position) < maxAnimalDetectionDistance)

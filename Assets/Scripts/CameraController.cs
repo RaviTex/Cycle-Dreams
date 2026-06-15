@@ -17,80 +17,52 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 drivingRotationClampX = new Vector2(-45f, 45f);
     [SerializeField] private Vector2 drivingRotationClampY = new Vector2(-60f, 60f);
 
-    private bool isVRMode
-    {
-        get
-        {
-            var gm = GameManager.Instance;
-            return gm != null && gm.isInVRMode;
-        }
-    }
-    private bool isModeSwitchPossible
-    {
-        get
-        {
-            var gm = GameManager.Instance;
-            return gm != null && gm.isModeSwitchPossible;
-        }
-    }
-    private Transform pivot
-    {
-        get
-        {
-            var gm = GameManager.Instance;
-            if (gm == null || gm.cameraPivot == null) return null;
-            return gm.cameraPivot.transform;
-        }
-    }
     private float rotationX = 0f;
     private float rotationY = 0f;
-    private GameObject _camera
-    {
-        get
-        {
-            var gm = GameManager.Instance;
-            if (gm == null || gm.mainCamera == null) return null;
-            return gm.mainCamera.gameObject;
-        }
-    }
     private Vector2 lookInput;
 
     void LateUpdate()
     {
-        if (pivot == null || _camera == null) return;
-        if (GameManager.Instance != null && GameManager.Instance.IsRestarting) return;
+        var gm = GameManager.Instance;
+        if (gm == null || gm.IsRestarting) return;
+        if (gm.cameraPivot == null || gm.mainCamera == null) return;
+
+        Transform pivotTransform = gm.cameraPivot.transform;
+        GameObject cameraGO = gm.mainCamera.gameObject;
+        bool vrMode = gm.isInVRMode;
+        bool modeSwitchPossible = gm.isModeSwitchPossible;
 
         if (lerpPositionAndRotation)
         {
-            transform.position = Vector3.Lerp(transform.position, pivot.position, Time.deltaTime * lerpSpeed);
-            transform.rotation = Quaternion.Slerp(transform.rotation, pivot.rotation, Time.deltaTime * lerpSpeed);
+            transform.position = Vector3.Lerp(transform.position, pivotTransform.position, Time.deltaTime * lerpSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, pivotTransform.rotation, Time.deltaTime * lerpSpeed);
         }
         else
         {
-            transform.position = pivot.position;
-            transform.rotation = pivot.rotation;
+            transform.position = pivotTransform.position;
+            transform.rotation = pivotTransform.rotation;
         }
 
-        if (isVRMode)
+        if (vrMode)
         {
             return;
         }
 
         bool isOutOfBounds = false;
-        if (!isModeSwitchPossible)
+        if (!modeSwitchPossible)
         {
             isOutOfBounds = rotationX < drivingRotationClampX.x || rotationX > drivingRotationClampX.y ||
                             rotationY < drivingRotationClampY.x || rotationY > drivingRotationClampY.y;
         }
 
-        bool canApplyPlayerInput = !isModeSwitchPossible || !isOutOfBounds;
+        bool canApplyPlayerInput = !modeSwitchPossible || !isOutOfBounds;
         if (canApplyPlayerInput)
         {
             rotationX -= lookInput.y;
             rotationY += lookInput.x;
         }
 
-        if (!isModeSwitchPossible)
+        if (!modeSwitchPossible)
         {
             if (isOutOfBounds)
             {
@@ -124,7 +96,7 @@ public class CameraController : MonoBehaviour
         }
 
         Quaternion deviation = Quaternion.Euler(rotationX, rotationY, 0);
-        _camera.transform.localRotation = deviation;
+        cameraGO.transform.localRotation = deviation;
     }
 
     private void ClampRotationToDrivingBounds(ref float rotX, ref float rotY)

@@ -36,15 +36,17 @@ public class GameManager : MonoBehaviour
         set
         {
             hasFotographedRabbit = value;
+            var check = GetOrFind(ref rabbitCheckmark, rabbitCheckmarkPath);
+            var xmark = GetOrFind(ref rabbitXmark, rabbitXmarkPath);
             if (value)
             {
-                rabbitCheckmark.SetActive(true);
-                rabbitXmark.SetActive(false);
+                if (check != null) check.SetActive(true);
+                if (xmark != null) xmark.SetActive(false);
             }
             else
             {
-                rabbitCheckmark.SetActive(false);
-                rabbitXmark.SetActive(true);
+                if (check != null) check.SetActive(false);
+                if (xmark != null) xmark.SetActive(true);
             }
         }
     }
@@ -55,22 +57,80 @@ public class GameManager : MonoBehaviour
         set
         {
             hasFotographedBear = value;
+            var check = GetOrFind(ref bearCheckmark, bearCheckmarkPath);
+            var xmark = GetOrFind(ref bearXmark, bearXmarkPath);
             if (value)
             {
-                bearCheckmark.SetActive(true);
-                bearXmark.SetActive(false);
+                if (check != null) check.SetActive(true);
+                if (xmark != null) xmark.SetActive(false);
             }
             else
             {
-                bearCheckmark.SetActive(false);
-                bearXmark.SetActive(true);
+                if (check != null) check.SetActive(false);
+                if (xmark != null) xmark.SetActive(true);
             }
         }
+    }
+
+    private static string GetPathOrNull(GameObject go)
+    {
+        if (go == null) return null;
+        var path = go.name;
+        var t = go.transform.parent;
+        while (t != null)
+        {
+            path = t.name + "/" + path;
+            t = t.parent;
+        }
+        return path;
+    }
+
+    private static GameObject FindByPath(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return null;
+        var parts = path.Split('/');
+        var root = GameObject.Find(parts[0]);
+        if (root == null) return null;
+        var t = root.transform;
+        for (int i = 1; i < parts.Length && t != null; i++)
+            t = t.Find(parts[i]);
+        return t != null ? t.gameObject : null;
+    }
+
+    private static GameObject GetOrFind(ref GameObject field, string path)
+    {
+        if (field == null && !string.IsNullOrEmpty(path))
+            field = FindByPath(path);
+        return field;
+    }
+
+    public List<GameObject> GetPrototypeAnimals()
+    {
+        if (prototypeAnimals == null || prototypeAnimals.Count == 0 || prototypeAnimals[0] == null)
+        {
+            prototypeAnimals = new List<GameObject>();
+            foreach (var path in prototypeAnimalPaths)
+            {
+                if (!string.IsNullOrEmpty(path))
+                {
+                    var go = FindByPath(path);
+                    if (go != null)
+                        prototypeAnimals.Add(go);
+                }
+            }
+        }
+        return prototypeAnimals;
     }
     [SerializeField] private GameObject rabbitCheckmark;
     [SerializeField] private GameObject bearCheckmark;
     [SerializeField] private GameObject rabbitXmark;
     [SerializeField] private GameObject bearXmark;
+
+    private string rabbitCheckmarkPath;
+    private string bearCheckmarkPath;
+    private string rabbitXmarkPath;
+    private string bearXmarkPath;
+    private List<string> prototypeAnimalPaths = new List<string>();
     public event Action OnMovementFreeze;
     public event Action OnGameOver;
 
@@ -110,6 +170,8 @@ public class GameManager : MonoBehaviour
 
         isInVRMode = XRGeneralSettings.Instance.Manager.activeLoader != null;
         print("Is VR Device Active: " + isInVRMode);
+
+        CacheUINames();
     }
 
     private void OnEnable()
@@ -124,13 +186,40 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        bool wasRestarting = IsRestarting;
         IsRestarting = false;
         InitializeReferences();
+        if (wasRestarting)
+            InvalidateUIReferences();
+    }
+
+    private void InvalidateUIReferences()
+    {
+        rabbitCheckmark = null;
+        bearCheckmark = null;
+        rabbitXmark = null;
+        bearXmark = null;
+        prototypeAnimals = null;
     }
 
     void Start()
     {
         InitializeReferences();
+    }
+
+    private void CacheUINames()
+    {
+        rabbitCheckmarkPath = GetPathOrNull(rabbitCheckmark);
+        bearCheckmarkPath = GetPathOrNull(bearCheckmark);
+        rabbitXmarkPath = GetPathOrNull(rabbitXmark);
+        bearXmarkPath = GetPathOrNull(bearXmark);
+
+        prototypeAnimalPaths.Clear();
+        if (prototypeAnimals != null)
+        {
+            foreach (var animal in prototypeAnimals)
+                prototypeAnimalPaths.Add(GetPathOrNull(animal));
+        }
     }
 
     private void InitializeReferences()

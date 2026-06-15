@@ -57875,7 +57875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInVRMode: 0
-  isSplineMode: 0
+  isSplineMode: 1
   bikeController: {fileID: 1008812384}
   bikeSplineController: {fileID: 0}
   cameraPivot: {fileID: 1985647674}

@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Ellie2.unity
-    guid: 8c84c1605e6bf794d9e184f5e7f5b68e
+    path: Assets/Scenes/Playtest.unity
+    guid: 017aaa2a199da4e49b0f3d55ea12549d
+  - enabled: 1
+    path: Assets/Scenes/PlaytestNormal.unity
+    guid: 2bb88e5a4489f5c4a9768239adda30fd
+  - enabled: 1
+    path: Assets/Scenes/PlaytestSpline.unity
+    guid: ed229d15a90f2a742824031c9b534fc6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e8231113d55893848a28c0ae28d141e8, type: 2}

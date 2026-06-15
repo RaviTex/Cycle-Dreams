@@ -62,7 +62,11 @@ public class SoundManager : MonoBehaviour
             player = null;
             return;
         }
-        player = gm.bikeController.gameObject;
+
+        var newPlayer = gm.bikeController.gameObject;
+        if (newPlayer == player) return;
+
+        player = newPlayer;
         playAmbience.Post(player);
         playBike.Post(player);
         playWind.Post(player);

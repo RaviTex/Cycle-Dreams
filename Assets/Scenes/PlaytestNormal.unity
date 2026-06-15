@@ -57843,144 +57843,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7026098011916370810, guid: 6656218313762eb43803a9fcc3c5e828, type: 3}
   m_PrefabInstance: {fileID: 1851049329}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1857826678
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1857826680}
-  - component: {fileID: 1857826679}
-  - component: {fileID: 1857826681}
-  - component: {fileID: 1857826682}
-  m_Layer: 0
-  m_Name: Game Manager (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1857826679
+--- !u!114 &1857826679 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+  m_PrefabInstance: {fileID: 5148352762519415689}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857826678}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 846e38311491af64389a12231c1c4df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInVRMode: 0
-  isSplineMode: 0
-  bikeController: {fileID: 1008812384}
-  bikeSplineController: {fileID: 0}
-  cameraPivot: {fileID: 1985647674}
-  cameraController: {fileID: 287822097}
-  bikeVisualController: {fileID: 0}
-  mainCamera: {fileID: 0}
-  photoCamera: {fileID: 0}
-  referenceFOV: 60
-  VRScaleMultiplier: 0.5
-  referenceFOVVR: 98.04
-  modeSwitchSpeedThreshold: 0.5
-  prototypeAnimals:
-  - {fileID: 264477443}
-  - {fileID: 319447081}
-  - {fileID: 1266752939}
-  - {fileID: 2098136915}
-  - {fileID: 745935975}
-  - {fileID: 279514965}
-  - {fileID: 299372052}
-  - {fileID: 821138013}
-  - {fileID: 2071769992}
-  rabbitCheckmark: {fileID: 886287525}
-  bearCheckmark: {fileID: 886287523}
-  rabbitXmark: {fileID: 886287526}
-  bearXmark: {fileID: 886287524}
---- !u!4 &1857826680
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857826678}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1857826681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857826678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4091288b7919b4882196e6b6d0dcd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prototypeCompleteUI: {fileID: 1928556319}
-  explainNormalInputsUI: {fileID: 8309202487735458410}
-  explainSplineInputsUI: {fileID: 1187559842}
-  explainPhotoModeUI: {fileID: 8309202487735458409}
-  explainViewModeUI: {fileID: 8309202487735458408}
-  explainOffRoadUI: {fileID: 8309202487735458407}
-  explainGameUI: {fileID: 8309202487735458406}
-  gameOverUI: {fileID: 1562552859}
-  reminderUI: {fileID: 174328317}
---- !u!114 &1857826682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857826678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7605c425d29e664d950ed3537eaf079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playAmbience:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 075d389edbfdbeb4dbb01325de512f11, type: 2}
-  stopAmbience:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 7d548bc4a2e13e54892224eefce2b937, type: 2}
-  playBike:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5c2f31629788b6f48aa9d33a46ce2fbc, type: 2}
-  stopBike:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 2e9d628b7d66cee41b23902d981b14c6, type: 2}
-  playWind:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 68900250009fec943adefb36e52d8a3c, type: 2}
-  stopWind:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 76e675b1b3e27644cb89fbd928c7de73, type: 2}
-  bikeSpeedRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 2e77e8e7dbcfc7144bd1e43b022f50a0, type: 2}
-  windSideRTPC:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 6bbfd17f827320041a281e4b680c49ee, type: 2}
 --- !u!1001 &1865348148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67208,6 +67081,163 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4142094803661738101, guid: 8783013336d14c549b560f140af567fe, type: 3}
   m_PrefabInstance: {fileID: 2680654263194866428}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5148352762519415689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: bearXmark
+      value: 
+      objectReference: {fileID: 886287524}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: cameraPivot
+      value: 
+      objectReference: {fileID: 1985647674}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: rabbitXmark
+      value: 
+      objectReference: {fileID: 886287526}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: bearCheckmark
+      value: 
+      objectReference: {fileID: 886287523}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: bikeController
+      value: 
+      objectReference: {fileID: 1008812384}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: rabbitCheckmark
+      value: 
+      objectReference: {fileID: 886287525}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 287822097}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[0]'
+      value: 
+      objectReference: {fileID: 264477443}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[1]'
+      value: 
+      objectReference: {fileID: 319447081}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1266752939}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2098136915}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[4]'
+      value: 
+      objectReference: {fileID: 745935975}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[5]'
+      value: 
+      objectReference: {fileID: 279514965}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[6]'
+      value: 
+      objectReference: {fileID: 299372052}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[7]'
+      value: 
+      objectReference: {fileID: 821138013}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: 'prototypeAnimals.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2071769992}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1562552859}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: reminderUI
+      value: 
+      objectReference: {fileID: 174328317}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: explainGameUI
+      value: 
+      objectReference: {fileID: 8309202487735458406}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: explainOffRoadUI
+      value: 
+      objectReference: {fileID: 8309202487735458407}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: explainViewModeUI
+      value: 
+      objectReference: {fileID: 8309202487735458408}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: explainPhotoModeUI
+      value: 
+      objectReference: {fileID: 8309202487735458409}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: prototypeCompleteUI
+      value: 
+      objectReference: {fileID: 1928556319}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: explainNormalInputsUI
+      value: 
+      objectReference: {fileID: 8309202487735458410}
+    - target: {fileID: 2925241413700474419, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: explainSplineInputsUI
+      value: 
+      objectReference: {fileID: 1187559842}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848137523714943256, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918327754821319473, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: m_Name
+      value: Game Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
 --- !u!1001 &6076388357461524517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67440,7 +67470,7 @@ SceneRoots:
   - {fileID: 1225910017}
   - {fileID: 1888021332}
   - {fileID: 8309202487735458405}
-  - {fileID: 1857826680}
+  - {fileID: 5148352762519415689}
   - {fileID: 1387416798}
   - {fileID: 38167093}
   - {fileID: 1302144555}
