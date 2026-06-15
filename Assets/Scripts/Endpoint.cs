@@ -4,6 +4,9 @@ public class Endpoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        if (GameManager.Instance == null || GameManager.Instance.IsRestarting) return;
+        if (UIManager.Instance == null) return;
+
         if (other.CompareTag("Endpoint"))
         {
             if (GameManager.Instance.HasFotographedRabbit && GameManager.Instance.HasFotographedBear)
@@ -41,6 +44,9 @@ public class Endpoint : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+        if (GameManager.Instance == null || GameManager.Instance.IsRestarting) return;
+        if (UIManager.Instance == null) return;
+
         if (other.CompareTag("Explain Inputs"))
         {
             if (!GameManager.Instance.isSplineMode)

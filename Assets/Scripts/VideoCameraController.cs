@@ -33,7 +33,14 @@ public class VideoCameraController : MonoBehaviour
     [SerializeField] private AK.Wwise.Event playCameraShutterSound;
     [SerializeField] private AK.Wwise.Event playCameraPickUpSound;
 
-    private bool isModeSwitchPossible => GameManager.Instance.isModeSwitchPossible;
+    private bool isModeSwitchPossible
+    {
+        get
+        {
+            var gm = GameManager.Instance;
+            return gm != null && gm.isModeSwitchPossible;
+        }
+    }
     private BikeController bikeController;
     private BikeSplineController bikeSplineController;
     private Camera mainCamera;
@@ -43,10 +50,15 @@ public class VideoCameraController : MonoBehaviour
 
     void Start()
     {
-        bikeController = GameManager.Instance.bikeController;
-        bikeSplineController = GameManager.Instance.bikeSplineController;
+        var gm = GameManager.Instance;
+        if (gm == null) return;
 
-        mainCamera = GameManager.Instance.mainCamera;
+        bikeController = gm.bikeController;
+        bikeSplineController = gm.bikeSplineController;
+
+        mainCamera = gm.mainCamera;
+        if (mainCamera == null) return;
+
         normalFOV = mainCamera.fieldOfView;
         renderTexture = new RenderTexture(resWidth, resHeight, 24);
     }
@@ -87,6 +99,8 @@ public class VideoCameraController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance == null || GameManager.Instance.IsRestarting) return;
+
         if (cameraModeToggleAction.action.triggered && !isInViewPhotoMode)
         {
             if (!isInCameraMode && !isModeSwitchPossible) return;
@@ -187,20 +201,25 @@ public class VideoCameraController : MonoBehaviour
 
             if (!GameManager.Instance.HasFotographedRabbit || !GameManager.Instance.HasFotographedBear)
             {
-                foreach (var animal in GameManager.Instance.prototypeAnimals)
+                var gm = GameManager.Instance;
+                if (gm != null && gm.prototypeAnimals != null)
                 {
-                    if (Vector3.Distance(mainCamera.transform.position, animal.transform.position) < maxAnimalDetectionDistance)
-                        if (IsVisibleToCamera(animal))
-                        {
-                            if (animal.CompareTag("Rabbit"))
+                    foreach (var animal in gm.prototypeAnimals)
+                    {
+                        if (animal == null) continue;
+                        if (Vector3.Distance(mainCamera.transform.position, animal.transform.position) < maxAnimalDetectionDistance)
+                            if (IsVisibleToCamera(animal))
                             {
-                                GameManager.Instance.HasFotographedRabbit = true;
+                                if (animal.CompareTag("Rabbit"))
+                                {
+                                    GameManager.Instance.HasFotographedRabbit = true;
+                                }
+                                else if (animal.CompareTag("Bear"))
+                                {
+                                    GameManager.Instance.HasFotographedBear = true;
+                                }
                             }
-                            else if (animal.CompareTag("Bear"))
-                            {
-                                GameManager.Instance.HasFotographedBear = true;
-                            }
-                        }
+                    }
                 }
             }
 

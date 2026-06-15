@@ -17,26 +17,48 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 drivingRotationClampX = new Vector2(-45f, 45f);
     [SerializeField] private Vector2 drivingRotationClampY = new Vector2(-60f, 60f);
 
-    private bool isVRMode = false;
-    private bool isModeSwitchPossible => GameManager.Instance.isModeSwitchPossible;
-    private Transform pivot;
+    private bool isVRMode
+    {
+        get
+        {
+            var gm = GameManager.Instance;
+            return gm != null && gm.isInVRMode;
+        }
+    }
+    private bool isModeSwitchPossible
+    {
+        get
+        {
+            var gm = GameManager.Instance;
+            return gm != null && gm.isModeSwitchPossible;
+        }
+    }
+    private Transform pivot
+    {
+        get
+        {
+            var gm = GameManager.Instance;
+            if (gm == null || gm.cameraPivot == null) return null;
+            return gm.cameraPivot.transform;
+        }
+    }
     private float rotationX = 0f;
     private float rotationY = 0f;
-    private GameObject _camera;
-    private Vector2 lookInput;
-
-    void Start()
+    private GameObject _camera
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        pivot = GameManager.Instance.cameraPivot.transform;
-        _camera = GameManager.Instance.mainCamera.gameObject;
-        isVRMode = GameManager.Instance.isInVRMode;
+        get
+        {
+            var gm = GameManager.Instance;
+            if (gm == null || gm.mainCamera == null) return null;
+            return gm.mainCamera.gameObject;
+        }
     }
+    private Vector2 lookInput;
 
     void LateUpdate()
     {
-        if (pivot == null) return;
+        if (pivot == null || _camera == null) return;
+        if (GameManager.Instance != null && GameManager.Instance.IsRestarting) return;
 
         if (lerpPositionAndRotation)
         {

@@ -233,8 +233,8 @@ MonoBehaviour:
   leftAction: {fileID: -7053123133719681545, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   turnAroundAction: {fileID: -5273930963971449646, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   spline: {fileID: 0}
-  acceleration: 2
-  drag: 1
+  acceleration: 4
+  drag: 2
   accelerationTimer: 0.5
   maxLeanAngle: 20
   bikeModel: {fileID: 1035438221101633566}
@@ -242,7 +242,7 @@ MonoBehaviour:
   backWheel: {fileID: 2116551063536099421}
   wheelSpinMultiplier: 15
   frontSection: {fileID: 8873404052146296575}
-  dualButtonBrakeMultiplier: 5
+  dualButtonBrakeMultiplier: 10
 --- !u!114 &3945799635894165725
 MonoBehaviour:
   m_ObjectHideFlags: 0

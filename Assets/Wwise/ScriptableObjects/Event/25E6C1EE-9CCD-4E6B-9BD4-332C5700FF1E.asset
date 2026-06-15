@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01bcc84f6e2ac44a9bc085566bc5337, type: 3}
+  m_Name: 25E6C1EE-9CCD-4E6B-9BD4-332C5700FF1E
+  m_EditorClassIdentifier: 
+  objectName: Stop_Ambiance
+  id: 2839405212
+  guid: 25E6C1EE-9CCD-4E6B-9BD4-332C5700FF1E
+  IsInUserDefinedSoundBank: 1

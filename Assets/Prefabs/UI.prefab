@@ -1156,6 +1156,7 @@ GameObject:
   - component: {fileID: 1291181705757838994}
   - component: {fileID: 1365242182609218037}
   - component: {fileID: 4385969020220101469}
+  - component: {fileID: 1704674710933158795}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1247,11 +1248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &4385969020220101469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,6 +1265,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30449b8367506184483617056cb889ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1704674710933158795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164870079721850503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe3cda3e244f60419474164d6ba3b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_MaxDistance: 1000
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4477894086617746148
 GameObject:
   m_ObjectHideFlags: 0

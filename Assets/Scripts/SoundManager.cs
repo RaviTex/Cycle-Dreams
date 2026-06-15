@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using AK.Wwise;
 
 public class SoundManager : MonoBehaviour
@@ -6,8 +7,11 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     [SerializeField] private AK.Wwise.Event playAmbience;
+    [SerializeField] private AK.Wwise.Event stopAmbience;
     [SerializeField] private AK.Wwise.Event playBike;
+    [SerializeField] private AK.Wwise.Event stopBike;
     [SerializeField] private AK.Wwise.Event playWind;
+    [SerializeField] private AK.Wwise.Event stopWind;
     [SerializeField] private AK.Wwise.RTPC bikeSpeedRTPC;
     [SerializeField] private AK.Wwise.RTPC windSideRTPC;
 
@@ -24,10 +28,41 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        var gm = GameManager.Instance;
+        if (gm != null)
+            gm.OnGameOver += OnGameOver;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        var gm = GameManager.Instance;
+        if (gm != null)
+            gm.OnGameOver -= OnGameOver;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializePlayerReference();
+    }
 
     private void Start()
     {
-        player = GameManager.Instance.bikeController.gameObject;
+        InitializePlayerReference();
+    }
+
+    private void InitializePlayerReference()
+    {
+        var gm = GameManager.Instance;
+        if (gm == null || gm.bikeController == null)
+        {
+            player = null;
+            return;
+        }
+        player = gm.bikeController.gameObject;
         playAmbience.Post(player);
         playBike.Post(player);
         playWind.Post(player);
@@ -35,7 +70,10 @@ public class SoundManager : MonoBehaviour
 
     private void Update()
     {
-        float bikeSpeed = GameManager.Instance.GetActiveBikeController()?.CurrentSpeed ?? 0f;
+        var gm = GameManager.Instance;
+        if (gm == null || gm.IsRestarting || player == null) return;
+
+        float bikeSpeed = gm.GetActiveBikeController()?.CurrentSpeed ?? 0f;
         float speed01 = Mathf.Clamp01(bikeSpeed / 25f);
         bikeSpeedRTPC.SetValue(player, speed01 * 100f);
         float oscillationFrequency = Mathf.Lerp(
@@ -47,5 +85,12 @@ public class SoundManager : MonoBehaviour
         float amplitude = speed01 * 100f;
         float stereoPan = Mathf.Sin(windPhase) * amplitude;
         windSideRTPC.SetValue(player, stereoPan / 2f + 50f);
+    }
+    private void OnGameOver()
+    {
+        if (player == null) return;
+        stopAmbience.Post(player);
+        stopBike.Post(player);
+        stopWind.Post(player);
     }
 }

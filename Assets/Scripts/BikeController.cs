@@ -93,7 +93,9 @@ public class BikeController : MonoBehaviour, IBikeController
 
     private void Start()
     {
-        visualController = GameManager.Instance.bikeVisualController;
+        var gm = GameManager.Instance;
+        if (gm != null)
+            visualController = gm.bikeVisualController;
     }
 
     void Update()

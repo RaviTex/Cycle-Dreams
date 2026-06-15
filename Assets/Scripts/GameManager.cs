@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Management;
@@ -71,7 +72,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject rabbitXmark;
     [SerializeField] private GameObject bearXmark;
     public event Action OnMovementFreeze;
+    public event Action OnGameOver;
 
+    public bool IsInteractableUIVisible
+    {
+        get => isInteractableUIVisible;
+        set
+        {
+            isInteractableUIVisible = value;
+            if (isInteractableUIVisible)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = isInVRMode ? CursorLockMode.None : CursorLockMode.Locked;
+                Cursor.visible = isInVRMode;
+            }
+        }
+    }
+    private bool isInteractableUIVisible;
+
+
+    public bool IsRestarting { get; private set; }
 
     private void Awake()
     {
@@ -82,52 +106,87 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         isInVRMode = XRGeneralSettings.Instance.Manager.activeLoader != null;
         print("Is VR Device Active: " + isInVRMode);
+    }
 
-        if (bikeController == null)
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        IsRestarting = false;
+        InitializeReferences();
+    }
+
+    void Start()
+    {
+        InitializeReferences();
+    }
+
+    private void InitializeReferences()
+    {
+        if (bikeController == null || bikeController.gameObject.IsDestroyed())
         {
             bikeController = FindFirstObjectByType<BikeController>();
         }
-        if (bikeSplineController == null)
+        if (bikeSplineController == null || bikeSplineController.gameObject.IsDestroyed())
         {
             bikeSplineController = FindFirstObjectByType<BikeSplineController>();
         }
-        if (cameraPivot == null)
+        if (cameraPivot == null || cameraPivot.gameObject.IsDestroyed())
         {
             cameraPivot = FindFirstObjectByType<CameraPivot>();
         }
-        if (cameraController == null)
+        if (cameraController == null || cameraController.gameObject.IsDestroyed())
         {
             cameraController = FindFirstObjectByType<CameraController>();
         }
-        if (bikeVisualController == null)
+        if (bikeVisualController == null || bikeVisualController.gameObject.IsDestroyed())
         {
             bikeVisualController = FindFirstObjectByType<BikeVisualController>();
         }
-        if (mainCamera == null)
+        if (mainCamera == null || mainCamera.gameObject.IsDestroyed())
         {
-            mainCamera = Camera.main;
+            var connector = FindFirstObjectByType<MainCameraConnector>();
+            if (connector != null)
+                mainCamera = connector.GetComponent<Camera>();
         }
 
-        bikeSplineController.enabled = isSplineMode;
-        bikeController.enabled = !isSplineMode;
+        if (bikeSplineController != null)
+            bikeSplineController.enabled = isSplineMode;
+        if (bikeController != null)
+            bikeController.enabled = !isSplineMode;
+
+        Cursor.lockState = isInVRMode ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isInVRMode;
     }
 
     public void PrototypeComplete()
     {
+        IsInteractableUIVisible = true;
         print("Prototype Complete!");
         UIManager.Instance.PrototypeComplete();
         FreezeBikeMovement();
     }
     public void GameOver()
     {
+        IsInteractableUIVisible = true;
         UIManager.Instance.ShowGameOver();
         FreezeBikeMovement();
     }
     public void RestartGame()
     {
+        IsRestarting = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

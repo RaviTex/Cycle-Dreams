@@ -15,11 +15,14 @@ public class CanvasScaler : MonoBehaviour
         if (targetCamera == null)
             targetCamera = Camera.main;
 
+        var gm = GameManager.Instance;
+        if (gm == null) return;
+
         initialScale = transform.localScale;
-        isInVRMode = GameManager.Instance.isInVRMode;
-        referenceFOV = GameManager.Instance.referenceFOV;
-        VRScaleMultiplier = GameManager.Instance.VRScaleMultiplier;
-        referenceFOVVR = GameManager.Instance.referenceFOVVR;
+        isInVRMode = gm.isInVRMode;
+        referenceFOV = gm.referenceFOV;
+        VRScaleMultiplier = gm.VRScaleMultiplier;
+        referenceFOVVR = gm.referenceFOVVR;
     }
 
     private void LateUpdate()
