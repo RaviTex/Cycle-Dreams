@@ -57875,7 +57875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInVRMode: 0
-  isSplineMode: 0
+  isSplineMode: 1
   bikeController: {fileID: 1008812384}
   bikeSplineController: {fileID: 0}
   cameraPivot: {fileID: 1985647674}
@@ -60126,6 +60126,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1945631537677127363, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      propertyPath: deviceName
+      value: BB
+      objectReference: {fileID: 0}
     - target: {fileID: 2887799627197391315, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       propertyPath: drag
       value: 2
@@ -60146,6 +60150,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 74391700346014206, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 2122401782}
     - targetCorrespondingSourceObject: {fileID: 74391700346014206, guid: fb40898c12df5914fbf08e2f88482195, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2122401774}
@@ -65829,6 +65836,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9541250ac7762a44f8bed5d944f66de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2122401782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122401767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3b925a2be2af74c9288030885be079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2123512832

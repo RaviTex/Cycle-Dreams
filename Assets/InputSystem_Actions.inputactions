@@ -801,7 +801,7 @@
                 {
                     "name": "",
                     "id": "46caa808-da75-4631-a4e6-32b7d0bfb8d9",
-                    "path": "<HID::Teensyduino Teensy Flight Sim Controls>/slider",
+                    "path": "<Gamepad>/leftStick/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

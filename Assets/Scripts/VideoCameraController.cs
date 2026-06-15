@@ -24,6 +24,7 @@ public class VideoCameraController : MonoBehaviour
     [SerializeField] private TMP_Text pageCountText;
     [SerializeField] private float maxZoomInFOV = 20f;
     [SerializeField] private float maxZoomOutFOV = 100f;
+    [SerializeField] private float maxAnimalDetectionDistance = 50f;
     public int resWidth = 1920;
     public int resHeight = 1080;
     public List<Sprite> shotImages = new List<Sprite>();
@@ -188,7 +189,7 @@ public class VideoCameraController : MonoBehaviour
             {
                 foreach (var animal in GameManager.Instance.prototypeAnimals)
                 {
-                    if (Vector3.Distance(mainCamera.transform.position, animal.transform.position) < 50f)
+                    if (Vector3.Distance(mainCamera.transform.position, animal.transform.position) < maxAnimalDetectionDistance)
                         if (IsVisibleToCamera(animal))
                         {
                             if (animal.CompareTag("Rabbit"))
