@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputSystem_Actions",
     "maps": [
         {
@@ -614,7 +615,7 @@
                 {
                     "name": "",
                     "id": "f5d0a5e6-594b-4bb4-8e1c-d4e659903b72",
-                    "path": "<XRController>/triggerPressed",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": ";XR",
@@ -757,7 +758,7 @@
                 {
                     "name": "",
                     "id": "0a0e4eec-6410-4b7b-a13e-47c0e2a6d0c5",
-                    "path": "<XRController>/triggerPressed",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": ";XR",
@@ -790,7 +791,7 @@
                 {
                     "name": "",
                     "id": "836bc653-01a7-4263-9b93-a1b586fcf88a",
-                    "path": "<XRController>/triggerPressed",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": ";XR",

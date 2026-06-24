@@ -133,7 +133,6 @@ public class GameManager : MonoBehaviour
     private List<string> prototypeAnimalPaths = new List<string>();
     public event Action OnMovementFreeze;
     public event Action OnGameOver;
-
     public bool IsInteractableUIVisible
     {
         get => isInteractableUIVisible;
@@ -269,6 +268,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        OnGameOver?.Invoke();
         IsInteractableUIVisible = true;
         UIManager.Instance.ShowGameOver();
         FreezeBikeMovement();

@@ -52,6 +52,7 @@ public class BikeController : MonoBehaviour, IBikeController
     private BikeVisualController visualController;
     private Rigidbody rb;
     private int groundLayer;
+    private Vector2 cachedMoveInput;
     private float currentSteerInput;
     private float currentForwardSpeed;
     private float currentSpeed;
@@ -102,6 +103,7 @@ public class BikeController : MonoBehaviour, IBikeController
     {
         if (freezeMovement) return;
 
+        cachedMoveInput = ReadMoveInput();
         UpdateSteeringInput();
         if (visualController != null)
         {
@@ -121,7 +123,8 @@ public class BikeController : MonoBehaviour, IBikeController
             return;
         }
 
-        Vector2 input = ReadMoveInput();
+        Vector2 input = cachedMoveInput;
+        print($"Throttle Input: {input.y:F2}, Steer Input: {input.x:F2}");
         Vector3 currentVelocity = rb.linearVelocity;
         currentSpeed = currentVelocity.magnitude;
         currentForwardSpeed = Vector3.Dot(currentVelocity, transform.forward);
@@ -133,6 +136,8 @@ public class BikeController : MonoBehaviour, IBikeController
         ApplyMotorAndBraking(ref currentVelocity, input.y, smoothedThrottle);
         ApplyHorizontalMotionCorrection(ref currentVelocity);
         RotateBikeBody(ref currentRotation);
+
+        print($"Current Speed: {currentSpeed:F2} m/s, Forward Speed: {currentForwardSpeed:F2} m/s");
 
         rb.linearVelocity = currentVelocity;
         rb.MoveRotation(currentRotation);
@@ -160,7 +165,7 @@ public class BikeController : MonoBehaviour, IBikeController
 
     private void UpdateSteeringInput()
     {
-        float steerInput = ReadMoveInput().x;
+        float steerInput = cachedMoveInput.x;
         currentSteerInput = Mathf.Lerp(currentSteerInput, steerInput, steeringLerpSpeed * Time.deltaTime);
     }
 

@@ -67094,6 +67094,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 886287524}
     - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: isInVRMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
       propertyPath: cameraPivot
       value: 
       objectReference: {fileID: 1985647674}
@@ -67101,6 +67105,10 @@ PrefabInstance:
       propertyPath: rabbitXmark
       value: 
       objectReference: {fileID: 886287526}
+    - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
+      propertyPath: isSplineMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1167649526206946826, guid: 7d4c92849691bc648bce8b492113863a, type: 3}
       propertyPath: bearCheckmark
       value: 
@@ -67413,6 +67421,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9000802907990573087, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206512571546093844, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9206512571546093844, guid: 116db8ef2f40c8f4ea46c806999df751, type: 3}

@@ -92,7 +92,7 @@ public class SoundManager : MonoBehaviour
     }
     private void OnGameOver()
     {
-        if (player == null) return;
+        print("Game Over - Stopping Sounds");
         stopAmbience.Post(player);
         stopBike.Post(player);
         stopWind.Post(player);
